@@ -1,0 +1,5 @@
+/*It must be in this file. Without this, when you click and remove text, 
+the bar will be blue instead of red.*/
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+}

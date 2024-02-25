@@ -1,0 +1,49 @@
+<div class="col-md-6 offset-md-3">
+  <h3>Edit book</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group mt-3 md-3">
+      <label class="ta-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        required
+        [(ngModel)]="book.title"
+        name="title"
+        #title="ngModel"
+      />
+      <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+        Title is required
+      </div>
+    </div>
+
+    <div class="form-group mt-3 md-3">
+      <label class="ta-label">Author</label>
+      <input
+        type="text"
+        class="form-control"
+        id="author"
+        required
+        [(ngModel)]="book.author"
+        name="author"
+        #author="ngModel"
+      />
+      <div
+        [hidden]="author.valid || author.pristine"
+        class="alert alert-danger"
+      >
+        Author is required
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <button
+        class="btn btn-success"
+        type="submit"
+        [disabled]="title.invalid || author.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

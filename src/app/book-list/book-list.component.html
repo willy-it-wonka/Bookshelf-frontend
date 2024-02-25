@@ -1,0 +1,37 @@
+<div class="mt-5 mb-5">
+  <h2>Bookshelf</h2>
+  <table class="table table-scripted">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td class="d-flex justify-content-end">
+          <button (click)="bookNotes(book.id)" class="btn btn-info">
+            Notes
+          </button>
+          <button
+            (click)="updateBook(book.id)"
+            class="btn btn-info"
+            style="margin-left: 10px"
+          >
+            Edit
+          </button>
+          <button
+            (click)="deleteBook(book.id)"
+            class="btn btn-danger"
+            style="margin-left: 10px"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
