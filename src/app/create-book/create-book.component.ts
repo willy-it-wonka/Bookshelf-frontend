@@ -21,6 +21,9 @@ export class CreateBookComponent implements OnInit {
   onSubmit() {
     console.log(this.book);
     this.saveBook();
+    //Clear text fields
+    this.book.title = '';
+    this.book.author = '';
     //pop-up
     const addModel = document.getElementById('staticBackdrop');
     if (addModel != null) {
