@@ -30,7 +30,9 @@
               "./node_modules/mdb-angular-ui-kit/assets/scss/mdb.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {

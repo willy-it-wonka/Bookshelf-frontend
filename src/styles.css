@@ -12,11 +12,11 @@ body {
 }
 
 .bg-color-f1 {
-  background-color: #28a745
+  background-color: #28a745;
 }
 
 .bg-color-f2 {
-  background-color: rgba(0, 0, 0, 0.2)
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .ng-valid[required],
@@ -30,5 +30,10 @@ body {
 
 .ta-label {
   margin-left: 15px;
+  font-weight: bold;
+}
+
+.ch-mark {
+  color: #00ad28;
   font-weight: bold;
 }

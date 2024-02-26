@@ -21,6 +21,11 @@ export class CreateBookComponent implements OnInit {
   onSubmit() {
     console.log(this.book);
     this.saveBook();
+    //pop-up
+    const addModel = document.getElementById('staticBackdrop');
+    if (addModel != null) {
+      addModel.style.display = 'block';
+    }
   }
 
   saveBook() {

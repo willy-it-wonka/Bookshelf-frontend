@@ -41,9 +41,47 @@
         class="btn btn-success"
         type="submit"
         [disabled]="title.invalid || author.invalid"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
       >
         Submit
       </button>
     </div>
   </form>
+
+  <!-- pop-up -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 ch-mark" id="staticBackdropLabel">
+            &#10004;
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">The book has been added to the list.</div>
+        <div class="modal-footer">
+          <a href="/bookshelf">
+            <button type="button" class="btn btn-dark">Bookshelf</button></a
+          >
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+              Add another
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
