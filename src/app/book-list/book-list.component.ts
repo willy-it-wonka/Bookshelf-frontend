@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
+  selectedBookId: number | null = null;
+  showDeleteConfirmation: boolean = false;
 
   constructor(private bookService: BookService, private router: Router) {}
 
@@ -26,18 +28,29 @@ export class BookListComponent implements OnInit {
     });
   }
 
+  bookNotes(id: number) {
+    this.router.navigate(['/notes', id]);
+  }
+
   updateBook(id: number) {
     this.router.navigate(['/update', id]);
   }
 
-  deleteBook(id: number) {
-    this.bookService.deleteBook(id).subscribe((data) => {
-      console.log(data);
-      this.getBooks();
-    });
+  // Pop-up for delete button
+  openModalForDelete(id: number) {
+    this.selectedBookId = id;
+    this.showDeleteConfirmation = true;
   }
 
-  bookNotes(id: number) {
-    this.router.navigate(['/notes', id]);
+  // Confirmation in a pop-up
+  confirmDelete() {
+    if (this.selectedBookId !== null) {
+      this.bookService.deleteBook(this.selectedBookId).subscribe((data) => {
+        console.log(data);
+        this.getBooks();
+      });
+      this.showDeleteConfirmation = false; // Hide the pop-up after confirming deletion
+      this.selectedBookId = null; // Reset selected book id
+    }
   }
 }

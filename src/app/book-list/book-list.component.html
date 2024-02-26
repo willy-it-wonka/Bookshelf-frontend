@@ -10,8 +10,20 @@
 
     <tbody>
       <tr *ngFor="let book of books">
-        <td>{{ book.title.length > 35 ? book.title.slice(0, 35) + '...' : book.title }}</td>
-        <td>{{ book.author.length > 30 ? book.author.slice(0, 30) + '...' : book.author }}</td>
+        <td>
+          {{
+            book.title.length > 35
+              ? book.title.slice(0, 35) + "..."
+              : book.title
+          }}
+        </td>
+        <td>
+          {{
+            book.author.length > 30
+              ? book.author.slice(0, 30) + "..."
+              : book.author
+          }}
+        </td>
         <td class="d-flex justify-content-end">
           <button
             (click)="bookNotes(book.id)"
@@ -27,9 +39,11 @@
             Edit
           </button>
           <button
-            (click)="deleteBook(book.id)"
+            (click)="openModalForDelete(book.id)"
             class="btn btn-danger btn-rounded btn-sm fw-bold"
             style="margin-left: 10px"
+            data-bs-toggle="modal"
+            data-bs-target="#confirm"
           >
             Delete
           </button>
@@ -37,4 +51,47 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- pop-up for delete button -->
+  <div
+    class="modal fade"
+    id="confirm"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="confirmLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-w" id="confirmLabel">WARNING</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">Are you sure you want to delete?</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-dark fw-bold"
+            data-bs-dismiss="modal"
+          >
+            No
+          </button>
+          <button
+            type="button"
+            (click)="confirmDelete()"
+            class="btn btn-danger fw-bold"
+            data-bs-dismiss="modal"
+          >
+            Yes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

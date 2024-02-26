@@ -1,4 +1,9 @@
 .table-h {
-    font-weight: bold;
-    color: white;
-  }
+  font-weight: bold;
+  color: white;
+}
+
+.text-w {
+  font-weight: bold;
+  color: rgb(187, 0, 0);
+}
