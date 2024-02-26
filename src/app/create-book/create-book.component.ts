@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../book';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../book.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-book',
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 export class CreateBookComponent implements OnInit {
   book: Book = new Book();
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {}
 
