@@ -10,8 +10,8 @@
 
     <tbody>
       <tr *ngFor="let book of books">
-        <td>{{ book.title }}</td>
-        <td>{{ book.author }}</td>
+        <td>{{ book.title.length > 35 ? book.title.slice(0, 35) + '...' : book.title }}</td>
+        <td>{{ book.author.length > 30 ? book.author.slice(0, 30) + '...' : book.author }}</td>
         <td class="d-flex justify-content-end">
           <button
             (click)="bookNotes(book.id)"
