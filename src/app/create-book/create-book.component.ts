@@ -25,8 +25,8 @@ export class CreateBookComponent implements OnInit {
 
   saveBook() {
     this.bookService.createBook(this.book).subscribe({
-      next: response => console.log(response),
-      error: error => console.log(error)
-    })
+      next: (response) => console.log(response),
+      error: (error) => console.log(error),
+    });
   }
 }
