@@ -7,3 +7,11 @@
   font-weight: bold;
   color: rgb(187, 0, 0);
 }
+
+table tbody tr:hover {
+  background-color: #332d2d;
+}
+
+table tbody tr:hover td {
+  color: white;
+}
