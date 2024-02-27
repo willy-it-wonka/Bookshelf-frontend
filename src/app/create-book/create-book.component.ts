@@ -24,9 +24,9 @@ export class CreateBookComponent implements OnInit {
     this.book.title = '';
     this.book.author = '';
     //pop-up
-    const addModel = document.getElementById('staticBackdrop');
-    if (addModel != null) {
-      addModel.style.display = 'block';
+    const modalAfterAdd = document.getElementById('staticBackdrop');
+    if (modalAfterAdd != null) {
+      modalAfterAdd.style.display = 'block';
     }
   }
 
