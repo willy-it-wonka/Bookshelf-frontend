@@ -15,3 +15,11 @@ table tbody tr:hover {
 table tbody tr:hover td {
   color: white;
 }
+
+.notes-button:hover {
+  cursor: url("../../assets/icons/notes.png") 15 15, auto;
+}
+
+.edit-button:hover {
+  cursor: url("../../assets/icons/edit.png") -2 32, auto;
+}
