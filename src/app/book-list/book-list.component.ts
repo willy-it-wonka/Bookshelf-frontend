@@ -28,7 +28,7 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  bookNotes(id: number) {
+  goToBookNotes(id: number) {
     this.router.navigate(['/notes', id]);
   }
 
