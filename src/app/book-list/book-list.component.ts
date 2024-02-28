@@ -3,18 +3,25 @@ import { Book } from '../book';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../book.service';
 import { Router } from '@angular/router';
+import { NgxSearchFilterModule } from 'ngx-search-filter';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxSearchFilterModule, FormsModule],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
+
+  // for Delete pop-up
   selectedBookId: number | null = null;
   showDeleteConfirmation: boolean = false;
+
+  // for search()
+  searchTerms: any;
 
   constructor(private bookService: BookService, private router: Router) {}
 
@@ -51,6 +58,23 @@ export class BookListComponent implements OnInit {
       });
       this.showDeleteConfirmation = false; // Hide the pop-up after confirming deletion
       this.selectedBookId = null; // Reset selected book id
+    }
+  }
+
+  // To the search bar. Checks whether the string you type is in a title and/or an author.
+  search() {
+    if (this.searchTerms == '') {
+      this.ngOnInit();
+    } else {
+      this.books = this.books.filter((res) => {
+        const titleMatch = res.title
+          .toLocaleLowerCase()
+          .includes(this.searchTerms.toLocaleLowerCase());
+        const authorMatch = res.author
+          .toLocaleLowerCase()
+          .includes(this.searchTerms.toLocaleLowerCase());
+        return titleMatch || authorMatch;
+      });
     }
   }
 }

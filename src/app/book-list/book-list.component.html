@@ -1,4 +1,16 @@
 <div class="mt-5 mb-5">
+  <!-- search bar -->
+  <div class="">
+    <input
+      class="form-control"
+      type="text"
+      [(ngModel)]="searchTerms"
+      (ngModelChange)="search()"
+      placeholder="tekst"
+    />
+  </div>
+
+  <!-- book-list table -->
   <table class="table">
     <thead class="bg-dark">
       <tr>
@@ -7,7 +19,7 @@
         <th></th>
       </tr>
     </thead>
-
+    
     <tbody>
       <tr *ngFor="let book of books">
         <td>
@@ -24,6 +36,8 @@
               : book.author
           }}
         </td>
+
+        <!-- buttons: notes, edit, delete -->
         <td class="d-flex justify-content-end">
           <button
             (click)="goToBookNotes(book.id)"
