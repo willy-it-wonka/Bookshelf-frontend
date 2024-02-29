@@ -1,12 +1,12 @@
 <div class="mt-5 mb-5">
   <!-- search bar -->
-  <div class="">
+  <div class="mb-3 col-md-4">
     <input
-      class="form-control"
+      class="form-control searchbar"
       type="text"
       [(ngModel)]="searchTerms"
       (ngModelChange)="search()"
-      placeholder="tekst"
+      placeholder="Search title or author"
     />
   </div>
 
@@ -19,7 +19,7 @@
         <th></th>
       </tr>
     </thead>
-    
+
     <tbody>
       <tr *ngFor="let book of books">
         <td>
