@@ -5,11 +5,17 @@ import { BookService } from '../book.service';
 import { Router } from '@angular/router';
 import { NgxSearchFilterModule } from 'ngx-search-filter';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, NgxSearchFilterModule, FormsModule],
+  imports: [
+    CommonModule,
+    NgxSearchFilterModule,
+    FormsModule,
+    NgxPaginationModule,
+  ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css',
 })
@@ -22,6 +28,9 @@ export class BookListComponent implements OnInit {
 
   // for search()
   searchTerms: any;
+
+  // to pagination
+  page: number = 1;
 
   constructor(private bookService: BookService, private router: Router) {}
 

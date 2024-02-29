@@ -21,7 +21,11 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let book of books">
+      <tr
+        *ngFor="
+          let book of books | paginate : { itemsPerPage: 10, currentPage: page }
+        "
+      >
         <td>
           {{
             book.title.length > 35
@@ -65,6 +69,10 @@
       </tr>
     </tbody>
   </table>
+  <pagination-controls
+    (pageChange)="page = $event"
+    class="mt-4 d-flex justify-content-end"
+  ></pagination-controls>
 
   <!-- pop-up for delete button -->
   <div
