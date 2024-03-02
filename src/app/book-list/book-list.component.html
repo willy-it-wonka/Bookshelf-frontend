@@ -16,6 +16,7 @@
       <tr>
         <th class="table-h">Title</th>
         <th class="table-h">Author</th>
+        <th class="table-h">Status</th>
         <th></th>
       </tr>
     </thead>
@@ -39,6 +40,23 @@
               ? book.author.slice(0, 30) + "..."
               : book.author
           }}
+        </td>
+        <td>
+          <span
+            *ngIf="book.status === 'READ'"
+            class="badge badge-success rounded-pill d-inline"
+            >READ</span
+          >
+          <span
+            *ngIf="book.status === 'WAITING'"
+            class="badge badge-warning rounded-pill d-inline"
+            >WAITING</span
+          >
+          <span
+            *ngIf="book.status === 'READING'"
+            class="badge badge-primary rounded-pill d-inline"
+            >READING</span
+          >
         </td>
 
         <!-- buttons: notes, edit, delete -->
