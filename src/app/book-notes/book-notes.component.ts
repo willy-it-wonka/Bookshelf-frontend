@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../book';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-book-notes',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './book-notes.component.html',
   styleUrl: './book-notes.component.css',
 })
