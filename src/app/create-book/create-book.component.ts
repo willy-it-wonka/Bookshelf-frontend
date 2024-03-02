@@ -15,15 +15,18 @@ export class CreateBookComponent implements OnInit {
 
   constructor(private bookService: BookService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Default status when creating a new book.
+    this.book.status = 'WAITING';
+  }
 
   onSubmit() {
     console.log(this.book);
     this.saveBook();
-    //Clear text fields
+    // Clear text fields
     this.book.title = '';
     this.book.author = '';
-    //pop-up
+    // pop-up
     const modalAfterAdd = document.getElementById('staticBackdrop');
     if (modalAfterAdd != null) {
       modalAfterAdd.style.display = 'block';
