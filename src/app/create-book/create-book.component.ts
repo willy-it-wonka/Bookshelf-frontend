@@ -15,10 +15,7 @@ export class CreateBookComponent implements OnInit {
 
   constructor(private bookService: BookService) {}
 
-  ngOnInit(): void {
-    // Default status when creating a new book.
-    this.book.status = 'WAITING';
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.book);

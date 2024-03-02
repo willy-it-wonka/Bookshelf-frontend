@@ -4,5 +4,5 @@ export class Book {
   author!: string;
   createdDate!: string;
   lastModifiedDate!: string;
-  status!: string;
+  status: string = 'WAITING'; // Default status when creating a new book
 }
