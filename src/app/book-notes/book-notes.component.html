@@ -4,12 +4,16 @@
     <div class="mt-4 p-left">
       <label><b>Title:</b></label> {{ book.title }}
     </div>
-    <div class="mt-2 p-left">
+    <div class="mt-1 p-left">
       <label><b>Author:</b></label> {{ book.author }}
     </div>
-    <div class="mt-2 p-left">
+    <div class="mt-3 p-left">
       <label><b>Created date:</b></label>
       {{ book.createdDate | date : "d MMM yyyy | HH:mm" }}
+    </div>
+    <div class="p-left">
+      <label><b>Last edited:</b></label>
+      {{ book.lastModifiedDate | date : "d MMM yyyy | HH:mm" }}
     </div>
   </div>
 </div>
