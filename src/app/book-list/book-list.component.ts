@@ -32,6 +32,9 @@ export class BookListComponent implements OnInit {
   // to pagination
   page: number = 1;
 
+  // for filterByStatus()
+  selectedStatus: string = '';
+
   constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit(): void {
@@ -52,21 +55,21 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['/update', id]);
   }
 
-  // Pop-up for delete button
+  // Pop-up for delete button.
   openModalForDelete(id: number) {
     this.selectedBookId = id;
     this.showDeleteConfirmation = true;
   }
 
-  // Confirmation in a pop-up
+  // Confirmation in a pop-up.
   confirmDelete() {
     if (this.selectedBookId !== null) {
       this.bookService.deleteBook(this.selectedBookId).subscribe((data) => {
         console.log(data);
         this.getBooks();
       });
-      this.showDeleteConfirmation = false; // Hide the pop-up after confirming deletion
-      this.selectedBookId = null; // Reset selected book id
+      this.showDeleteConfirmation = false; // Hide the pop-up after confirming deletion.
+      this.selectedBookId = null; // Reset selected book id.
     }
   }
 
@@ -84,6 +87,19 @@ export class BookListComponent implements OnInit {
           .includes(this.searchTerms.toLocaleLowerCase());
         return titleMatch || authorMatch;
       });
+    }
+  }
+
+  // Method to filter books based on selected status.
+  filterByStatus() {
+    if (this.selectedStatus) {
+      this.bookService.getBooksByStatus(this.selectedStatus).subscribe({
+        next: (data) => {
+          this.books = data;
+        },
+      });
+    } else {
+      this.getBooks(); // If no status is selected, fetch all books.
     }
   }
 }

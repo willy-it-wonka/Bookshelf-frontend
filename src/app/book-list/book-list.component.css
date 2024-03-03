@@ -24,16 +24,16 @@ table tbody tr:hover td {
   cursor: url("../../assets/icons/edit.png") -2 32, auto;
 }
 
-.searchbar {
+.my-bar {
   font-size: 14px;
 }
-.searchbar:hover {
+.my-bar:hover {
   background-color: #332d2d;
 }
-.searchbar:hover::placeholder {
+.my-bar:hover::placeholder {
   color: white;
 }
-.searchbar:focus {
+.my-bar:focus {
   background-color: #332d2d;
   color: white;
   outline: none !important;

@@ -34,4 +34,9 @@ export class BookService {
   deleteBook(id: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseUrl}/${id}`);
   }
+
+  /*GET books by status.*/
+  getBooksByStatus(status: string): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(`${this.baseUrl}/status/${status}`);
+  }
 }

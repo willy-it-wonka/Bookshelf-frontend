@@ -1,13 +1,29 @@
 <div class="mt-5 mb-5">
-  <!-- search bar -->
-  <div class="mb-3 col-md-4">
-    <input
-      class="form-control searchbar"
-      type="text"
-      [(ngModel)]="searchTerms"
-      (ngModelChange)="search()"
-      placeholder="Search title or author"
-    />
+  <div class="mb-3 row d-flex justify-content-between">
+    <!-- search bar -->
+    <div class="col-md-4">
+      <input
+        class="form-control my-bar"
+        type="text"
+        [(ngModel)]="searchTerms"
+        (ngModelChange)="search()"
+        placeholder="Search title or author"
+      />
+    </div>
+
+    <!-- drop-down list -->
+    <div class="col-md-4">
+      <select
+        class="form-select my-bar"
+        [(ngModel)]="selectedStatus"
+        (change)="filterByStatus()"
+      >
+        <option value="">Display books by status: ALL</option>
+        <option value="READ">Read</option>
+        <option value="READING">Reading</option>
+        <option value="WAITING">Waiting</option>
+      </select>
+    </div>
   </div>
 
   <!-- book-list table -->
