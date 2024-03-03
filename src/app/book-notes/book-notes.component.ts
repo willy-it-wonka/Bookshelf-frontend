@@ -3,11 +3,12 @@ import { Book } from '../book';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
 import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-notes',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, CommonModule],
   templateUrl: './book-notes.component.html',
   styleUrl: './book-notes.component.css',
 })

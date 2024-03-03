@@ -2,6 +2,21 @@
   <h3>Information about the book and your notes:</h3>
   <div>
     <div class="mt-4 p-left">
+      <span *ngIf="book.status === 'READ'" class="badge badge-success d-inline"
+        >READ</span
+      >
+      <span
+        *ngIf="book.status === 'WAITING'"
+        class="badge badge-warning d-inline"
+        >WAITING</span
+      >
+      <span
+        *ngIf="book.status === 'READING'"
+        class="badge badge-primary d-inline"
+        >READING</span
+      >
+    </div>
+    <div class="mt-4 p-left">
       <label><b>Title:</b></label> {{ book.title }}
     </div>
     <div class="mt-1 p-left">
