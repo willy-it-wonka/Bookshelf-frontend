@@ -1,4 +1,4 @@
-<div class="col-md-6 offset-md-3">
+<div class="col-md-6 offset-md-3 mt-5 mb-5">
   <h3>Edit book</h3>
   <form (ngSubmit)="onSubmit()">
     
@@ -50,6 +50,18 @@
         <option value="READING">Reading</option>
         <option value="READ">Read</option>
       </select>
+    </div>
+
+    <div class="form-group mt-3 md-3">
+      <label class="ta-label">Link to cover</label>
+      <input
+        type="text"
+        class="form-control"
+        id="linkToCover"
+        [(ngModel)]="book.linkToCover"
+        name="linkToCover"
+        #linkToCover="ngModel"
+      />
     </div>
 
     <div class="d-flex justify-content-center mt-4">
