@@ -30,6 +30,7 @@
   <table class="table">
     <thead class="bg-dark">
       <tr>
+        <th class="cover-column"></th>
         <th class="table-h">Title</th>
         <th class="table-h">Author</th>
         <th class="table-h">Status</th>
@@ -43,6 +44,14 @@
           let book of books | paginate : { itemsPerPage: 10, currentPage: page }
         "
       >
+        <td class="cover-column">
+          <img
+            *ngIf="book.linkToCover"
+            [src]="book.linkToCover"
+            alt=""
+            class="cover"
+          />
+        </td>
         <td>
           {{
             book.title.length > 35
@@ -76,7 +85,7 @@
         </td>
 
         <!-- buttons: notes, edit, delete -->
-        <td class="d-flex justify-content-end">
+        <td class="right-align">
           <button
             (click)="goToBookNotes(book.id)"
             class="btn btn-info btn-rounded btn-sm fw-bold notes-button"

@@ -40,3 +40,23 @@ table tbody tr:hover td {
   border: 1px solid green;
   box-shadow: 0 0 5px green;
 }
+
+.cover {
+  width: 45px;
+  height: 65px;
+}
+.cover-column {
+  max-width: 60px;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.right-align {
+  text-align: right;
+}
+.right-align button {
+  display: inline-block;
+}
