@@ -1,39 +1,27 @@
+/* Necessary for proper display of content and footer. */
 html,
 body {
   height: 100%;
 }
 
-.btn-icons:hover i {
-  color: black;
-}
-
+/* navbar, book-notes */
 .p-left {
   padding-left: 30px;
 }
 
+/* footer */
 .bg-color-f1 {
   background-color: #28a745;
 }
-
 .bg-color-f2 {
   background-color: rgba(0, 0, 0, 0.2);
 }
-
-.ng-valid[required],
-.ng-valid.required {
-  border-left: 5px solid #42a948;
+.btn-icons:hover i {
+  color: black;
 }
 
-.ng-invalid:not(form) {
-  border-left: 5px solid #a94442;
-}
-
+/* For labels to create-book and update-book. */
 .ta-label {
   margin-left: 15px;
-  font-weight: bold;
-}
-
-.ch-mark {
-  color: #00ad28;
   font-weight: bold;
 }
