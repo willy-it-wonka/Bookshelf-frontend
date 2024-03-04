@@ -43,7 +43,7 @@ table tbody tr:hover td {
 
 .cover {
   width: 45px;
-  height: 65px;
+  height: auto;
 }
 .cover-column {
   max-width: 60px;

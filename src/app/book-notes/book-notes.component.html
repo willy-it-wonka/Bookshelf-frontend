@@ -1,6 +1,13 @@
-<div>
-  <h3>Information about the book and your notes:</h3>
-  <div>
+<div class="row mt-5 mb-5">
+  <div class="col-md-3">
+    <img
+      *ngIf="book.linkToCover"
+      [src]="book.linkToCover"
+      alt=""
+      class="cover-notes"
+    />
+  </div>
+  <div class="col-md-6">
     <div class="mt-4 p-left">
       <span *ngIf="book.status === 'READ'" class="badge badge-success d-inline"
         >READ</span
