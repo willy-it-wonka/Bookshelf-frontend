@@ -38,10 +38,10 @@ table tbody tr:hover td {
 
 /* Icons when the cursor hovers over the buttons. */
 .notes-button:hover {
-  cursor: url("../../assets/icons/notes.png") 15 15, auto;
+  cursor: url("../../../assets/icons/notes.png") 15 15, auto;
 }
 .edit-button:hover {
-  cursor: url("../../assets/icons/edit.png") -2 32, auto;
+  cursor: url("../../../assets/icons/edit.png") -2 32, auto;
 }
 
 /* Book covers */
