@@ -29,13 +29,15 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.userService.login(data).subscribe((result: any) => {
-      console.log(result);
-      if (result.message == 'Successfully logged in.')
+    this.userService.login(data).subscribe((response: any) => {
+      console.log(response);
+      if (response.status === true) {
+        this.userService.username.next(response.message);  // Saves the user's nick when logging in.
         this.router.navigate(['/bookshelf']);
-      else if (result.message == 'User not found.') 
+      } 
+      else if (response.message == 'User not found.')
         alert('Incorrect email.');
-      else if (result.message == 'Incorrect password.')
+      else if (response.message == 'Incorrect password.')
         alert('Incorrect password.');
     });
   }
