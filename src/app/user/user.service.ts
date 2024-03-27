@@ -7,12 +7,12 @@ import { User } from './user';
   providedIn: 'root',
 })
 export class UserService {
-  private registerUrl = 'http://localhost:8080/api/register';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private httpClient: HttpClient) {}
 
   /*HTTP POST to register a new user.*/
   createUser(user: User): Observable<Object> {
-    return this.httpClient.post(`${this.registerUrl}`, user);
+    return this.httpClient.post(`${this.baseUrl}/register`, user);
   }
 }
