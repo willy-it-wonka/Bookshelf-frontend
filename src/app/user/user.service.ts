@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -8,9 +8,6 @@ import { User } from './user';
 })
 export class UserService {
   private baseUrl = 'http://localhost:8080/api';
-
-  // User's nick is saved when logging in.
-  username: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private httpClient: HttpClient) {}
 

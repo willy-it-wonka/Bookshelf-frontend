@@ -32,9 +32,9 @@ export class LoginComponent {
     this.userService.login(data).subscribe((response: any) => {
       console.log(response);
       if (response.status === true) {
-        this.userService.username.next(response.message);  // Saves the user's nick when logging in.
+        localStorage.setItem('loggedInUsername', response.message); // Save username in local storage.
         this.router.navigate(['/bookshelf']);
-      } 
+      }
       else if (response.message == 'User not found.')
         alert('Incorrect email.');
       else if (response.message == 'Incorrect password.')

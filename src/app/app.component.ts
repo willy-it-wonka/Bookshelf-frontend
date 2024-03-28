@@ -6,6 +6,7 @@ import { UpdateBookComponent } from './book/update-book/update-book.component';
 import { BookNotesComponent } from './book/book-notes/book-notes.component';
 //insted: import { HttpClientModule } from '@angular/common/http'; this: import provideHttpClient in config to avoid NullInjectorError
 import { RouterModule } from '@angular/router'; //Essential for properly functioning of nav menu.
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,17 @@ import { RouterModule } from '@angular/router'; //Essential for properly functio
     RouterModule,
     UpdateBookComponent,
     BookNotesComponent,
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'bookshelf-angular';
+
+  loggedInUsername!: string;
+
+  ngOnInit() {
+    this.loggedInUsername = localStorage.getItem('loggedInUsername') || '';
+  }
 }

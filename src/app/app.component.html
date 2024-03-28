@@ -1,5 +1,7 @@
 <div class="d-flex flex-column h-100 justify-content-between">
-  <nav class="navbar navbar-expand-sm bg-success navbar-dark p-left">
+  <nav
+    class="navbar navbar-expand-sm bg-success navbar-dark p-left justify-content-between"
+  >
     <ul class="navbar-nav">
       <li class="nav-item">
         <a routerLink="bookshelf" routerLinkActive="active" class="nav-link"
@@ -12,6 +14,9 @@
         >
       </li>
     </ul>
+    <div class="navbar-user" *ngIf="loggedInUsername">
+      {{ loggedInUsername }}
+    </div>
   </nav>
 
   <div class="container">
