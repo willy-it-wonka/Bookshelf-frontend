@@ -19,4 +19,8 @@ export class UserService {
   login(user: any): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/login`, user);
   }
+
+  logout(): Observable<string> {
+    return this.httpClient.get(`${this.baseUrl}/logout`, { responseType: 'text'});
+  }
 }

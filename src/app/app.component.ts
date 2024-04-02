@@ -7,6 +7,7 @@ import { BookNotesComponent } from './book/book-notes/book-notes.component';
 //insted: import { HttpClientModule } from '@angular/common/http'; this: import provideHttpClient in config to avoid NullInjectorError
 import { RouterModule } from '@angular/router'; //Essential for properly functioning of nav menu.
 import { CommonModule } from '@angular/common';
+import { UserService } from './user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,16 @@ export class AppComponent {
 
   loggedInUsername!: string;
 
+  constructor(private userService: UserService) {}
+
   ngOnInit() {
     this.loggedInUsername = localStorage.getItem('loggedInUsername') || '';
+  }
+
+  logout() {
+    this.userService.logout().subscribe((response: any) => {
+      console.log(response);
+      localStorage.removeItem('loggedInUsername');
+    });
   }
 }

@@ -16,6 +16,9 @@
     </ul>
     <div class="navbar-user" *ngIf="loggedInUsername">
       {{ loggedInUsername }}
+      <a (click)="logout()" role="button"
+        ><i class="fa fa-power-off fa-lg l-out"></i
+      ></a>
     </div>
   </nav>
 
@@ -30,42 +33,42 @@
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
           href="https://facebook.com"
           role="button"
-          ><i class="fa fa-facebook"></i
+          ><i class="fa fa-facebook fa-lg"></i
         ></a>
         <a
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
           href="https://twitter.com"
           role="button"
-          ><i class="fa fa-twitter"></i
+          ><i class="fa fa-twitter fa-lg"></i
         ></a>
         <a
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
           href="https://gmail.com"
           role="button"
-          ><i class="fa fa-google"></i
+          ><i class="fa fa-google fa-lg"></i
         ></a>
         <a
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
           href="https://instagram.com"
           role="button"
-          ><i class="fa fa-instagram"></i
+          ><i class="fa fa-instagram fa-lg"></i
         ></a>
         <a
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
           href="https://linkedin.com/"
           role="button"
-          ><i class="fa fa-linkedin"></i
+          ><i class="fa fa-linkedin fa-lg"></i
         ></a>
         <a
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
           href="https://github.com/"
           role="button"
-          ><i class="fa fa-github"></i
+          ><i class="fa fa-github fa-lg"></i
         ></a>
       </section>
     </div>
     <div class="text-center text-white p-2 bg-color-f2">
-      <span>All rights reserved 2024 &#64;MyBooksTeam</span>
+      <span>All rights reserved 2024 &#64;WilliamWonk</span>
     </div>
   </footer>
 </div>
