@@ -34,7 +34,9 @@ export class LoginComponent {
       if (response.status === true) {
         localStorage.setItem('loggedInUsername', response.message); // Save username in local storage.
         localStorage.setItem('loggedInEmail', this.email); // Save email in local storage.
-        this.router.navigate(['/bookshelf']);
+        this.router.navigate(['/bookshelf']).then(() => {
+          window.location.reload();
+        });
       } 
       else if (response.message == 'User not found.')
         alert('Incorrect email.');

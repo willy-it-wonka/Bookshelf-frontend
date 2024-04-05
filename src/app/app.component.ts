@@ -50,6 +50,7 @@ export class AppComponent {
       console.log(response);
       localStorage.removeItem('loggedInUsername');
       localStorage.removeItem('loggedInEmail');
+      window.location.reload();
     });
   }
 }
