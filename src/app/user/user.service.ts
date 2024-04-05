@@ -21,6 +21,10 @@ export class UserService {
   }
 
   logout(): Observable<string> {
-    return this.httpClient.get(`${this.baseUrl}/logout`, { responseType: 'text'});
+    return this.httpClient.get(`${this.baseUrl}/logout`, { responseType: 'text' });
+  }
+
+  checkEnabled(email: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.baseUrl}/user/${email}`);
   }
 }

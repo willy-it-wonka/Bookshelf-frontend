@@ -25,20 +25,31 @@ import { UserService } from './user/user.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'bookshelf-angular';
-
   loggedInUsername!: string;
+  loggedInEmail!: string;
+  enabled!: boolean;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.loggedInUsername = localStorage.getItem('loggedInUsername') || '';
+    this.loggedInEmail = localStorage.getItem('loggedInEmail') || '';
+    this.checkEnabled();
+  }
+
+  checkEnabled() {
+    this.userService
+      .checkEnabled(this.loggedInEmail)
+      .subscribe((enabled: boolean) => {
+        this.enabled = enabled;
+      });
   }
 
   logout() {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);
       localStorage.removeItem('loggedInUsername');
+      localStorage.removeItem('loggedInEmail');
     });
   }
 }

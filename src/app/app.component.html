@@ -14,11 +14,14 @@
         >
       </li>
     </ul>
-    <div class="navbar-user" *ngIf="loggedInUsername">
-      {{ loggedInUsername }}
+    <div class="navbar-user" *ngIf="loggedInUsername; enabled">
+      <div class="nick">{{ loggedInUsername }}</div>
       <a (click)="logout()" role="button"
-        ><i class="fa fa-power-off fa-lg l-out"></i
+        ><i class="fa fa-power-off fa-lg p"></i
       ></a>
+      <div class="p" [ngClass]="enabled ? 'conf' : 'unconf'">
+        {{ enabled ? "email confirmed" : "email unconfirmed" }}
+      </div>
     </div>
   </nav>
 

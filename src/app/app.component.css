@@ -1,9 +1,21 @@
 .navbar-user {
   color: white;
-  font-weight: bold;
   padding-right: 150px;
+  display: flex;
 }
 
-.l-out {
+.nick {
+  font-weight: bold;
+}
+
+.p {
   padding-left: 15px;
+}
+
+.conf {
+  color: rgb(129, 255, 129);
+}
+
+.unconf {
+  color: rgb(255, 230, 0);
 }
