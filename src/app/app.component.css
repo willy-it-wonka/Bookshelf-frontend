@@ -8,8 +8,12 @@
   font-weight: bold;
 }
 
-.p {
+.padd {
   padding-left: 15px;
+}
+
+.marg {
+  margin-left: 10px;
 }
 
 .conf {

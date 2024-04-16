@@ -25,6 +25,10 @@ export class UserService {
   }
 
   checkEnabled(email: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(`${this.baseUrl}/user/${email}`);
+    return this.httpClient.get<boolean>(`${this.baseUrl}/enabled/${email}`);
+  }
+
+  sendNewConfirmationEmail(email: string): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/newtoken/${email}`, {}, { responseType: 'text' });
   }
 }

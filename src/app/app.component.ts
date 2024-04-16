@@ -25,6 +25,8 @@ import { UserService } from './user/user.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  title = 'bookshelf-angular';
+
   loggedInUsername!: string;
   loggedInEmail!: string;
   enabled!: boolean;
@@ -42,6 +44,14 @@ export class AppComponent {
       .checkEnabled(this.loggedInEmail)
       .subscribe((enabled: boolean) => {
         this.enabled = enabled;
+      });
+  }
+
+  sendNewConfirmationEmail() {
+    this.userService
+      .sendNewConfirmationEmail(this.loggedInEmail)
+      .subscribe((response: any) => {
+        console.log(response);
       });
   }
 
