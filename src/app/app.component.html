@@ -19,7 +19,7 @@
       <a (click)="logout()" role="button"
         ><i class="fa fa-power-off fa-lg padd"></i
       ></a>
-      <div class="padd"[ngClass]="enabled ? 'conf' : 'unconf'">
+      <div class="padd" [ngClass]="enabled ? 'conf' : 'unconf'">
         {{ enabled ? "email confirmed" : "email unconfirmed" }}
       </div>
       <button

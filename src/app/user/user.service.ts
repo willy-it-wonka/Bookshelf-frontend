@@ -24,11 +24,11 @@ export class UserService {
     return this.httpClient.get(`${this.baseUrl}/logout`, { responseType: 'text' });
   }
 
-  checkEnabled(email: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(`${this.baseUrl}/enabled/${email}`);
+  checkEnabled(id: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.baseUrl}/enabled/${id}`);
   }
 
-  sendNewConfirmationEmail(email: string): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/newtoken/${email}`, {}, { responseType: 'text' });
+  sendNewConfirmationEmail(id: string): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/new-conf-email/${id}`, {}, { responseType: 'text' });
   }
 }

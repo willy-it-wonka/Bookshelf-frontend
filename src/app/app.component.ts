@@ -27,21 +27,34 @@ import { UserService } from './user/user.service';
 export class AppComponent {
   title = 'bookshelf-angular';
 
+  loggedInUserId!: string;
   loggedInUsername!: string;
-  loggedInEmail!: string;
   enabled!: boolean;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.loggedInUsername = localStorage.getItem('loggedInUsername') || '';
-    this.loggedInEmail = localStorage.getItem('loggedInEmail') || '';
+    const jwt = localStorage.getItem('jwt');
+    // Check if JWT exists
+    if (jwt) {
+      // JWT decoding
+      const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
+
+      // Read data from JWT
+      this.loggedInUserId = decodedJwt.sub;
+      this.loggedInUsername = decodedJwt.nick;
+      console.log('User ID:', this.loggedInUserId);
+      console.log('Nick:', this.loggedInUsername);
+    } else {
+      console.log('JWT not found in local storage.');
+    }
+
     this.checkEnabled();
   }
 
   checkEnabled() {
     this.userService
-      .checkEnabled(this.loggedInEmail)
+      .checkEnabled(this.loggedInUserId)
       .subscribe((enabled: boolean) => {
         this.enabled = enabled;
       });
@@ -49,7 +62,7 @@ export class AppComponent {
 
   sendNewConfirmationEmail() {
     this.userService
-      .sendNewConfirmationEmail(this.loggedInEmail)
+      .sendNewConfirmationEmail(this.loggedInUserId)
       .subscribe((response: any) => {
         console.log(response);
       });
@@ -58,8 +71,7 @@ export class AppComponent {
   logout() {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);
-      localStorage.removeItem('loggedInUsername');
-      localStorage.removeItem('loggedInEmail');
+      localStorage.removeItem('jwt');
       window.location.reload();
     });
   }

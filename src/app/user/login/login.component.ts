@@ -32,8 +32,7 @@ export class LoginComponent {
     this.userService.login(data).subscribe((response: any) => {
       console.log(response);
       if (response.status === true) {
-        localStorage.setItem('loggedInUsername', response.message); // Save username in local storage.
-        localStorage.setItem('loggedInEmail', this.email); // Save email in local storage.
+        localStorage.setItem('jwt', response.message); // Save JWT in local storage.
         this.router.navigate(['/bookshelf']).then(() => {
           window.location.reload();
         });
