@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   saveUser() {
-    this.userService.createUser(this.user).subscribe({
+    this.userService.register(this.user).subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
