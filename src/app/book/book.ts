@@ -6,4 +6,5 @@ export class Book {
   lastModifiedDate!: string;
   status: string = 'WAITING'; // Default status when creating a new book
   linkToCover!: string;
+  userId!: string;
 }

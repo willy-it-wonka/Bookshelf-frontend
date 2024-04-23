@@ -9,9 +9,11 @@ import { Book } from './book';
 export class BookService {
   private baseUrl = 'http://localhost:8080/api/books';
   private headers: HttpHeaders;
+  private userId: string;
 
   constructor(private httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
+    this.userId = localStorage.getItem('userId') || "";
   }
 
   private createAuthorizationHeader() {
