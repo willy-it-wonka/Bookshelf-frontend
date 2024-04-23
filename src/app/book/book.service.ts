@@ -9,11 +9,9 @@ import { Book } from './book';
 export class BookService {
   private baseUrl = 'http://localhost:8080/api/books';
   private headers: HttpHeaders;
-  private userId: string;
 
   constructor(private httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
-    this.userId = localStorage.getItem('userId') || "";
   }
 
   private createAuthorizationHeader() {
@@ -37,7 +35,6 @@ export class BookService {
     return this.httpClient.post(`${this.baseUrl}`, book, { headers: this.headers });
   }
 
-  // GET the data - to display it for "Edit".
   getBookById(id: number): Observable<Book> {
     return this.httpClient.get<Book>(`${this.baseUrl}/${id}`, { headers: this.headers });
   }
@@ -50,7 +47,6 @@ export class BookService {
     return this.httpClient.delete(`${this.baseUrl}/${id}`, { headers: this.headers });
   }
 
-  // GET books by status.
   getBooksByStatus(status: string): Observable<Book[]> {
     return this.httpClient.get<Book[]>(`${this.baseUrl}/status/${status}`, { headers: this.headers });
   }

@@ -41,10 +41,8 @@ export class AppComponent {
       const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
 
       // Read data from JWT
+      this.loggedInUserId = decodedJwt.sub;
       this.loggedInUsername = decodedJwt.nick;
-      const userId = decodedJwt.sub;
-      this.loggedInUserId = userId;
-      localStorage.setItem('userId', userId); // For book.service
 
       console.log('User ID:', this.loggedInUserId);
       console.log('Nick:', this.loggedInUsername);
@@ -75,7 +73,6 @@ export class AppComponent {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);
       localStorage.removeItem('jwt');
-      localStorage.removeItem('userId');
       window.location.reload();
     });
   }
