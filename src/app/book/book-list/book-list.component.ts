@@ -22,17 +22,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class BookListComponent implements OnInit {
   books: Book[] = [];
 
-  // for Delete pop-up
+  // For delete modal
   selectedBookId: number | null = null;
   showDeleteConfirmation: boolean = false;
 
-  // for search()
+  // For search()
   searchTerms: any;
 
-  // to pagination
+  // To pagination
   page: number = 1;
 
-  // for filterByStatus()
+  // For filterByStatus()
   selectedStatus: string = '';
 
   constructor(private bookService: BookService, private router: Router) {}
@@ -55,20 +55,19 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['/update', id]);
   }
 
-  // Pop-up for delete button.
+  // Modal for delete button.
   openModalForDelete(id: number) {
     this.selectedBookId = id;
     this.showDeleteConfirmation = true;
   }
 
-  // Confirmation in a pop-up.
+  // Confirmation in a modal.
   confirmDelete() {
     if (this.selectedBookId !== null) {
-      this.bookService.deleteBook(this.selectedBookId).subscribe((data) => {
-        console.log(data);
+      this.bookService.deleteBook(this.selectedBookId).subscribe(() => {
         this.getBooks();
       });
-      this.showDeleteConfirmation = false; // Hide the pop-up after confirming deletion.
+      this.showDeleteConfirmation = false; // Hide the modal after confirming deletion.
       this.selectedBookId = null; // Reset selected book id.
     }
   }
