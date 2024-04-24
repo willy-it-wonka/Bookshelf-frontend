@@ -18,36 +18,50 @@ export class BookService {
     const jwt = localStorage.getItem('jwt');
     let headers = new HttpHeaders();
 
-    if (jwt) headers = headers.set('Authorization', 'Bearer ' + jwt);
+    if (jwt) this.headers = headers.set('Authorization', 'Bearer ' + jwt);
     else console.log('JWT not found in local storage.');
 
     return headers;
   }
 
+  // Utility method to make HTTP requests with current headers.
+  private makeHttpRequest<T>(
+    method: string,
+    url: string,
+    body?: any
+  ): Observable<T> {
+    this.createAuthorizationHeader(); // Update headers before each request.
+    return this.httpClient.request<T>(method, url, {
+      headers: this.headers,
+      body: body,
+    });
+  }
+
   /* The method retrieves a list of books from the database by making an HTTP GET request to a specified URL, 
   and returns the data as an object Observable<Book[]>. */
   getBookList(): Observable<Book[]> {
-    return this.httpClient.get<Book[]>(`${this.baseUrl}`, { headers: this.headers });
+    return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}`);
   }
 
   // HTTP POST to submit data from the "Add book" form.
   createBook(book: Book): Observable<Object> {
-    return this.httpClient.post(`${this.baseUrl}`, book, { headers: this.headers });
+    return this.makeHttpRequest('POST', `${this.baseUrl}`, book);
   }
 
   getBookById(id: number): Observable<Book> {
-    return this.httpClient.get<Book>(`${this.baseUrl}/${id}`, { headers: this.headers });
+    return this.makeHttpRequest<Book>('GET', `${this.baseUrl}/${id}`);
   }
 
   updateBook(id: number, book: Book): Observable<Object> {
-    return this.httpClient.put(`${this.baseUrl}/${id}`, book, { headers: this.headers });
+    return this.makeHttpRequest('PUT', `${this.baseUrl}/${id}`, book);
   }
 
   deleteBook(id: number): Observable<Object> {
-    return this.httpClient.delete(`${this.baseUrl}/${id}`, { headers: this.headers });
+    return this.makeHttpRequest('DELETE', `${this.baseUrl}/${id}`);
   }
 
   getBooksByStatus(status: string): Observable<Book[]> {
-    return this.httpClient.get<Book[]>(`${this.baseUrl}/status/${status}`, { headers: this.headers });
+    return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}/status/${status}`);
   }
+
 }
