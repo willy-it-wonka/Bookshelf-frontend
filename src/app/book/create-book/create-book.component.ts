@@ -18,12 +18,14 @@ export class CreateBookComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.book);
     this.saveBook();
+
     // Clear text fields
     this.book.title = '';
     this.book.author = '';
-    // pop-up
+    this.book.linkToCover = '';
+
+    // Modal
     const modalAfterAdd = document.getElementById('staticBackdrop');
     if (modalAfterAdd != null) {
       modalAfterAdd.style.display = 'block';
