@@ -29,7 +29,7 @@ export class BookListComponent implements OnInit {
   // For search()
   searchTerms: any;
 
-  // To pagination
+  // For pagination
   page: number = 1;
 
   // For filterByStatus()
@@ -77,6 +77,7 @@ export class BookListComponent implements OnInit {
     if (this.searchTerms == '') {
       this.ngOnInit();
     } else {
+      this.page = 1; // After searching, go to page 1. Without this, you may think that the search doesn't work on page 2 and next.
       this.books = this.books.filter((res) => {
         const titleMatch = res.title
           .toLocaleLowerCase()
