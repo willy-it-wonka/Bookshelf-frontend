@@ -8,6 +8,7 @@ import { BookNotesComponent } from './book/book-notes/book-notes.component';
 import { RouterModule } from '@angular/router'; //Essential for properly functioning of nav menu.
 import { CommonModule } from '@angular/common';
 import { UserService } from './user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
   enabled!: boolean; // Is the email account confirmed?
   loggedIn: boolean = false; // For nav bar.
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.isLoggedIn();
@@ -83,7 +84,12 @@ export class AppComponent implements OnInit {
       localStorage.removeItem('jwt');
       localStorage.removeItem('loggedIn');
       this.loggedIn = false;
-      window.location.reload();
+      this.goToHomepage();
     });
   }
+
+  goToHomepage() {
+    this.router.navigate(['/homepage']);
+  }
+  
 }
