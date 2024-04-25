@@ -35,9 +35,18 @@
     </div>
 
     <ng-template #loggedOut>
-      <div class="navbar-guest">
-        <img src="../assets/icons/favicon.ico" />
-        <p>Welcome to the application used to manage your library.</p>
+      <div class="d-flex justify-content-between w-100">
+        <div class="navbar-guest">
+          <img src="../assets/icons/favicon.ico" />
+          <p>Welcome to the application used to manage your library.</p>
+        </div>
+        <ul class="navbar-nav p-r">
+          <li class="nav-item">
+            <a routerLink="homepage" routerLinkActive="active" class="nav-link"
+              >Home page</a
+            >
+          </li>
+        </ul>
       </div>
     </ng-template>
   </nav>
