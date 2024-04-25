@@ -25,3 +25,8 @@ body {
   margin-left: 15px;
   font-weight: bold;
 }
+
+/* For input in login and registration. */
+.input-w {
+  width: 400px;
+}
