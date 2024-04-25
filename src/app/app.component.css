@@ -1,7 +1,26 @@
+.navbar-guest {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+}
+.navbar-guest p {
+  margin: 0;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+}
+
 .navbar-user {
   color: white;
-  padding-right: 150px;
-  display: flex;
+  align-items: center;
+  padding-right: 120px;
+}
+
+.navbar-nav {
+  font-weight: bold;
+}
+.navbar-nav a:hover {
+  color: #332d2d;
 }
 
 .nick {

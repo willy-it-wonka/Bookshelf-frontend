@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { CreateBookComponent } from './book/create-book/create-book.component';
@@ -24,23 +24,25 @@ import { UserService } from './user/user.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'bookshelf-angular';
 
   loggedInUserId!: string;
   loggedInUsername!: string;
-  enabled!: boolean;
+  enabled!: boolean; // Is the email account confirmed?
+  loggedIn: boolean = false; // For nav bar.
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
+    this.isLoggedIn();
+
     const jwt = localStorage.getItem('jwt');
-    // Check if JWT exists
     if (jwt) {
-      // JWT decoding
+      // JWT decoding.
       const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
 
-      // Read data from JWT
+      // Read data from JWT.
       this.loggedInUserId = decodedJwt.sub;
       this.loggedInUsername = decodedJwt.nick;
 
@@ -51,6 +53,12 @@ export class AppComponent {
     }
 
     this.checkEnabled();
+  }
+
+  isLoggedIn() {
+    const loggedInValue = localStorage.getItem('loggedIn');
+    if (loggedInValue) this.loggedIn = JSON.parse(loggedInValue);
+    console.log(this.loggedIn);
   }
 
   checkEnabled() {
@@ -73,6 +81,8 @@ export class AppComponent {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);
       localStorage.removeItem('jwt');
+      localStorage.removeItem('loggedIn');
+      this.loggedIn = false;
       window.location.reload();
     });
   }

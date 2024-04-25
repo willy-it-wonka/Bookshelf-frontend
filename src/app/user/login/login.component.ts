@@ -33,6 +33,7 @@ export class LoginComponent {
       console.log(response);
       if (response.status === true) {
         localStorage.setItem('jwt', response.message); // Save JWT in local storage.
+        localStorage.setItem('loggedIn', response.status); // For navigation bar.
         this.router.navigate(['/bookshelf']).then(() => {
           window.location.reload();
         });

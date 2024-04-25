@@ -1,35 +1,45 @@
 <div class="d-flex flex-column h-100 justify-content-between">
-  <nav
-    class="navbar navbar-expand-sm bg-success navbar-dark p-left justify-content-between"
-  >
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a routerLink="bookshelf" routerLinkActive="active" class="nav-link"
-          >Bookshelf</a
+  <nav class="navbar navbar-expand-sm bg-success navbar-dark p-left">
+    <div
+      *ngIf="loggedIn; else loggedOut"
+      class="d-flex justify-content-between w-100"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a routerLink="bookshelf" routerLinkActive="active" class="nav-link"
+            >Bookshelf</a
+          >
+        </li>
+        <li class="nav-item">
+          <a routerLink="create" routerLinkActive="active" class="nav-link"
+            >Add book</a
+          >
+        </li>
+      </ul>
+      <div class="navbar-user d-flex" *ngIf="loggedInUsername; enabled">
+        <div class="nick">{{ loggedInUsername }}</div>
+        <a (click)="logout()" role="button"
+          ><i class="fa fa-power-off fa-lg padd"></i
+        ></a>
+        <div class="padd" [ngClass]="enabled ? 'conf' : 'unconf'">
+          {{ enabled ? "email confirmed" : "email unconfirmed" }}
+        </div>
+        <button
+          class="btn btn-info btn-rounded btn-sm fw-bold marg"
+          *ngIf="enabled === false"
+          (click)="sendNewConfirmationEmail()"
         >
-      </li>
-      <li class="nav-item">
-        <a routerLink="create" routerLinkActive="active" class="nav-link"
-          >Add book</a
-        >
-      </li>
-    </ul>
-    <div class="navbar-user" *ngIf="loggedInUsername; enabled">
-      <div class="nick">{{ loggedInUsername }}</div>
-      <a (click)="logout()" role="button"
-        ><i class="fa fa-power-off fa-lg padd"></i
-      ></a>
-      <div class="padd" [ngClass]="enabled ? 'conf' : 'unconf'">
-        {{ enabled ? "email confirmed" : "email unconfirmed" }}
+          Send new conf email
+        </button>
       </div>
-      <button
-        class="btn btn-info btn-rounded btn-sm fw-bold marg"
-        *ngIf="enabled === false"
-        (click)="sendNewConfirmationEmail()"
-      >
-        Send new conf email
-      </button>
     </div>
+
+    <ng-template #loggedOut>
+      <div class="navbar-guest">
+        <img src="../assets/icons/favicon.ico" />
+        <p>Welcome to the application used to manage your library.</p>
+      </div>
+    </ng-template>
   </nav>
 
   <div class="container">
