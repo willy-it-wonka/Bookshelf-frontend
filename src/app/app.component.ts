@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
       console.log('JWT not found in local storage.');
     }
 
-    this.checkEnabled();
+    if (this.loggedIn) this.checkEnabled();
   }
 
   isLoggedIn() {
@@ -91,5 +91,4 @@ export class AppComponent implements OnInit {
   goToHomepage() {
     this.router.navigate(['/homepage']);
   }
-  
 }
