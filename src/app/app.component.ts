@@ -28,38 +28,32 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'bookshelf-angular';
 
+  loggedIn: boolean = false;
   loggedInUserId!: string;
   loggedInUsername!: string;
   enabled!: boolean; // Is the email account confirmed?
-  loggedIn: boolean = false; // For nav bar.
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
-    this.isLoggedIn();
-
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
+      this.loggedIn = true;
+      console.log('loggedIn:', this.loggedIn);
+
       // JWT decoding.
       const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
-
       // Read data from JWT.
       this.loggedInUserId = decodedJwt.sub;
       this.loggedInUsername = decodedJwt.nick;
 
-      console.log('User ID:', this.loggedInUserId);
-      console.log('Nick:', this.loggedInUsername);
+      console.log('UserId:', this.loggedInUserId);
+      console.log('Username:', this.loggedInUsername);
     } else {
       console.log('JWT not found in local storage.');
     }
 
     if (this.loggedIn) this.checkEnabled();
-  }
-
-  isLoggedIn() {
-    const loggedInValue = localStorage.getItem('loggedIn');
-    if (loggedInValue) this.loggedIn = JSON.parse(loggedInValue);
-    console.log(this.loggedIn);
   }
 
   checkEnabled() {
@@ -82,7 +76,6 @@ export class AppComponent implements OnInit {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);
       localStorage.removeItem('jwt');
-      localStorage.removeItem('loggedIn');
       this.loggedIn = false;
       this.goToHomepage();
     });

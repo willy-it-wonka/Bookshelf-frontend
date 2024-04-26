@@ -33,7 +33,6 @@ export class LoginComponent {
       console.log(response);
       if (response.status === true) {
         localStorage.setItem('jwt', response.message); // Save JWT in local storage.
-        localStorage.setItem('loggedIn', response.status); // For navigation bar.
         this.goToBookshelf();
       } else if (response.message == 'User not found.')
         alert('Incorrect email.');
@@ -47,5 +46,4 @@ export class LoginComponent {
       window.location.reload();
     });
   }
-  
 }
