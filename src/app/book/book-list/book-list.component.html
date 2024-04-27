@@ -49,7 +49,7 @@
             *ngIf="book.linkToCover"
             [src]="book.linkToCover"
             alt=""
-            class="cover"
+            class="cover zoom"
           />
         </td>
         <td>
@@ -117,7 +117,7 @@
     class="mt-4 d-flex justify-content-end"
   ></pagination-controls>
 
-  <!-- pop-up for delete button -->
+  <!-- modal for delete button -->
   <div
     class="modal fade"
     id="confirm"

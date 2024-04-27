@@ -44,13 +44,21 @@ table tbody tr:hover td {
   cursor: url("../../../assets/icons/edit.png") -2 32, auto;
 }
 
-/* Book covers */
+/* Book covers. */
 .cover {
   width: 45px;
   height: auto;
 }
 .cover-column {
   max-width: 60px;
+}
+
+/* Zoom cover. */
+.zoom {
+  transition: transform 1s ease;
+}
+.zoom:hover {
+  transform: scale(3.7);
 }
 
 /* Align buttons to right. */
