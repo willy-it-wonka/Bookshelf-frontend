@@ -10,6 +10,8 @@ export class UserService {
   private baseUrl = 'http://localhost:8080/api';
   private headers: HttpHeaders;
 
+  hasAuthToRoute: boolean = false;
+
   constructor(private httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
   }
@@ -38,7 +40,7 @@ export class UserService {
     });
   }
 
-  // Below methods require authorization.
+  // The next methods require authorization.
 
   checkEnabled(id: string): Observable<boolean> {
     return this.httpClient.get<boolean>(`${this.baseUrl}/enabled/${id}`, {
@@ -52,5 +54,15 @@ export class UserService {
       {},
       { headers: this.headers, responseType: 'text' }
     );
+  }
+
+  // The next methods are for routesGuard.
+
+  setHasAuthToRoute(value: boolean) {
+    this.hasAuthToRoute = value;
+  }
+
+  getHasAuthToRoute(): boolean {
+    return this.hasAuthToRoute;
   }
 }

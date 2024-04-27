@@ -41,17 +41,16 @@ export class AppComponent implements OnInit {
       this.loggedIn = true;
       console.log('loggedIn:', this.loggedIn);
 
+      this.userService.setHasAuthToRoute(true);
+
       // JWT decoding.
       const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
       // Read data from JWT.
       this.loggedInUserId = decodedJwt.sub;
       this.loggedInUsername = decodedJwt.nick;
-
       console.log('UserId:', this.loggedInUserId);
       console.log('Username:', this.loggedInUsername);
-    } else {
-      console.log('JWT not found in local storage.');
-    }
+    } else console.log('JWT not found in local storage.');
 
     if (this.loggedIn) this.checkEnabled();
   }
@@ -77,6 +76,7 @@ export class AppComponent implements OnInit {
       console.log(response);
       localStorage.removeItem('jwt');
       this.loggedIn = false;
+      this.userService.setHasAuthToRoute(false);
       this.goToHomepage();
     });
   }

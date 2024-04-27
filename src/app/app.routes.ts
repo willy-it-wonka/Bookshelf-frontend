@@ -6,14 +6,30 @@ import { BookNotesComponent } from './book/book-notes/book-notes.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { routesGuard } from './routes.guard';
 
 export const routes: Routes = [
-  { path: 'homepage', component: HomepageComponent },
-  { path: 'bookshelf', component: BookListComponent },
-  { path: 'create', component: CreateBookComponent },
-  { path: 'update/:id', component: UpdateBookComponent },
-  { path: 'notes/:id', component: BookNotesComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'homepage', title: 'Home', component: HomepageComponent },
+  { path: 'register', title: 'Register', component: RegisterComponent },
+  { path: 'login', title: 'Login', component: LoginComponent },
+  { path: 'bookshelf', title: 'Bookshelf', component: BookListComponent },
+  {
+    path: 'create',
+    title: 'Add book',
+    component: CreateBookComponent,
+    canActivate: [routesGuard],
+  },
+  {
+    path: 'update/:id',
+    title: 'Update book',
+    component: UpdateBookComponent,
+    canActivate: [routesGuard],
+  },
+  {
+    path: 'notes/:id',
+    title: 'Notes',
+    component: BookNotesComponent,
+    canActivate: [routesGuard],
+  },
   { path: '**', redirectTo: 'homepage', pathMatch: 'full' },
 ];

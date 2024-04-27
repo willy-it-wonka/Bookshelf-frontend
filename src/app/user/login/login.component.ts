@@ -19,7 +19,6 @@ export class LoginComponent {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.email);
     this.signIn();
   }
 
@@ -43,7 +42,7 @@ export class LoginComponent {
 
   goToBookshelf() {
     this.router.navigate(['/bookshelf']).then(() => {
-      window.location.reload();
+      window.location.reload(); // Essential to change the guest navbar to the user navbar.
     });
   }
 }
