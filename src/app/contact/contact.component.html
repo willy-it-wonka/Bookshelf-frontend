@@ -1,1 +1,50 @@
-<p>contact works!</p>
+<div
+  [formGroup]="formGroup"
+  class="col-md-6 offset-md-3 mt-5 mb-5 d-flex justify-content-center"
+>
+  <form (submit)="sendEmail()">
+    <input
+      type="email"
+      class="form-control mb-3"
+      formControlName="from_email"
+      placeholder="Your e-mail"
+      required
+    />
+    <input
+      type="text"
+      class="form-control mb-3"
+      formControlName="from_name"
+      placeholder="Your name"
+      required
+    />
+    <input
+      type="text"
+      class="form-control mb-3"
+      formControlName="subject"
+      placeholder="Subject"
+      required
+    />
+    <textarea
+      type="text"
+      class="form-control mb-3"
+      formControlName="message"
+      placeholder="Message"
+      required
+    ></textarea>
+
+    <div class="d-flex justify-content-center">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="
+          !this.formGroup.value.from_email ||
+          !this.formGroup.value.from_name ||
+          !this.formGroup.value.subject ||
+          !this.formGroup.value.message
+        "
+      >
+        Send
+      </button>
+    </div>
+  </form>
+</div>

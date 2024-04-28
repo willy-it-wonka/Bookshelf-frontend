@@ -1,0 +1,20 @@
+input,
+textarea {
+  background-color: #332d2d;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  min-width: 500px;
+}
+
+textarea {
+  min-height: 250px;
+}
+
+input:focus,
+textarea:focus {
+  background-color: #332d2d;
+  color: white;
+  outline: 0;
+  border: 0;
+}
