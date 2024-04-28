@@ -37,11 +37,22 @@
       />
     </div>
 
+    <div class="d-flex justify-content-center mb-3">
+      <ngx-recaptcha2
+        #captchaElem
+        [siteKey]="siteKey"
+        (success)="onCaptchaResolved($event)"
+      >
+      </ngx-recaptcha2>
+    </div>
+
     <div class="d-flex justify-content-center">
       <button
         type="submit"
         class="btn btn-success"
-        [disabled]="!user.nick || !user.email || !user.password"
+        [disabled]="
+          !user.nick || !user.email || !user.password || !this.isCaptchaResolved
+        "
       >
         Register
       </button>
