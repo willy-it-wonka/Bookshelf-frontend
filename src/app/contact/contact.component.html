@@ -32,6 +32,15 @@
       required
     ></textarea>
 
+    <div class="d-flex justify-content-center mb-3">
+      <ngx-recaptcha2
+        #captchaElem
+        [siteKey]="siteKey"
+        (success)="onCaptchaResolved($event)"
+      >
+      </ngx-recaptcha2>
+    </div>
+
     <div class="d-flex justify-content-center">
       <button
         type="submit"
@@ -40,7 +49,8 @@
           !this.formGroup.value.from_email ||
           !this.formGroup.value.from_name ||
           !this.formGroup.value.subject ||
-          !this.formGroup.value.message
+          !this.formGroup.value.message ||
+          !this.isCaptchaResolved
         "
       >
         Send
