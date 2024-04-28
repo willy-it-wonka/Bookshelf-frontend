@@ -15,6 +15,11 @@
             >Add book</a
           >
         </li>
+        <li class="nav-item">
+          <a routerLink="contact" routerLinkActive="active" class="nav-link"
+            >Contact us</a
+          >
+        </li>
       </ul>
       <div class="navbar-user d-flex" *ngIf="loggedInUsername; enabled">
         <div class="nick">{{ loggedInUsername }}</div>
@@ -44,6 +49,11 @@
           <li class="nav-item">
             <a routerLink="homepage" routerLinkActive="active" class="nav-link"
               >Home page</a
+            >
+          </li>
+          <li class="nav-item">
+            <a routerLink="contact" routerLinkActive="active" class="nav-link"
+              >Contact us</a
             >
           </li>
         </ul>
