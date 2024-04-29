@@ -35,6 +35,10 @@ export class BookListComponent implements OnInit {
   // For filterByStatus()
   selectedStatus: string = '';
 
+  // For sortTableBy()
+  sortDirection: 'asc' | 'desc' | '' = '';
+  field: string = '';
+
   constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit(): void {
@@ -98,8 +102,22 @@ export class BookListComponent implements OnInit {
           this.books = data;
         },
       });
-    } else {
-      this.getBooks(); // If no status is selected, fetch all books.
-    }
+    } else this.getBooks(); // If no status is selected, fetch all books.
+  }
+
+  // Sort asc/desc by title/author.
+  sortTableBy(field: string) {
+    this.field = field;
+    // Change the sorting direction when you click.
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+
+    this.books.sort((a, b) => {
+      let result: number = 0;
+      if (field === 'title') result = a[field].localeCompare(b[field]);
+      else if (field === 'author') result = a[field].localeCompare(b[field]);
+
+      // Return the sorted result, considering the sorting direction.
+      return this.sortDirection === 'asc' ? result : -result;
+    });
   }
 }

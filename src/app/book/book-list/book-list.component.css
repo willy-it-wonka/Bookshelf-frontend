@@ -16,32 +16,26 @@
   box-shadow: 0 0 5px green;
 }
 
-/* Text in <th> */
-.table-h {
-  font-weight: bold;
-  color: white;
-}
-
 /* For clear display of table content. */
 .table td,
 .table th {
   vertical-align: middle;
 }
 
-/* Row hover */
-table tbody tr:hover {
-  background-color: #332d2d;
+/* Asc/desc arrows. */
+.fa {
+  margin-left: 10px;
 }
-table tbody tr:hover td {
+
+th {
+  font-weight: bold;
+  font-size: 15px;
   color: white;
 }
 
-/* Icons when the cursor hovers over the buttons. */
-.notes-button:hover {
-  cursor: url("../../../assets/icons/notes.png") 15 15, auto;
-}
-.edit-button:hover {
-  cursor: url("../../../assets/icons/edit.png") -2 32, auto;
+tr:hover td {
+  background-color: #332d2d;
+  color: white;
 }
 
 /* Book covers. */
@@ -67,6 +61,14 @@ table tbody tr:hover td {
 }
 .right-align button {
   display: inline-block;
+}
+
+/* Icons when the cursor hovers over the buttons. */
+.notes-button:hover {
+  cursor: url("../../../assets/icons/notes.png") 15 15, auto;
+}
+.edit-button:hover {
+  cursor: url("../../../assets/icons/edit.png") -2 32, auto;
 }
 
 /* Warning in modal (delete button). */

@@ -1,5 +1,5 @@
 <div class="mt-5 mb-5">
-  <div class="mb-3 row d-flex justify-content-between">
+  <div class="mb-3 d-flex justify-content-between">
     <!-- search bar -->
     <div class="col-md-4">
       <input
@@ -31,9 +31,31 @@
     <thead class="bg-dark">
       <tr>
         <th class="cover-column"></th>
-        <th class="table-h">Title</th>
-        <th class="table-h">Author</th>
-        <th class="table-h">Status</th>
+        <th (click)="sortTableBy('title')">
+          Title
+          <i *ngIf="sortDirection === ''" class="fa fa-solid fa-sort fa-lg"></i>
+          <i
+            *ngIf="sortDirection === 'asc' && field === 'title'"
+            class="fa fa-solid fa-sort-up fa-lg"
+          ></i
+          ><i
+            *ngIf="sortDirection === 'desc' && field === 'title'"
+            class="fa fa-solid fa-sort-down fa-lg"
+          ></i>
+        </th>
+        <th (click)="sortTableBy('author')">
+          Author
+          <i *ngIf="sortDirection === ''" class="fa fa-solid fa-sort fa-lg"></i>
+          <i
+            *ngIf="sortDirection === 'asc' && field === 'author'"
+            class="fa fa-solid fa-sort-up fa-lg"
+          ></i
+          ><i
+            *ngIf="sortDirection === 'desc' && field === 'author'"
+            class="fa fa-solid fa-sort-down fa-lg"
+          ></i>
+        </th>
+        <th>Status</th>
         <th></th>
       </tr>
     </thead>
