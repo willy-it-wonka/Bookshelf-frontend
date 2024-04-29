@@ -2,3 +2,7 @@
   max-width: 280px;
   max-height: auto;
 }
+
+.p-left {
+  padding-left: 30px;
+}

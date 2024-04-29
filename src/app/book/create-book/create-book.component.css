@@ -1,12 +1,23 @@
-.ng-valid[required],
-.ng-valid.required {
+.ng-valid[required] {
   border-left: 5px solid #42a948;
+  border-color: #42a948;
 }
+.ng-valid[required]:focus {
+  border-color: #42a948;
+}
+
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }
+.ng-invalid:not(form):focus {
+  border-color: #a94442;
+}
 
-/* Check mark in pop-up */
+h3 {
+  font-weight: bold;
+}
+
+/* Check mark in modal. */
 .ch-mark {
   color: #00ad28;
   font-weight: bold;

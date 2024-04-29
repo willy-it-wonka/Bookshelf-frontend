@@ -4,8 +4,8 @@ import { BookListComponent } from './book/book-list/book-list.component';
 import { CreateBookComponent } from './book/create-book/create-book.component';
 import { UpdateBookComponent } from './book/update-book/update-book.component';
 import { BookNotesComponent } from './book/book-notes/book-notes.component';
-//insted: import { HttpClientModule } from '@angular/common/http'; this: import provideHttpClient in config to avoid NullInjectorError
-import { RouterModule } from '@angular/router'; //Essential for properly functioning of nav menu.
+// Insted: import { HttpClientModule }; this: import provideHttpClient in app.config to avoid NullInjectorError.
+import { RouterModule } from '@angular/router'; // Essential for properly functioning of nav bar.
 import { CommonModule } from '@angular/common';
 import { UserService } from './user/user.service';
 import { Router } from '@angular/router';

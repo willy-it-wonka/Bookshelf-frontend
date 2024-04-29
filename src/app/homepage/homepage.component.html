@@ -1,5 +1,5 @@
-<div class="mt-5 mb-8">
-  <div class="container mb-6">
+<div class="mt-5 mb-5">
+  <div class="d-flex justify-content-center">
     <div
       id="carouselExampleCaptions"
       class="carousel slide"
@@ -76,9 +76,13 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mt-5">
     <button class="but" (click)="goToRegister()">Register</button>
-    <button class="but m" style="--c: #e95a49" (click)="goToLogin()">
+    <button
+      class="but"
+      style="--c: #e95a49; margin-left: 20px"
+      (click)="goToLogin()"
+    >
       Login
     </button>
   </div>

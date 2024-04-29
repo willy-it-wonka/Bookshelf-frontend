@@ -1,5 +1,5 @@
-<div class="d-flex flex-column h-100 justify-content-between">
-  <nav class="navbar navbar-expand-sm bg-success navbar-dark p-left">
+<div class="d-flex flex-column justify-content-between h-100">
+  <nav class="navbar navbar-expand-sm bg-success navbar-dark">
     <div
       *ngIf="loggedIn; else loggedOut"
       class="d-flex justify-content-between w-100"
@@ -21,16 +21,16 @@
           >
         </li>
       </ul>
-      <div class="navbar-user d-flex" *ngIf="loggedInUsername; enabled">
+      <div class="navbar-user" *ngIf="loggedInUsername; enabled">
         <div class="nick">{{ loggedInUsername }}</div>
         <a (click)="logout()" role="button"
-          ><i class="fa fa-power-off fa-lg padd"></i
+          ><i class="fa fa-power-off fa-lg p-l"></i
         ></a>
-        <div class="padd" [ngClass]="enabled ? 'conf' : 'unconf'">
+        <div class="p-l" [ngClass]="enabled ? 'conf' : 'unconf'">
           {{ enabled ? "email confirmed" : "email unconfirmed" }}
         </div>
         <button
-          class="btn btn-info btn-rounded btn-sm fw-bold marg"
+          class="btn btn-info btn-rounded btn-sm fw-bold m-2"
           *ngIf="enabled === false"
           (click)="sendNewConfirmationEmail()"
         >
@@ -65,7 +65,7 @@
     <router-outlet></router-outlet>
   </div>
 
-  <footer class="text-center text-white bg-color-f1">
+  <footer class="f-bg-1">
     <div class="container pt-2">
       <section class="mb-2">
         <a
@@ -100,14 +100,14 @@
         ></a>
         <a
           class="btn btn-link btn-floating btn-lg text-white m-1 btn-icons"
-          href="https://github.com/"
+          href="https://github.com/willy-it-wonka"
           role="button"
           ><i class="fa fa-github fa-lg"></i
         ></a>
       </section>
     </div>
-    <div class="text-center text-white p-2 bg-color-f2">
-      <span>All rights reserved 2024 &#64;WilliamWonk</span>
+    <div class="f-bg-2 p-2">
+      <span>&copy; 2024 - All rights reserved - William Wonk</span>
     </div>
   </footer>
 </div>

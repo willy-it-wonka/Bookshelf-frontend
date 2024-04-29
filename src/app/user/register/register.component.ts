@@ -32,7 +32,10 @@ export class RegisterComponent implements OnInit {
 
   saveUser() {
     this.userService.register(this.user).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => {
+        console.log(response),
+          alert('The confirmation email has been sent. Check your email.');
+      },
       error: (error) => {
         console.log(error), alert(error.error);
       },

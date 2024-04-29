@@ -1,3 +1,7 @@
+.navbar {
+  padding-left: 50px;
+}
+
 .navbar-guest {
   display: flex;
   align-items: center;
@@ -11,9 +15,10 @@
 }
 
 .navbar-user {
-  color: white;
+  display: flex;
   align-items: center;
   padding-right: 120px;
+  color: white;
 }
 
 .navbar-nav {
@@ -27,16 +32,12 @@
   font-weight: bold;
 }
 
-.padd {
+.p-l {
   padding-left: 15px;
 }
 
 .p-r {
   padding-right: 270px;
-}
-
-.marg {
-  margin-left: 10px;
 }
 
 .conf {

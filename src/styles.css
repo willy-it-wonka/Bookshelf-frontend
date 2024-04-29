@@ -4,29 +4,36 @@ body {
   height: 100%;
 }
 
-/* navbar, book-notes */
-.p-left {
-  padding-left: 30px;
+/* Footer. */
+footer {
+  text-align: center;
+  color: white;
 }
-
-/* footer */
-.bg-color-f1 {
+.f-bg-1 {
   background-color: #28a745;
 }
-.bg-color-f2 {
+.f-bg-2 {
   background-color: rgba(0, 0, 0, 0.2);
 }
 .btn-icons:hover i {
   color: black;
 }
 
-/* For labels to create-book and update-book. */
+/* For label in create-book and update-book. */
 .ta-label {
   margin-left: 15px;
+  margin-bottom: 3px;
   font-weight: bold;
 }
 
-/* For input in login and registration. */
-.input-w {
-  width: 400px;
+/* For input in login and register. */
+.input-r-l {
+  min-width: 400px;
+  padding: 10px;
+}
+.input-r-l:focus,
+.input-r-l:hover {
+  background-color: #332d2d;
+  color: white;
+  border: 0;
 }

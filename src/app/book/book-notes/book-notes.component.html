@@ -7,8 +7,8 @@
       class="cover-notes"
     />
   </div>
-  <div class="col-md-6">
-    <div class="mt-4 p-left">
+  <div class="col-md-6 p-left">
+    <div class="mt-4">
       <span *ngIf="book.status === 'READ'" class="badge badge-success d-inline"
         >READ</span
       >
@@ -23,17 +23,17 @@
         >READING</span
       >
     </div>
-    <div class="mt-4 p-left">
+    <div class="mt-4">
       <label><b>Title:</b></label> {{ book.title }}
     </div>
-    <div class="mt-1 p-left">
+    <div class="mt-1">
       <label><b>Author:</b></label> {{ book.author }}
     </div>
-    <div class="mt-3 p-left">
+    <div class="mt-4">
       <label><b>Created date:</b></label>
       {{ book.createdDate | date : "d MMM yyyy | HH:mm" }}
     </div>
-    <div class="p-left">
+    <div>
       <label><b>Last edited:</b></label>
       {{ book.lastModifiedDate | date : "d MMM yyyy | HH:mm" }}
     </div>

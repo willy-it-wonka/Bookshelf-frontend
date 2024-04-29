@@ -29,15 +29,15 @@ export class UpdateBookComponent implements OnInit {
     });
   }
 
-  goToBookshelf() {
-    this.router.navigate(['/bookshelf']);
-  }
-
   onSubmit() {
     this.bookService.updateBook(this.id, this.book).subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),
       complete: () => this.goToBookshelf(),
     });
+  }
+
+  goToBookshelf() {
+    this.router.navigate(['/bookshelf']);
   }
 }

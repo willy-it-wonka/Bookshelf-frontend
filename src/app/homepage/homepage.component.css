@@ -1,15 +1,9 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .carousel-item img {
   max-width: 800px;
-  margin: 0 auto;
+  margin: auto;
 }
 
-/* author: Temani Afif + my edit */
+/* by Temani Afif + my edit */
 .but {
   --c: #229091; /* default color */
 
@@ -39,8 +33,4 @@
   box-shadow: 0 0 9e9Q inset #0009;
   background-color: var(--c);
   color: #fff;
-}
-
-.m {
-  margin-left: 20px;
 }
