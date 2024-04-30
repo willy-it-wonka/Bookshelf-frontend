@@ -1,5 +1,6 @@
 .carousel-item img {
   max-width: 800px;
+  max-height: 500px;
   margin: auto;
 }
 
@@ -33,4 +34,9 @@
   box-shadow: 0 0 9e9Q inset #0009;
   background-color: var(--c);
   color: #fff;
+}
+
+h5,
+p {
+  font-weight: bold;
 }
