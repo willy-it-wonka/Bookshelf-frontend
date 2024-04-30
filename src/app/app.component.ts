@@ -26,7 +26,6 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  title = 'bookshelf-angular';
 
   loggedIn: boolean = false;
   loggedInUserId!: string;

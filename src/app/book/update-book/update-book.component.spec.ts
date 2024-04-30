@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpdateBookComponent } from './update-book.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 
 describe('UpdateBookComponent', () => {
   let component: UpdateBookComponent;
@@ -7,7 +9,13 @@ describe('UpdateBookComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpdateBookComponent],
+      imports: [UpdateBookComponent, HttpClientTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { params: { id: 'test-id' } } },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UpdateBookComponent);
