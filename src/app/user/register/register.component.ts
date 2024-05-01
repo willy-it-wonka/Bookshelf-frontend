@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -11,7 +11,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   user: User = new User();
 
   /*
@@ -22,8 +22,6 @@ export class RegisterComponent implements OnInit {
   isCaptchaResolved: boolean = false;
 
   constructor(private userService: UserService) {}
-
-  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.user);
