@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { BookListComponent } from './book/book-list/book-list.component';
-import { CreateBookComponent } from './book/create-book/create-book.component';
-import { UpdateBookComponent } from './book/update-book/update-book.component';
-import { BookNotesComponent } from './book/book-notes/book-notes.component';
-// Insted: import { HttpClientModule }; this: import provideHttpClient in app.config to avoid NullInjectorError.
-import { RouterModule } from '@angular/router'; // Essential for properly functioning of nav bar.
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user/user.service';
 import { Router } from '@angular/router';
@@ -13,20 +7,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    BookListComponent,
-    CreateBookComponent,
-    RouterModule,
-    UpdateBookComponent,
-    BookNotesComponent,
-    CommonModule,
-  ],
+  imports: [RouterModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-
   loggedIn: boolean = false;
   loggedInUserId!: string;
   loggedInUsername!: string;
@@ -35,11 +20,14 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
+    this.checkLoggedIn();
+    if (this.loggedIn) this.checkEnabled();
+  }
+
+  private checkLoggedIn() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       this.loggedIn = true;
-      console.log('loggedIn:', this.loggedIn);
-
       this.userService.setHasAuthToRoute(true);
 
       // JWT decoding.
@@ -47,14 +35,10 @@ export class AppComponent implements OnInit {
       // Read data from JWT.
       this.loggedInUserId = decodedJwt.sub;
       this.loggedInUsername = decodedJwt.nick;
-      console.log('UserId:', this.loggedInUserId);
-      console.log('Username:', this.loggedInUsername);
     } else console.log('JWT not found in local storage.');
-
-    if (this.loggedIn) this.checkEnabled();
   }
 
-  checkEnabled() {
+  private checkEnabled() {
     this.userService
       .checkEnabled(this.loggedInUserId)
       .subscribe((enabled: boolean) => {
@@ -73,14 +57,18 @@ export class AppComponent implements OnInit {
   logout() {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);
-      localStorage.removeItem('jwt');
-      this.loggedIn = false;
-      this.userService.setHasAuthToRoute(false);
+      this.resetState();
       this.goToHomepage();
     });
   }
 
-  goToHomepage() {
+  private resetState() {
+    localStorage.removeItem('jwt');
+    this.loggedIn = false;
+    this.userService.setHasAuthToRoute(false);
+  }
+
+  private goToHomepage() {
     this.router.navigate(['/homepage']);
   }
 }
