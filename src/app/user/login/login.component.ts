@@ -16,8 +16,6 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   onSubmit() {
     this.signIn();
   }
@@ -33,10 +31,7 @@ export class LoginComponent {
       if (response.status === true) {
         localStorage.setItem('jwt', response.message); // Save JWT in local storage.
         this.goToBookshelf();
-      } else if (response.message == 'User not found.')
-        alert('Incorrect email.');
-      else if (response.message == 'Incorrect password.')
-        alert('Incorrect password.');
+      } else alert(response.message);
     });
   }
 
