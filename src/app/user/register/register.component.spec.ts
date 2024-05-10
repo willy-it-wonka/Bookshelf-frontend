@@ -7,7 +7,6 @@ describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
   let userService: jasmine.SpyObj<UserService>;
-  const simulatedSiteKey = 'simulatedSiteKey';
 
   beforeEach(async () => {
     userService = jasmine.createSpyObj('UserService', ['register']);
@@ -19,7 +18,6 @@ describe('RegisterComponent', () => {
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
-    component.siteKey = simulatedSiteKey;
     fixture.detectChanges();
   });
 
