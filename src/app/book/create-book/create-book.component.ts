@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Book } from '../book';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../book.service';
@@ -10,26 +10,15 @@ import { BookService } from '../book.service';
   templateUrl: './create-book.component.html',
   styleUrl: './create-book.component.css',
 })
-export class CreateBookComponent implements OnInit {
+export class CreateBookComponent {
   book: Book = new Book();
 
   constructor(private bookService: BookService) {}
 
-  ngOnInit(): void {}
-
   onSubmit() {
     this.saveBook();
-
-    // Clear text fields
-    this.book.title = '';
-    this.book.author = '';
-    this.book.linkToCover = '';
-
-    // Modal
-    const modalAfterAdd = document.getElementById('staticBackdrop');
-    if (modalAfterAdd != null) {
-      modalAfterAdd.style.display = 'block';
-    }
+    this.resetForm();
+    this.showModal();
   }
 
   saveBook() {
@@ -37,5 +26,16 @@ export class CreateBookComponent implements OnInit {
       next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
+  }
+
+  resetForm() {
+    this.book.title = '';
+    this.book.author = '';
+    this.book.linkToCover = '';
+  }
+
+  showModal() {
+    const modalAfterAdd = document.getElementById('staticBackdrop');
+    if (modalAfterAdd != null) modalAfterAdd.style.display = 'block';
   }
 }
