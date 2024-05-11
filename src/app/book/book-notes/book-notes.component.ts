@@ -22,7 +22,15 @@ export class BookNotesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initializeId();
+    this.initializeBook();
+  }
+
+  initializeId() {
     this.id = this.route.snapshot.params['id'];
+  }
+
+  initializeBook() {
     this.book = new Book();
     this.bookService.getBookById(this.id).subscribe((data) => {
       this.book = data;
