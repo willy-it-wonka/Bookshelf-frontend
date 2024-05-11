@@ -22,7 +22,15 @@ export class UpdateBookComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initializeId();
+    this.initializeBook();
+  }
+
+  initializeId() {
     this.id = this.route.snapshot.params['id'];
+  }
+
+  initializeBook() {
     this.bookService.getBookById(this.id).subscribe({
       next: (data) => (this.book = data),
       error: (error) => console.log(error),
@@ -30,6 +38,10 @@ export class UpdateBookComponent implements OnInit {
   }
 
   onSubmit() {
+    this.updateBook();
+  }
+
+  updateBook() {
     this.bookService.updateBook(this.id, this.book).subscribe({
       next: (response) => console.log(response),
       error: (error) => console.log(error),
