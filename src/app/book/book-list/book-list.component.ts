@@ -45,7 +45,7 @@ export class BookListComponent implements OnInit {
     this.getBooks();
   }
 
-  private getBooks() {
+  getBooks() {
     this.bookService.getBookList().subscribe((data) => {
       this.books = data;
     });
@@ -55,7 +55,7 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['/notes', id]);
   }
 
-  updateBook(id: number) {
+  goToUpdateBook(id: number) {
     this.router.navigate(['/update', id]);
   }
 
