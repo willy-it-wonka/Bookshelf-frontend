@@ -1,9 +1,12 @@
-import { CanActivateFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { inject } from '@angular/core';
 import { UserService } from './user/user.service';
 import { map, of } from 'rxjs';
 
-export const routesGuard: CanActivateFn = () => {
+export const routesGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
   const userService = inject(UserService);
   const router = inject(Router);
 
