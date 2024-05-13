@@ -1,5 +1,5 @@
 ## Links
-Back-end: [repository](https://github.com/willy-it-wonka/Bookshelf-Full-Stack-App-back-end.git)\
+Back-end: [repository](https://github.com/willy-it-wonka/Bookshelf-backend)\
 Demo: [soon]
 </br></br>
 
@@ -12,7 +12,7 @@ Demo: [soon]
 </br></br>
 
 ## Installation
-1. Run the [back-end](https://github.com/willy-it-wonka/Bookshelf-Full-Stack-App-back-end.git) of this application.
+1. Run the [back-end](https://github.com/willy-it-wonka/Bookshelf-backend) of this application.
 2. Clone the repository. [Instruction](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=integrated-terminal#clone-repository).
 3. To install all dependencies, type in the VSC terminal:
 ```bash
@@ -41,6 +41,5 @@ With this application you can manage your library. Create a reading schedule. Ke
 </br></br>
 
 ## Future features
-* 100% unit test coverage.
 * Reading schedule.
 * Your notes, conclusions about the book.
