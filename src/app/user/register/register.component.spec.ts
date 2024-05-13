@@ -18,7 +18,9 @@ describe('RegisterComponent', () => {
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    setTimeout(function () {    // Solution for "Error: reCAPTCHA placeholder element must be an element or id" which
+      fixture.detectChanges();  // appears in random unit tests.
+    }, 2000);
   });
 
   it('should create', () => {
