@@ -50,7 +50,7 @@ export class NavBarComponent implements OnInit {
     this.userService
       .sendNewConfirmationEmail(this.loggedInUserId)
       .subscribe((response: any) => {
-        console.log(response);
+        alert(response);
       });
   }
 

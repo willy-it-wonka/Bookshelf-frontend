@@ -36,5 +36,8 @@ export class NoteService {
       body: body,
     });
   }
-  
+
+  getNoteByBookId(bookId: number): Observable<Note> {
+    return this.makeHttpRequest<Note>('GET', `${this.baseUrl}/${bookId}`);
+  }
 }
