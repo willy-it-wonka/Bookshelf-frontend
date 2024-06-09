@@ -70,9 +70,3 @@ tr:hover td {
 .edit-button:hover {
   cursor: url("../../../assets/icons/edit.png") -2 32, auto;
 }
-
-/* Warning in modal (delete button). */
-.text-w {
-  font-weight: bold;
-  color: rgb(187, 0, 0);
-}

@@ -22,6 +22,8 @@ export class BookNotesComponent implements OnInit {
   // For notes
   isEditing: boolean = false; // For switching between editing and presentation states.
   missingNotesMessage!: string; // For display info about lack of notes.
+  canDelete: boolean = false; // For disable/enable the delete button.
+  showDeleteConfirmation: boolean = false; // For delete modal.
 
   constructor(
     private route: ActivatedRoute,
@@ -49,7 +51,7 @@ export class BookNotesComponent implements OnInit {
   initializeNote() {
     this.note = new Note();
     this.noteService.getNoteByBookId(this.id).subscribe({
-      next: (response) => (this.note = response),
+      next: (response) => ((this.note = response), (this.canDelete = true)),
       error: (error) => (this.missingNotesMessage = error.error),
     });
   }
@@ -69,6 +71,7 @@ export class BookNotesComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.isEditing = false;
+          this.canDelete = true;
           this.cleanMissingNotesMessage();
         },
         error: (error) => console.log(error),
@@ -85,5 +88,23 @@ export class BookNotesComponent implements OnInit {
 
   cleanMissingNotesMessage() {
     this.missingNotesMessage = '';
+  }
+
+  // Modal for delete button.
+  openModalForDelete() {
+    this.showDeleteConfirmation = true;
+  }
+
+  // Confirmation in a modal.
+  confirmDelete() {
+    if (this.showDeleteConfirmation) {
+      this.noteService.deleteNoteByBookId(this.id).subscribe({
+        next: () => {
+          this.showDeleteConfirmation = false; // Hide the modal after confirming deletion.
+          this.canDelete = false;
+          this.initializeNote();
+        },
+      });
+    }
   }
 }

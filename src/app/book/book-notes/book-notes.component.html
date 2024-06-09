@@ -59,6 +59,15 @@
         >
           Edit
         </button>
+        <button
+          (click)="openModalForDelete()"
+          [disabled]="!this.canDelete"
+          class="btn btn-danger btn-lg btn-rounded fw-bold ms-2"
+          data-bs-toggle="modal"
+          data-bs-target="#confirm"
+        >
+          Delete
+        </button>
       </div>
     </div>
 
@@ -83,6 +92,51 @@
         >
           Cancel
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for delete button. -->
+  <div
+    class="modal fade"
+    id="confirm"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="confirmLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-w" id="confirmLabel">WARNING</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete these notes?
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-dark fw-bold"
+            data-bs-dismiss="modal"
+          >
+            No
+          </button>
+          <button
+            type="button"
+            (click)="confirmDelete()"
+            class="btn btn-danger fw-bold"
+            data-bs-dismiss="modal"
+          >
+            Yes
+          </button>
+        </div>
       </div>
     </div>
   </div>
