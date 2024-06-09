@@ -70,6 +70,8 @@ export class BookNotesComponent implements OnInit {
       this.noteService.createNote(this.note).subscribe({
         next: (response) => {
           console.log(response);
+          this.note = response; // Without this, when you create a new note and try to edit it without first
+          // reloading the page, it will cause a SQLIntegrityConstraintViolationException (re-creates instead of editing).
           this.isEditing = false;
           this.canDelete = true;
           this.cleanMissingNotesMessage();
