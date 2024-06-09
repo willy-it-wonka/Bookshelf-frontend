@@ -47,10 +47,42 @@
   <!-- Notes section -->
   <div class="mt-5">
     <!-- Presentation of the contents of the note. -->
-    <div>
+    <div *ngIf="!isEditing">
       <div class="notes-presentation">
         {{ missingNotesMessage }}
         {{ note.content }}
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <button
+          (click)="isEditing = true"
+          class="btn btn-primary btn-lg btn-rounded fw-bold"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+
+    <!-- Edit the content of the note. -->
+    <div *ngIf="isEditing">
+      <textarea
+        [(ngModel)]="note.content"
+        rows="15"
+        class="form-control"
+      ></textarea>
+      <div class="d-flex justify-content-center mt-3">
+        <button
+          (click)="saveNote()"
+          [disabled]="!canSaveNote()"
+          class="btn btn-success btn-lg btn-rounded fw-bold"
+        >
+          Save
+        </button>
+        <button
+          (click)="isEditing = false; cleanMissingNotesMessage()"
+          class="btn btn-warning btn-lg btn-rounded fw-bold ms-2"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   </div>

@@ -40,4 +40,12 @@ export class NoteService {
   getNoteByBookId(bookId: number): Observable<Note> {
     return this.makeHttpRequest<Note>('GET', `${this.baseUrl}/${bookId}`);
   }
+
+  createNote(note: Note): Observable<Note> {
+    return this.makeHttpRequest<Note>('POST', `${this.baseUrl}`, note);
+  }
+
+  updateNote(bookId: number, note: Note): Observable<Note> {
+    return this.makeHttpRequest<Note>('PUT', `${this.baseUrl}/${bookId}`, note);
+  }
 }

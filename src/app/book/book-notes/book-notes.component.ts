@@ -20,6 +20,7 @@ export class BookNotesComponent implements OnInit {
   note!: Note;
 
   // For notes
+  isEditing: boolean = false; // For switching between editing and presentation states.
   missingNotesMessage!: string; // For display info about lack of notes.
 
   constructor(
@@ -51,5 +52,38 @@ export class BookNotesComponent implements OnInit {
       next: (response) => (this.note = response),
       error: (error) => (this.missingNotesMessage = error.error),
     });
+  }
+
+  saveNote() {
+    if (this.note.id) {
+      this.noteService.updateNote(this.id, this.note).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.isEditing = false;
+        },
+        error: (error) => console.log(error),
+      });
+    } else {
+      this.note.book = this.book;
+      this.noteService.createNote(this.note).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.isEditing = false;
+          this.cleanMissingNotesMessage();
+        },
+        error: (error) => console.log(error),
+      });
+    }
+  }
+
+  // To disable SAVE when there is no text or only whitespaces.
+  canSaveNote(): boolean {
+    if (this.note && this.note.content && this.note.content.trim().length > 0)
+      return true;
+    return false;
+  }
+
+  cleanMissingNotesMessage() {
+    this.missingNotesMessage = '';
   }
 }
