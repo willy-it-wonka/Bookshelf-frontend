@@ -2,20 +2,27 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookNotesComponent } from './book-notes.component';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
-import { of } from 'rxjs';
+import { NoteService } from '../note.service';
 import { Book } from '../book';
+import { Note } from '../note';
+import { of } from 'rxjs';
 
 describe('BookNotesComponent', () => {
   let component: BookNotesComponent;
   let fixture: ComponentFixture<BookNotesComponent>;
   let bookService: jasmine.SpyObj<BookService>;
+  let noteService: jasmine.SpyObj<NoteService>;
   let activatedRouteMock: { snapshot: any };
 
   beforeEach(async () => {
     bookService = jasmine.createSpyObj('BookService', ['getBookById']);
-    bookService.getBookById.and.returnValue(of(new Book())); /* Always return Observable<Book>. 
-    Solution for TypeError: Cannot read properties of undefined (reading 'subscribe').
-    Helps avoid mocking with subscribe in each test method. */
+    noteService = jasmine.createSpyObj('NoteService', ['getNoteByBookId']);
+    /* Always return Observable<...>. 
+       Solution for TypeError: Cannot read properties of undefined (reading 'subscribe').
+       Helps avoid mocking with subscribe in each test method. */
+    bookService.getBookById.and.returnValue(of(new Book()));
+    noteService.getNoteByBookId.and.returnValue(of(new Note()));
+
     activatedRouteMock = { snapshot: { params: { id: 123 } } };
 
     await TestBed.configureTestingModule({
@@ -23,6 +30,7 @@ describe('BookNotesComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteMock },
         { provide: BookService, useValue: bookService },
+        { provide: NoteService, useValue: noteService },
       ],
     }).compileComponents();
 
@@ -38,11 +46,13 @@ describe('BookNotesComponent', () => {
   it('should initialize the component properly', () => {
     const idSpy = spyOn(component, 'initializeId');
     const bookSpy = spyOn(component, 'initializeBook');
+    const noteSpy = spyOn(component, 'initializeNote');
 
     component.ngOnInit();
 
     expect(idSpy).toHaveBeenCalled();
     expect(bookSpy).toHaveBeenCalled();
+    expect(noteSpy).toHaveBeenCalled();
   });
 
   it('should initialize id from the route parameters', () => {
