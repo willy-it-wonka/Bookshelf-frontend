@@ -17,3 +17,14 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
+
+textarea {
+  background-color: #ececec;
+  padding: 15px; 
+}
+
+textarea:focus {
+  background-color: #ececec;
+  outline: 0;
+  border: 0;
+}
