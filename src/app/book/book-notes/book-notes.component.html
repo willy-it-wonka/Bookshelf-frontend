@@ -46,7 +46,7 @@
 
   <!-- Notes section -->
   <div class="mt-5">
-    <!-- Presentation of the contents of the note. -->
+    <!-- Presentation of the content of the note. -->
     <div *ngIf="!isEditing">
       <div class="notes-presentation">
         {{ missingNotesMessage }}
@@ -77,8 +77,12 @@
         [(ngModel)]="note.content"
         rows="15"
         class="form-control"
+        maxlength="10000"
       ></textarea>
-      <div class="d-flex justify-content-center mt-3">
+      <div class="text-muted ms-2">
+        {{ 10000 - (note.content ? note.content.length : 0) }} characters left.
+      </div>
+      <div class="d-flex justify-content-center">
         <button
           (click)="saveNote()"
           [disabled]="!canSaveNote()"
