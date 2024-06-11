@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testi
 import { ContactComponent } from './contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ContactComponent', () => {
   let component: ContactComponent;
@@ -9,7 +10,7 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContactComponent, ReactiveFormsModule],
+      imports: [ContactComponent, ReactiveFormsModule, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ContactComponent);

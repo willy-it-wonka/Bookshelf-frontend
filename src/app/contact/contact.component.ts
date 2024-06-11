@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule, NgxCaptchaModule],
+  imports: [ReactiveFormsModule, NgxCaptchaModule, MatSnackBarModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
 })
@@ -26,7 +27,10 @@ export class ContactComponent {
   siteKey: string = 'YOUR_siteKey';
   isCaptchaResolved: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private matSnackBar: MatSnackBar
+  ) {}
 
   /*
   Usage EmailJS:
@@ -44,7 +48,9 @@ export class ContactComponent {
     });
 
     this.formGroup.reset();
-    alert('The email has been sent.');
+    this.matSnackBar.open('The email has been sent.', 'Close', {
+      duration: 5000,
+    });
   }
 
   onCaptchaResolved(resolved: any) {

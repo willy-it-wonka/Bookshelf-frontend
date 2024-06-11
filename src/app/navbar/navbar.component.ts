@@ -3,11 +3,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatSnackBarModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -17,7 +18,11 @@ export class NavBarComponent implements OnInit {
   loggedInUsername!: string;
   enabled!: boolean; // Is the email account confirmed?
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private matSnackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.checkLoggedIn();
@@ -50,7 +55,9 @@ export class NavBarComponent implements OnInit {
     this.userService
       .sendNewConfirmationEmail(this.loggedInUserId)
       .subscribe((response: any) => {
-        alert(response);
+        this.matSnackBar.open(response, 'Close', {
+          duration: 5000,
+        });
       });
   }
 

@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, NgxCaptchaModule],
+  imports: [FormsModule, NgxCaptchaModule, MatSnackBarModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -21,7 +22,10 @@ export class RegisterComponent {
   siteKey: string = 'YOUR_siteKey';
   isCaptchaResolved: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private matSnackBar: MatSnackBar
+  ) {}
 
   onSubmit() {
     console.log(this.user);
@@ -32,10 +36,18 @@ export class RegisterComponent {
     this.userService.register(this.user).subscribe({
       next: (response) => {
         console.log(response),
-          alert('The confirmation email has been sent. Check your email.');
+          this.matSnackBar.open(
+            'The confirmation email has been sent. Check your email.',
+            'Close',
+            {
+              duration: 5000,
+            }
+          );
       },
       error: (error) => {
-        console.log(error), alert(error.error);
+        this.matSnackBar.open(error.error, 'Close', {
+          duration: 5000,
+        });
       },
     });
   }

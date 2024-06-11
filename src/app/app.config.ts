@@ -1,10 +1,13 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-
-// Solution for NullInjectorError at http GET.
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http'; // Solution for NullInjectorError in http requests.
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideHttpClient()],
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    provideAnimationsAsync(),
+  ],
 };

@@ -4,6 +4,7 @@ import { UserService } from '../user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NavbarComponent', () => {
   let component: NavBarComponent;
@@ -22,7 +23,7 @@ describe('NavbarComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [NavBarComponent],
+      imports: [NavBarComponent, NoopAnimationsModule],
       providers: [
         { provide: UserService, useValue: userService },
         { provide: ActivatedRoute, useValue: {} },

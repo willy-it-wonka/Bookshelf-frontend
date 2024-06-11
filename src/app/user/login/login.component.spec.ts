@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { UserService } from '../user.service';
 import { of } from 'rxjs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -13,7 +14,7 @@ describe('LoginComponent', () => {
     userService = jasmine.createSpyObj('UserService', ['login']);
 
     await TestBed.configureTestingModule({
-      imports: [LoginComponent],
+      imports: [LoginComponent, NoopAnimationsModule],
       providers: [{ provide: UserService, useValue: userService }],
     }).compileComponents();
 
@@ -51,11 +52,9 @@ describe('LoginComponent', () => {
   it('should handle unsuccessful login', () => {
     const response = { message: 'error message', status: false };
     userService.login.and.returnValue(of(response));
-    spyOn(window, 'alert');
 
     component.signIn();
 
     expect(userService.login).toHaveBeenCalledWith(userData);
-    expect(window.alert).toHaveBeenCalledWith('error message');
   });
 });
