@@ -32,9 +32,9 @@ With this application you can manage your library. Create a reading schedule. Ke
 </br>
 * registration and login
 * sending confirmation email
-* authentication and authorization with JWT
-* create books, update, delete, etc.
-* contact form with EmailJS
+* JWT authorization
+* CRUD
+* contact form using EmailJS
 * reCAPTCHA
 * route guard
 * unit testing
@@ -42,4 +42,4 @@ With this application you can manage your library. Create a reading schedule. Ke
 
 ## Future features
 * Reading schedule.
-* Your notes, conclusions about the book.
+* Formatting text in notes.
