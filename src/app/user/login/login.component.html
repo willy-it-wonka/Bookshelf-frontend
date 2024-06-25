@@ -8,14 +8,20 @@
       placeholder="E-mail"
       required
     />
-    <input
-      type="password"
-      class="form-control mb-3 input-r-l"
-      [(ngModel)]="password"
-      name="password"
-      placeholder="Password"
-      required
-    />
+    <div class="password-wrapper mb-3">
+      <input
+        [type]="hidePassword ? 'password' : 'text'"
+        class="form-control input-r-l"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        required
+      />
+      <i
+        class="fa fa-eye password-icon"
+        (click)="hidePassword = !hidePassword"
+      ></i>
+    </div>
 
     <div class="d-flex justify-content-center">
       <button

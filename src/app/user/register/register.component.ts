@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterComponent {
   user: User = new User();
+  hidePassword: boolean = true;
 
   /*
   Usage reCAPTCHA:

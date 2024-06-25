@@ -14,6 +14,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  hidePassword: boolean = true;
 
   constructor(
     private userService: UserService,

@@ -19,16 +19,22 @@
       placeholder="E-mail"
       required
     />
-    <input
-      type="password"
-      class="form-control input-r-l"
-      [(ngModel)]="user.password"
-      name="password"
-      #password="ngModel"
-      placeholder="Password"
-      required
-      minlength="6"
-    />
+    <div class="password-wrapper">
+      <input
+        [type]="hidePassword ? 'password' : 'text'"
+        class="form-control input-r-l"
+        [(ngModel)]="user.password"
+        name="password"
+        #password="ngModel"
+        placeholder="Password"
+        required
+        minlength="6"
+      />
+      <i
+        class="fa fa-eye password-icon"
+        (click)="hidePassword = !hidePassword"
+      ></i>
+    </div>
     <div *ngIf="password.errors?.['minlength']" class="alert alert-danger">
       The password must have at least 6 characters.
     </div>

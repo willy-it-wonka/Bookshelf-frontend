@@ -43,3 +43,18 @@ footer {
   font-weight: bold;
   color: rgb(187, 0, 0);
 }
+
+/* Show/hide password. */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-wrapper .form-control {
+  padding-right: 30px;
+}
+.password-wrapper .password-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
