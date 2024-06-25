@@ -8,6 +8,7 @@
       #nick="ngModel"
       placeholder="Nick"
       required
+      maxlength="25"
     />
     <input
       type="email"
@@ -20,15 +21,19 @@
     />
     <input
       type="password"
-      class="form-control mb-3 input-r-l"
+      class="form-control input-r-l"
       [(ngModel)]="user.password"
       name="password"
       #password="ngModel"
       placeholder="Password"
       required
+      minlength="6"
     />
+    <div *ngIf="password.errors?.['minlength']" class="alert alert-danger">
+      The password must have at least 6 characters.
+    </div>
 
-    <div class="d-flex justify-content-center mb-3">
+    <div class="d-flex justify-content-center mt-3 mb-3">
       <ngx-recaptcha2
         #captchaElem
         [siteKey]="siteKey"
@@ -42,7 +47,10 @@
         type="submit"
         class="btn btn-success"
         [disabled]="
-          !user.nick || !user.email || !user.password || !this.isCaptchaResolved
+          !user.nick ||
+          !user.email ||
+          user.password.length < 6 ||
+          !this.isCaptchaResolved
         "
       >
         Register

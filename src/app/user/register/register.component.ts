@@ -4,11 +4,12 @@ import { User } from '../user';
 import { UserService } from '../user.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, NgxCaptchaModule, MatSnackBarModule],
+  imports: [FormsModule, NgxCaptchaModule, MatSnackBarModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
