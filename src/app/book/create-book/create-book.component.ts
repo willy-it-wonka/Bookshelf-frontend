@@ -22,9 +22,8 @@ export class CreateBookComponent {
   }
 
   saveBook() {
-    this.bookService.createBook(this.book).subscribe({
-      next: (response) => console.log(response),
-      error: (error) => console.log(error),
+    this.bookService.createBook(this.book).subscribe((response) => {
+      console.log(response);
     });
   }
 

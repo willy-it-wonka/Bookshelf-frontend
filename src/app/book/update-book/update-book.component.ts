@@ -33,7 +33,6 @@ export class UpdateBookComponent implements OnInit {
   initializeBook() {
     this.bookService.getBookById(this.id).subscribe({
       next: (data) => (this.book = data),
-      error: (error) => console.log(error),
     });
   }
 
@@ -44,7 +43,6 @@ export class UpdateBookComponent implements OnInit {
   updateBook() {
     this.bookService.updateBook(this.id, this.book).subscribe({
       next: (response) => console.log(response),
-      error: (error) => console.log(error),
       complete: () => this.goToBookshelf(),
     });
   }

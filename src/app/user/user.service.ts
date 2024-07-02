@@ -21,7 +21,6 @@ export class UserService {
     let headers = new HttpHeaders();
 
     if (jwt) headers = headers.set('Authorization', 'Bearer ' + jwt);
-    else console.log('JWT not found in local storage.');
 
     return headers;
   }

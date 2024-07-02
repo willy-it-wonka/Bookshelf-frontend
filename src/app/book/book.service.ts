@@ -19,7 +19,6 @@ export class BookService {
     let headers = new HttpHeaders();
 
     if (jwt) this.headers = headers.set('Authorization', 'Bearer ' + jwt);
-    else console.log('JWT not found in local storage.');
 
     return headers;
   }
@@ -63,5 +62,5 @@ export class BookService {
   getBooksByStatus(status: string): Observable<Book[]> {
     return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}/status/${status}`);
   }
-
+  
 }

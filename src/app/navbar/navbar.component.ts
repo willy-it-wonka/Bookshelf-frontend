@@ -40,7 +40,7 @@ export class NavBarComponent implements OnInit {
       // Read data from JWT.
       this.loggedInUserId = decodedJwt.sub;
       this.loggedInUsername = decodedJwt.nick;
-    } else console.log('JWT not found in local storage.');
+    }
   }
 
   checkEnabled() {

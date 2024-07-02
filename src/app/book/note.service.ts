@@ -19,7 +19,6 @@ export class NoteService {
     let headers = new HttpHeaders();
 
     if (jwt) this.headers = headers.set('Authorization', 'Bearer ' + jwt);
-    else console.log('JWT not found in local storage.');
 
     return headers;
   }
