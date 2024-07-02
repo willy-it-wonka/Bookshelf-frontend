@@ -15,7 +15,7 @@ import { NoteService } from '../note.service';
   styleUrl: './book-notes.component.css',
 })
 export class BookNotesComponent implements OnInit {
-  id!: number; // This is the book ID, also used in NoteService http requests.
+  id!: number; // This is a book ID, also used in NoteService http requests.
   book!: Book;
   note!: Note;
 
@@ -57,28 +57,27 @@ export class BookNotesComponent implements OnInit {
   }
 
   saveNote() {
-    if (this.note.id) {
-      this.noteService.updateNote(this.id, this.note).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.isEditing = false;
-        },
-        error: (error) => console.log(error),
-      });
-    } else {
-      this.note.book = this.book;
-      this.noteService.createNote(this.note).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.note = response; // Without this, when you create a new note and try to edit it without first
-          // reloading the page, it will cause a SQLIntegrityConstraintViolationException (re-creates instead of editing).
-          this.isEditing = false;
-          this.canDelete = true;
-          this.cleanMissingNotesMessage();
-        },
-        error: (error) => console.log(error),
-      });
-    }
+    if (this.note.id) this.updateNote(this.id, this.note);
+    else this.createNote(this.note);
+  }
+
+  updateNote(id: number, note: Note) {
+    this.noteService.updateNote(id, note).subscribe((response) => {
+      console.log(response);
+      this.isEditing = false;
+    });
+  }
+
+  createNote(note: Note) {
+    this.note.book = this.book;
+    this.noteService.createNote(note).subscribe((response) => {
+      console.log(response);
+      this.note = response; // Without this, when you create a new note and try to edit it without first reloading
+      // the page, it will cause a SQLIntegrityConstraintViolationException (re-creates instead of editing).
+      this.isEditing = false;
+      this.canDelete = true;
+      this.cleanMissingNotesMessage();
+    });
   }
 
   // To disable SAVE when there is no text or only whitespaces.
@@ -100,12 +99,10 @@ export class BookNotesComponent implements OnInit {
   // Confirmation in a modal.
   confirmDelete() {
     if (this.showDeleteConfirmation) {
-      this.noteService.deleteNoteByBookId(this.id).subscribe({
-        next: () => {
-          this.showDeleteConfirmation = false; // Hide the modal after confirming deletion.
-          this.canDelete = false;
-          this.initializeNote();
-        },
+      this.noteService.deleteNoteByBookId(this.id).subscribe(() => {
+        this.showDeleteConfirmation = false; // Hide the modal after confirming deletion.
+        this.canDelete = false;
+        this.initializeNote();
       });
     }
   }
