@@ -1,6 +1,6 @@
 ## Links
 Back-end: [repository](https://github.com/willy-it-wonka/Bookshelf-backend)\
-Demo: [soon]
+YT presentation: [soon]
 </br></br>
 
 ## Tech stack
@@ -33,7 +33,7 @@ With this application you can manage your library. Create a reading schedule. Ke
 * registration and login
 * sending confirmation email
 * JWT authorization
-* CRUD
+* CRUD books, notes
 * contact form using EmailJS
 * reCAPTCHA
 * route guard
