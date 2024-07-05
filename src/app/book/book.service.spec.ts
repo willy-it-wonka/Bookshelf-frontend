@@ -48,7 +48,7 @@ describe('BookService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a list of the user books', () => {
+  it('should fetch a list of the user books', () => {
     service.getBookList().subscribe((books) => {
       expect(books.length).toBe(2);
       expect(books).toEqual(booksMock);
@@ -59,7 +59,7 @@ describe('BookService', () => {
     req.flush(booksMock);
   });
 
-  it('should return a book with the given id', () => {
+  it('should fetch a book with the given id', () => {
     const id = booksMock[0].id;
 
     service.getBookById(id).subscribe((book) => {
@@ -118,7 +118,7 @@ describe('BookService', () => {
     req.flush({});
   });
 
-  it('should get books by status and return an array of books', () => {
+  it('should fetch books by status and return an array of books', () => {
     const status = 'WAITING';
     const expectedBooks = booksMock.filter((book) => book.status === status);
 
