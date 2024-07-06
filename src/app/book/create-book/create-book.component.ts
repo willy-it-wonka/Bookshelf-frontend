@@ -30,6 +30,7 @@ export class CreateBookComponent {
   resetForm() {
     this.book.title = '';
     this.book.author = '';
+    this.book.status = '';
     this.book.linkToCover = '';
   }
 

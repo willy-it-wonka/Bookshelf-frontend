@@ -57,12 +57,14 @@ describe('CreateBookComponent', () => {
   it('should reset book properties when resetForm() is called', () => {
     component.book.title = 'title';
     component.book.author = 'author';
+    component.book.status = 'READ';
     component.book.linkToCover = 'link';
 
     component.resetForm();
 
     expect(component.book.title).toBe('');
     expect(component.book.author).toBe('');
+    expect(component.book.status).toBe('');
     expect(component.book.linkToCover).toBe('');
   });
 });
