@@ -13,6 +13,10 @@
   border-color: #a94442;
 }
 
+.required-alert {
+  padding: 10px 25px;
+}
+
 h3 {
   font-weight: bold;
 }
@@ -21,4 +25,17 @@ h3 {
 .ch-mark {
   color: #00ad28;
   font-weight: bold;
+}
+
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.category-button {
+  margin-right: 2px;
+  margin-bottom: 2px;
+  padding-left: 9px;
+  padding-right: 9px;
 }
