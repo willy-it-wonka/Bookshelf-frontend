@@ -107,15 +107,6 @@ describe('BookListComponent', () => {
     expect(component.selectedBookId).toBeNull();
   });
 
-  it('should call ngOnInit() if searchTerms is empty', () => {
-    component.searchTerms = '';
-    spyOn(component, 'ngOnInit');
-
-    component.search();
-
-    expect(component.ngOnInit).toHaveBeenCalled();
-  });
-
   it('should find books and reset pagination when searchTerms are provided', () => {
     component.books = booksMock;
     component.searchTerms = 'Title1';

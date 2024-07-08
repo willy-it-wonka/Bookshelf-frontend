@@ -4,6 +4,7 @@
 }
 .my-bar:hover {
   background-color: #332d2d;
+  color: white;
 }
 .my-bar:hover::placeholder {
   color: white;
@@ -13,7 +14,25 @@
   color: white;
   outline: none !important;
   border: 1px solid green;
-  box-shadow: 0 0 5px green;
+  box-shadow: 0 0 2.5px green;
+}
+
+/* For categories button. */
+.active-categories {
+  background-color: #332d2d;
+  color: white;
+  border: 1px solid green;
+  box-shadow: 0 0 2.5px green;
+}
+
+/* For category buttons. */
+.btn-selected {
+  background-color: #332d2d;
+  color: white;
+}
+.marg {
+  margin-right: 2px;
+  margin-bottom: 2px;
 }
 
 /* For clear display of table content. */

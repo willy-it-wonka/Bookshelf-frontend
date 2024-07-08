@@ -11,6 +11,17 @@
       />
     </div>
 
+    <!-- categories button -->
+    <div>
+      <button
+        class="btn btn-outline-dark fw-bold"
+        [ngClass]="{ 'active-categories': showCategoryButtons }"
+        (click)="toggleCategories()"
+      >
+        Categories
+      </button>
+    </div>
+
     <!-- drop-down list -->
     <div class="col-md-4">
       <select
@@ -24,6 +35,21 @@
         <option value="WAITING">Waiting</option>
       </select>
     </div>
+  </div>
+
+  <!-- category buttons -->
+  <div *ngIf="showCategoryButtons" class="mb-3">
+    <button
+      *ngFor="let category of allCategories"
+      class="btn btn-sm marg"
+      [ngClass]="{
+        'btn-selected': selectedCategories.has(category),
+        'btn-outline-secondary': !selectedCategories.has(category)
+      }"
+      (click)="toggleCategory(category)"
+    >
+      {{ formatCategory(category) }}
+    </button>
   </div>
 
   <!-- book-list table -->

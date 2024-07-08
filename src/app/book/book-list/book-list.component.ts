@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgxSearchFilterModule } from 'ngx-search-filter';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BookCategory } from '../book-category';
 
 @Component({
   selector: 'app-book-list',
@@ -21,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
+  allBooks: Book[] = [];
 
   // For delete modal
   selectedBookId: number | null = null;
@@ -39,6 +41,11 @@ export class BookListComponent implements OnInit {
   sortDirection: 'asc' | 'desc' | '' = '';
   field: string = '';
 
+  // For category filtering
+  allCategories: BookCategory[] = Object.values(BookCategory);
+  selectedCategories: Set<BookCategory> = new Set();
+  showCategoryButtons: boolean = false;
+
   constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit(): void {
@@ -46,8 +53,9 @@ export class BookListComponent implements OnInit {
   }
 
   getBooks() {
-    this.bookService.getBookList().subscribe((data) => {
-      this.books = data;
+    this.bookService.getBookList().subscribe((response) => {
+      this.allBooks = response;
+      this.books = response;
     });
   }
 
@@ -76,17 +84,18 @@ export class BookListComponent implements OnInit {
     }
   }
 
-  // To the search bar. Checks whether the string you type is in a title and/or an author.
+  // For the search bar. Checks if the typed string is in a title and/or an author.
   search() {
+    this.page = 1; // After searching, go to page 1. Without this, you may think that the search doesn't work on page 2 and next.
     if (this.searchTerms == '') {
-      this.ngOnInit();
+      if (this.selectedCategories.size > 0) this.filterBooksByCategory();
+      else this.books = this.allBooks; // Reset to the original book list.
     } else {
-      this.page = 1; // After searching, go to page 1. Without this, you may think that the search doesn't work on page 2 and next.
-      this.books = this.books.filter((res) => {
-        const titleMatch = res.title
+      this.books = this.books.filter((book) => {
+        const titleMatch = book.title
           .toLocaleLowerCase()
           .includes(this.searchTerms.toLocaleLowerCase());
-        const authorMatch = res.author
+        const authorMatch = book.author
           .toLocaleLowerCase()
           .includes(this.searchTerms.toLocaleLowerCase());
         return titleMatch || authorMatch;
@@ -94,15 +103,51 @@ export class BookListComponent implements OnInit {
     }
   }
 
-  // Method to filter books based on selected status.
+  // Show/hide list of categories.
+  toggleCategories() {
+    // Reset to the original state when opening categories.
+    this.searchTerms = '';
+    this.books = this.allBooks;
+
+    this.showCategoryButtons = !this.showCategoryButtons;
+    if (!this.showCategoryButtons) {
+      this.selectedCategories.clear();
+      this.books = this.allBooks; // Reset to the original book list when hiding categories.
+    }
+  }
+
+  // Check/uncheck the category button.
+  toggleCategory(category: BookCategory) {
+    this.searchTerms = '';
+
+    if (this.selectedCategories.has(category))
+      this.selectedCategories.delete(category);
+    else this.selectedCategories.add(category);
+
+    this.filterBooksByCategory(); // Filter at each check/uncheck.
+  }
+
+  filterBooksByCategory() {
+    if (this.selectedCategories.size > 0) {
+      this.books = this.allBooks.filter((book) =>
+        // Filter the list of books by every checked category.
+        Array.from(this.selectedCategories).every((category) =>
+          book.categories.includes(category)
+        )
+      );
+    } else this.books = this.allBooks; // If no category is selected, return all books.
+  }
+
+  // Filter books based on selected status.
   filterByStatus() {
+    if (this.showCategoryButtons) this.toggleCategories(); // Hide and reset categories.
     if (this.selectedStatus) {
-      this.bookService.getBooksByStatus(this.selectedStatus).subscribe({
-        next: (data) => {
-          this.books = data;
-        },
-      });
-    } else this.getBooks(); // If no status is selected, fetch all books.
+      this.bookService
+        .getBooksByStatus(this.selectedStatus)
+        .subscribe((response) => {
+          this.books = response;
+        });
+    } else this.books = this.allBooks; // If no status is selected, return all books.
   }
 
   // Sort asc/desc by title/author.
@@ -116,8 +161,12 @@ export class BookListComponent implements OnInit {
       if (field === 'title') result = a[field].localeCompare(b[field]);
       else if (field === 'author') result = a[field].localeCompare(b[field]);
 
-      // Return the sorted result, considering the sorting direction.
+      // Return the sorted result, taking into account the sorting direction.
       return this.sortDirection === 'asc' ? result : -result;
     });
+  }
+
+  formatCategory(category: string): string {
+    return category.replace(/_/g, ' ');
   }
 }
