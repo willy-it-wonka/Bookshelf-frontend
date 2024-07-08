@@ -1,10 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { BookService } from './book.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Book } from './book';
+import { BookCategory } from './book-category';
 
 describe('BookService', () => {
   let service: BookService;
@@ -19,6 +17,7 @@ describe('BookService', () => {
       createdDate: '2024-01-01',
       lastModifiedDate: '2024-01-02',
       linkToCover: 'http://example.com/cover.jpg',
+      categories: [BookCategory.IT],
     },
     {
       id: 2,
@@ -28,6 +27,7 @@ describe('BookService', () => {
       createdDate: '2024-01-01',
       lastModifiedDate: '2024-01-01',
       linkToCover: 'http://example.com/cover.jpg',
+      categories: [BookCategory.IT],
     },
   ];
 
@@ -80,6 +80,7 @@ describe('BookService', () => {
       createdDate: '2024-01-01',
       lastModifiedDate: '2024-01-01',
       linkToCover: 'http://example.com/cover.jpg',
+      categories: [BookCategory.IT],
     };
     const createdBook = booksMock[1];
 

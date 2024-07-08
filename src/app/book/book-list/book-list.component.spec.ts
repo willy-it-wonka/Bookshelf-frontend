@@ -4,6 +4,7 @@ import { BookService } from '../book.service';
 import { of } from 'rxjs';
 import { Book } from '../book';
 import { Router } from '@angular/router';
+import { BookCategory } from '../book-category';
 
 describe('BookListComponent', () => {
   let component: BookListComponent;
@@ -12,23 +13,34 @@ describe('BookListComponent', () => {
   let router: jasmine.SpyObj<Router>;
   const bookId = 123;
   const booksMock: Book[] = [
-    { id: 1,
+    {
+      id: 1,
       title: 'Title1',
       author: 'Author1',
       status: 'WAITING',
+      linkToCover: 'http://example.com/cover.jpg',
+      categories: [BookCategory.IT],
       createdDate: '2024-01-01',
       lastModifiedDate: '2024-01-02',
-      linkToCover: 'http://example.com/cover.jpg' },
-    { id: 2,
+    },
+    {
+      id: 2,
       title: 'Title2',
       author: 'Author2',
       status: 'READ',
+      linkToCover: 'http://example.com/cover.jpg',
+      categories: [BookCategory.IT],
       createdDate: '2024-01-01',
       lastModifiedDate: '2024-01-01',
-      linkToCover: 'http://example.com/cover.jpg' } ];
+    },
+  ];
 
   beforeEach(async () => {
-    bookService = jasmine.createSpyObj('BookService', ['getBookList', 'deleteBook', 'getBooksByStatus' ]);
+    bookService = jasmine.createSpyObj('BookService', [
+      'getBookList',
+      'deleteBook',
+      'getBooksByStatus',
+    ]);
     bookService.getBookList.and.returnValue(of([]));
     bookService.deleteBook.and.returnValue(of({}));
     bookService.getBooksByStatus.and.returnValue(of([]));

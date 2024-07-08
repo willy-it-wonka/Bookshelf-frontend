@@ -1,10 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { NoteService } from './note.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Note } from './note';
+import { BookCategory } from './book-category';
 
 describe('NoteService', () => {
   let service: NoteService;
@@ -17,10 +15,11 @@ describe('NoteService', () => {
       id: 1,
       title: 'Title',
       author: 'Author',
-      createdDate: '2024-01-01',
-      lastModifiedDate: '2024-01-02',
       status: 'WAITING',
       linkToCover: 'http://example.com/cover',
+      categories: [BookCategory.IT],
+      createdDate: '2024-01-01',
+      lastModifiedDate: '2024-01-02',
     },
   };
   const bookId = 1;

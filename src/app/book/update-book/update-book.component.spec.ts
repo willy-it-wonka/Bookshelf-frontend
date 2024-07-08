@@ -6,6 +6,7 @@ import { Book } from '../book';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BookCategory } from '../book-category';
 
 describe('UpdateBookComponent', () => {
   let component: UpdateBookComponent;
@@ -66,9 +67,10 @@ describe('UpdateBookComponent', () => {
       title: 'Title',
       author: 'Author',
       status: 'WAITING',
+      linkToCover: 'http://example.com/cover.jpg',
+      categories: [BookCategory.IT],
       createdDate: '2024-01-01',
       lastModifiedDate: '2024-01-01',
-      linkToCover: 'http://example.com/cover.jpg',
     };
     bookService.getBookById.and.returnValue(of(bookMock));
 

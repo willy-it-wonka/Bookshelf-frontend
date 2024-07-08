@@ -6,6 +6,7 @@ import { NoteService } from '../note.service';
 import { Book } from '../book';
 import { Note } from '../note';
 import { of, throwError } from 'rxjs';
+import { BookCategory } from '../book-category';
 
 describe('BookNotesComponent', () => {
   let component: BookNotesComponent;
@@ -19,9 +20,10 @@ describe('BookNotesComponent', () => {
     title: 'Title',
     author: 'Author',
     status: 'WAITING',
+    linkToCover: 'http://example.com/cover.jpg',
+    categories: [BookCategory.IT],
     createdDate: '2024-01-01',
     lastModifiedDate: '2024-01-01',
-    linkToCover: 'http://example.com/cover.jpg',
   };
   const noteMock: Note = {
     id: 1,
