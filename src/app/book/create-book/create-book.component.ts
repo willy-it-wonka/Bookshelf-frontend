@@ -58,6 +58,11 @@ export class CreateBookComponent {
     });
   }
 
+  // Format category text by changing '_' to ' '
+  formatCategory(category: string): string {
+    return category.replace(/_/g, ' ');
+  }
+
   showModal() {
     const modalAfterAdd = document.getElementById('staticBackdrop');
     if (modalAfterAdd != null) modalAfterAdd.style.display = 'block';
