@@ -15,13 +15,27 @@ import { BookCategory } from '../book-category';
 export class CreateBookComponent {
   book: Book = new Book();
   allCategories = Object.values(BookCategory); // Array of all values from BookCategory.
+  selectedCategories = new Map<string, boolean>(); // For track the checked/unchecked status of category buttons.
 
   constructor(private bookService: BookService) {}
 
+  // Change the state of selectedCategories when the category button is clicked.
+  toggleCategory(category: string) {
+    const isSelected = this.selectedCategories.get(category) || false;
+    this.selectedCategories.set(category, !isSelected);
+  }
+
   onSubmit() {
+    this.setBookCategories();
     this.saveBook();
     this.resetForm();
     this.showModal();
+  }
+
+  setBookCategories() {
+    this.book.categories = Array.from(this.selectedCategories.entries())
+      .filter(([_, isSelected]) => isSelected) // Filtr by isSelected == true. Category is ignored _
+      .map(([category]) => category as BookCategory); // Convert string to BookCategory.
   }
 
   saveBook() {
@@ -35,6 +49,13 @@ export class CreateBookComponent {
     this.book.author = '';
     this.book.status = '';
     this.book.linkToCover = '';
+    this.resetCategories();
+  }
+
+  resetCategories() {
+    this.allCategories.forEach((category) => {
+      this.selectedCategories.set(category, false);
+    });
   }
 
   showModal() {

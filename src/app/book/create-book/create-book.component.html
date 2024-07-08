@@ -71,7 +71,15 @@
       <label class="ta-label">Categories</label>
       <div class="category-container">
         <div *ngFor="let category of allCategories">
-          <button type="button" class="btn btn-sm category-button">
+          <button
+            type="button"
+            class="btn btn-sm category-button"
+            [ngClass]="{
+              'btn-success': selectedCategories.get(category),
+              'btn-outline-secondary': !selectedCategories.get(category)
+            }"
+            (click)="toggleCategory(category)"
+          >
             {{ category }}
           </button>
         </div>
