@@ -16,7 +16,10 @@ describe('UpdateBookComponent', () => {
   let router: Router;
 
   beforeEach(async () => {
-    bookService = jasmine.createSpyObj('BookService', ['getBookById', 'updateBook']);
+    bookService = jasmine.createSpyObj('BookService', [
+      'getBookById',
+      'updateBook',
+    ]);
     bookService.getBookById.and.returnValue(of(new Book())); /* Always return Observable<Book>. 
     Solution for TypeError: Cannot read properties of undefined (reading 'subscribe').
     Helps avoid mocking with subscribe in each test method. */
@@ -41,13 +44,13 @@ describe('UpdateBookComponent', () => {
   });
 
   it('should initialize the component properly', () => {
-    const idSpy = spyOn(component, 'initializeId');
-    const bookSpy = spyOn(component, 'initializeBook');
+    spyOn(component, 'initializeId');
+    spyOn(component, 'initializeBook');
 
     component.ngOnInit();
 
-    expect(idSpy).toHaveBeenCalled();
-    expect(bookSpy).toHaveBeenCalled();
+    expect(component.initializeId).toHaveBeenCalled();
+    expect(component.initializeBook).toHaveBeenCalled();
   });
 
   it('should initialize id from the route parameters', () => {
@@ -61,7 +64,7 @@ describe('UpdateBookComponent', () => {
     expect(bookService.getBookById).toHaveBeenCalledWith(component.id);
   });
 
-  it('should assign the fetched book to the book property', () => {
+  it('should assign the fetched book to the book property and call getCurrentCategories()', () => {
     const bookMock: Book = {
       id: 123,
       title: 'Title',
@@ -73,19 +76,65 @@ describe('UpdateBookComponent', () => {
       lastModifiedDate: '2024-01-01',
     };
     bookService.getBookById.and.returnValue(of(bookMock));
+    spyOn(component, 'getCurrentCategories');
 
     component.initializeBook();
 
     expect(component.book).toEqual(bookMock);
+    expect(component.getCurrentCategories).toHaveBeenCalled();
   });
 
-  it('should call updateBook() when onSubmit() is called', () => {
+  it('should set selectedCategories map to reflect the current state of book categories', () => {
+    component.book.categories = [BookCategory.IT];
+
+    component.getCurrentCategories();
+
+    expect(component.selectedCategories.get('IT')).toBeTrue();
+    expect(component.selectedCategories.get('HISTORY')).toBeFalse();
+  });
+
+  it('should toggle category from false to true', () => {
+    const category = 'IT';
+    component.selectedCategories.set(category, false); // Set initial unchecked state.
+
+    component.toggleCategory(category);
+
+    expect(component.selectedCategories.get(category)).toBeTrue();
+  });
+
+  it('should toggle category from true to false', () => {
+    const category = 'IT';
+    component.selectedCategories.set(category, true); // Set initial checked state.
+
+    component.toggleCategory(category);
+
+    expect(component.selectedCategories.get(category)).toBeFalse();
+  });
+
+  it('should call setBookCategories() and updateBook() when onSubmit() is called', () => {
+    spyOn(component, 'setBookCategories');
     spyOn(component, 'updateBook');
+
     component.onSubmit();
+
+    expect(component.setBookCategories).toHaveBeenCalled();
     expect(component.updateBook).toHaveBeenCalled();
   });
 
-  it('should call bookService.updateBook with the correct data from the properties, and then go to bookshelf', () => {
+  it('should only add selected categories to the book', () => {
+    component.selectedCategories.set('IT', true);
+    component.selectedCategories.set('DRAMA', false);
+    component.selectedCategories.set('BUSINESS', true);
+
+    component.setBookCategories();
+
+    expect(component.book.categories).toContain(BookCategory.IT);
+    expect(component.book.categories).toContain(BookCategory.BUSINESS);
+    expect(component.book.categories).not.toContain(BookCategory.DRAMA);
+    expect(component.book.categories.length).toBe(2);
+  });
+
+  it('should call bookService.updateBook with the correct data from the properties and call goToBookshelf()', () => {
     const spy = bookService.updateBook.and.returnValue(of(Book));
     spyOn(component, 'goToBookshelf');
 
@@ -93,6 +142,16 @@ describe('UpdateBookComponent', () => {
 
     expect(spy).toHaveBeenCalledWith(component.id, component.book);
     expect(component.goToBookshelf).toHaveBeenCalled();
+  });
+
+  it('should replace all underscores in category names with spaces', () => {
+    const formattedCategory = component.formatCategory(BookCategory.SELF_IMPROVEMENT);
+    expect(formattedCategory).toBe('SELF IMPROVEMENT');
+  });
+
+  it('should handle category names without underscores correctly', () => {
+    const formattedCategory = component.formatCategory(BookCategory.HISTORY);
+    expect(formattedCategory).toBe('HISTORY');
   });
 
   it('should navigate to bookshelf', () => {

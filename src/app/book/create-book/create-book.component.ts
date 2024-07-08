@@ -32,6 +32,7 @@ export class CreateBookComponent {
     this.showModal();
   }
 
+  // Set book.categories based on selectedCategories (checked category buttons).
   setBookCategories() {
     this.book.categories = Array.from(this.selectedCategories.entries())
       .filter(([_, isSelected]) => isSelected) // Filtr by isSelected == true. Category is ignored _

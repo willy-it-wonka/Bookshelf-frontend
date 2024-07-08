@@ -58,3 +58,16 @@ footer {
   right: 10px;
   cursor: pointer;
 }
+
+/* For the category buttons in create-book and update-book. */
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+.category-button {
+  margin-right: 2px;
+  margin-bottom: 2px;
+  padding-left: 9px;
+  padding-right: 9px;
+}

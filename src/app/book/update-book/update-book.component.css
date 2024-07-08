@@ -13,6 +13,10 @@
   border-color: #a94442;
 }
 
+.required-alert {
+  padding: 10px 25px;
+}
+
 h3 {
   font-weight: bold;
 }
