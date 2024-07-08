@@ -34,6 +34,14 @@
         <label><b>Author:</b></label> {{ book.author }}
       </div>
       <div class="mt-4">
+        <label><b>Categories:</b></label
+        ><span
+          *ngFor="let category of book.categories"
+          class="badge badge-info m-1"
+          >{{ formatCategory(category) }}</span
+        >
+      </div>
+      <div class="mt-4">
         <label><b>Created date:</b></label>
         {{ book.createdDate | date : "d MMM yyyy | HH:mm" }}
       </div>

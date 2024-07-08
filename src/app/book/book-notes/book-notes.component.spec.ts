@@ -96,6 +96,16 @@ describe('BookNotesComponent', () => {
     expect(component.book).toEqual(bookMock);
   });
 
+  it('should replace all underscores in category names with spaces', () => {
+    const formattedCategory = component.formatCategory(BookCategory.SELF_IMPROVEMENT);
+    expect(formattedCategory).toBe('SELF IMPROVEMENT');
+  });
+
+  it('should handle category names without underscores correctly', () => {
+    const formattedCategory = component.formatCategory(BookCategory.HISTORY);
+    expect(formattedCategory).toBe('HISTORY');
+  });
+
   it('should initialize the note from the book ID and allow deletion', () => {
     noteService.getNoteByBookId.and.returnValue(of(noteMock));
 

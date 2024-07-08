@@ -48,6 +48,10 @@ export class BookNotesComponent implements OnInit {
     });
   }
 
+  formatCategory(category: string): string {
+    return category.replace(/_/g, ' ');
+  }
+
   initializeNote() {
     this.note = new Note();
     this.noteService.getNoteByBookId(this.id).subscribe({
