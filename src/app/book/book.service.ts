@@ -7,7 +7,7 @@ import { Book } from './book';
   providedIn: 'root',
 })
 export class BookService {
-  private baseUrl = 'http://localhost:8080/api/books';
+  private baseUrl = 'http://localhost:8080/api/v1/books';
   private headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient) {
@@ -60,7 +60,9 @@ export class BookService {
   }
 
   getBooksByStatus(status: string): Observable<Book[]> {
-    return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}/status/${status}`);
+    return this.makeHttpRequest<Book[]>(
+      'GET',
+      `${this.baseUrl}/status?status=${status}`
+    );
   }
-  
 }

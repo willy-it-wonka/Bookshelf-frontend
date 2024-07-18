@@ -7,7 +7,7 @@ import { User } from './user';
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'http://localhost:8080/api/v1/users';
   private headers: HttpHeaders;
 
   hasAuthToRoute: boolean = false;
@@ -26,15 +26,15 @@ export class UserService {
   }
 
   register(user: User): Observable<Object> {
-    return this.httpClient.post(`${this.baseUrl}/register`, user);
+    return this.httpClient.post(`${this.baseUrl}`, user);
   }
 
   login(user: any): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/login`, user);
+    return this.httpClient.post(`${this.baseUrl}/session`, user);
   }
 
   logout(): Observable<string> {
-    return this.httpClient.get(`${this.baseUrl}/logout`, {
+    return this.httpClient.delete(`${this.baseUrl}/session`, {
       responseType: 'text',
     });
   }
@@ -42,14 +42,14 @@ export class UserService {
   // The next methods require authorization.
 
   checkEnabled(id: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(`${this.baseUrl}/enabled/${id}`, {
+    return this.httpClient.get<boolean>(`${this.baseUrl}/${id}/enabled`, {
       headers: this.headers,
     });
   }
 
   sendNewConfirmationEmail(id: string): Observable<any> {
     return this.httpClient.post(
-      `${this.baseUrl}/new-conf-email/${id}`,
+      `${this.baseUrl}/${id}/new-confirmation-email`,
       {},
       { headers: this.headers, responseType: 'text' }
     );
