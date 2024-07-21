@@ -7,7 +7,7 @@ import { BookCategory } from './book-category';
 describe('BookService', () => {
   let service: BookService;
   let httpMock: HttpTestingController;
-  const baseUrl = 'http://localhost:8080/api/books';
+  const baseUrl = 'http://localhost:8080/api/v1/books';
   const booksMock: Book[] = [
     {
       id: 1,
@@ -128,7 +128,7 @@ describe('BookService', () => {
       expect(books.length).toBe(1);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/status/${status}`);
+    const req = httpMock.expectOne(`${baseUrl}/status?status=${status}`);
     expect(req.request.method).toBe('GET');
     req.flush(expectedBooks);
   });

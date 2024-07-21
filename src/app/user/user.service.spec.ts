@@ -9,7 +9,7 @@ import { User } from './user';
 describe('UserService', () => {
   let service: UserService;
   let httpMock: HttpTestingController;
-  const baseUrl = 'http://localhost:8080/api';
+  const baseUrl = 'http://localhost:8080/api/v1/users';
   const user: User = {
     nick: 'user',
     email: 'test@Example.com',
@@ -39,7 +39,7 @@ describe('UserService', () => {
       expect(response).toEqual(user);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/register`);
+    const req = httpMock.expectOne(`${baseUrl}`);
     expect(req.request.method).toBe('POST');
     req.flush(user);
   });
@@ -51,7 +51,7 @@ describe('UserService', () => {
       expect(res).toEqual(responseMock);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/login`);
+    const req = httpMock.expectOne(`${baseUrl}/session`);
     expect(req.request.method).toBe('POST');
     req.flush(responseMock);
   });
@@ -63,8 +63,8 @@ describe('UserService', () => {
       expect(res).toBe(responseMock);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/logout`);
-    expect(req.request.method).toBe('GET');
+    const req = httpMock.expectOne(`${baseUrl}/session`);
+    expect(req.request.method).toBe('DELETE');
     req.flush(responseMock);
   });
 
@@ -75,7 +75,7 @@ describe('UserService', () => {
       expect(responseMock).toBeFalse();
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/enabled/${id}`);
+    const req = httpMock.expectOne(`${baseUrl}/${id}/enabled`);
     expect(req.request.method).toBe('GET');
     req.flush(responseMock);
   });
@@ -87,7 +87,7 @@ describe('UserService', () => {
       expect(res).toBe(responseMock);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/new-conf-email/${id}`);
+    const req = httpMock.expectOne(`${baseUrl}/${id}/new-confirmation-email`);
     expect(req.request.method).toBe('POST');
     req.flush(responseMock);
   });

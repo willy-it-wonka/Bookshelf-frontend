@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,8 @@ export class RegisterComponent {
 
   constructor(
     private userService: UserService,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   onSubmit() {
@@ -37,14 +39,19 @@ export class RegisterComponent {
   saveUser() {
     this.userService.register(this.user).subscribe({
       next: (response) => {
-        console.log(response),
-          this.matSnackBar.open(
-            'The confirmation email has been sent. Check your email.',
-            'Close',
-            {
-              duration: 5000,
-            }
-          );
+        console.log(response);
+
+        this.resetForm();
+
+        this.matSnackBar.open(
+          'The confirmation email has been sent. Check your email.',
+          'Close',
+          {
+            duration: 4000,
+          }
+        );
+
+        this.goToLogin();
       },
       error: (error) => {
         this.matSnackBar.open(error.error, 'Close', {
@@ -56,5 +63,17 @@ export class RegisterComponent {
 
   onCaptchaResolved(resolved: any) {
     this.isCaptchaResolved = true;
+  }
+
+  resetForm() {
+    this.user.nick = '';
+    this.user.email = '';
+    this.user.password = '';
+  }
+
+  goToLogin() {
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 5000);
   }
 }

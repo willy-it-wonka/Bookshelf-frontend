@@ -1,13 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
 import { UserService } from '../user.service';
 import { of, throwError } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
   let userService: jasmine.SpyObj<UserService>;
+  let router: Router;
 
   beforeEach(async () => {
     userService = jasmine.createSpyObj('UserService', ['register']);
@@ -19,6 +26,7 @@ describe('RegisterComponent', () => {
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     setTimeout(function () {    // Solution for "Error: reCAPTCHA placeholder element must be an element or id" which
       fixture.detectChanges();  // appears in random unit tests.
     }, 2000);
@@ -57,4 +65,25 @@ describe('RegisterComponent', () => {
     component.onCaptchaResolved(resolvedValue);
     expect(component.isCaptchaResolved).toBeTruthy();
   });
+
+  it('should reset user properties and when resetForm() is called', () => {
+    component.user.nick = 'nick';
+    component.user.email = 'email@email.com';
+    component.user.password = '123';
+
+    component.resetForm();
+
+    expect(component.user.nick).toBe('');
+    expect(component.user.email).toBe('');
+    expect(component.user.password).toBe('');
+  });
+
+  it('should navigate to login page', fakeAsync(() => {
+    spyOn(router, 'navigate');
+
+    component.goToLogin();
+    tick(5000);
+
+    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+  }));
 });

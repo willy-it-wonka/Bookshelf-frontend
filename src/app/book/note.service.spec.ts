@@ -7,7 +7,7 @@ import { BookCategory } from './book-category';
 describe('NoteService', () => {
   let service: NoteService;
   let httpMock: HttpTestingController;
-  const baseUrl = 'http://localhost:8080/api/notes';
+  const baseUrl = 'http://localhost:8080/api/v1/notes';
   const noteMock: Note = {
     id: 1,
     content: 'content',
