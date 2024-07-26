@@ -10,7 +10,7 @@ export class UserService {
   private baseUrl = 'http://localhost:8080/api/v1/users';
   private headers: HttpHeaders;
 
-  hasAuthToRoute: boolean = false;
+  hasAuthToRoute: boolean = false; // For routesGuard
 
   constructor(private httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
@@ -41,16 +41,17 @@ export class UserService {
 
   // The next methods require authorization.
 
+  // Check if the user's email address has been confirmed.
   checkEnabled(id: string): Observable<boolean> {
     return this.httpClient.get<boolean>(`${this.baseUrl}/${id}/enabled`, {
       headers: this.headers,
     });
   }
 
-  sendNewConfirmationEmail(id: string): Observable<any> {
+  sendNewConfirmationEmail(id: string): Observable<string> {
     return this.httpClient.post(
       `${this.baseUrl}/${id}/new-confirmation-email`,
-      {},
+      null,
       { headers: this.headers, responseType: 'text' }
     );
   }

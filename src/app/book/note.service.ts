@@ -48,7 +48,7 @@ export class NoteService {
     return this.makeHttpRequest<Note>('PUT', `${this.baseUrl}/${bookId}`, note);
   }
 
-  deleteNoteByBookId(bookId: number): Observable<Object> {
+  deleteNoteByBookId(bookId: number): Observable<Note> {
     return this.makeHttpRequest('DELETE', `${this.baseUrl}/${bookId}`);
   }
 }

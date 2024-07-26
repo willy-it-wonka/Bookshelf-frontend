@@ -36,14 +36,11 @@ export class BookService {
     });
   }
 
-  /* The method retrieves a list of books from the database by making an HTTP GET request to a specified URL, 
-  and returns the data as an object Observable<Book[]>. */
   getBookList(): Observable<Book[]> {
     return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}`);
   }
 
-  // HTTP POST to submit data from the "Add book" form.
-  createBook(book: Book): Observable<Object> {
+  createBook(book: Book): Observable<Book> {
     return this.makeHttpRequest('POST', `${this.baseUrl}`, book);
   }
 
@@ -51,18 +48,15 @@ export class BookService {
     return this.makeHttpRequest<Book>('GET', `${this.baseUrl}/${id}`);
   }
 
-  updateBook(id: number, book: Book): Observable<Object> {
+  updateBook(id: number, book: Book): Observable<Book> {
     return this.makeHttpRequest('PUT', `${this.baseUrl}/${id}`, book);
   }
 
-  deleteBook(id: number): Observable<Object> {
+  deleteBook(id: number): Observable<Book> {
     return this.makeHttpRequest('DELETE', `${this.baseUrl}/${id}`);
   }
 
   getBooksByStatus(status: string): Observable<Book[]> {
-    return this.makeHttpRequest<Book[]>(
-      'GET',
-      `${this.baseUrl}/status?status=${status}`
-    );
+    return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}/status?status=${status}`);
   }
 }
