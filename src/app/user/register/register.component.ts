@@ -6,6 +6,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,7 @@ export class RegisterComponent {
   user: User = new User();
   hidePassword: boolean = true;
 
-  /*
-  Usage reCAPTCHA:
-  1. Login to your goole account.
-  2. Go to google.com/recaptcha/admin/create and configure it, click send, and you will get siteKey. */
-  siteKey: string = 'YOUR_siteKey';
+  siteKey: string = environment.reCaptchaSiteKey;
   isCaptchaResolved: boolean = false;
 
   constructor(

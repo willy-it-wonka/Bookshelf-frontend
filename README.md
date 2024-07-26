@@ -18,8 +18,8 @@ Demo: [AWS](http://bookshelf-app.s3-website.eu-north-1.amazonaws.com)
    ```bash
    npm install
    ```
-4. CAPTCHA verification has been implemented in the registration and contact form. Instructions for use are included in the comments in the files: register.component and contact.component.
-5. Contact form works with [EmailJS](https://www.emailjs.com/). Instructions are in the comments in contact.component.
+4. CAPTCHA verification has been implemented in the registration and contact form. Instructions for use are included in the comments in the file: environment.ts
+5. Contact form works with [EmailJS](https://www.emailjs.com/). Instructions are in the comments in environment.ts
 6. To use the application through the browser, type in the VSC terminal:
    ```bash
    ng serve

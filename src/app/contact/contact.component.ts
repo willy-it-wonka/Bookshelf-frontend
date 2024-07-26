@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -20,11 +21,7 @@ export class ContactComponent {
     message: '',
   });
 
-  /*
-  Usage reCAPTCHA:
-  1. Login to your goole account.
-  2. Go to google.com/recaptcha/admin/create and configure it, click send, and you will get siteKey. */
-  siteKey: string = 'YOUR_siteKey';
+  siteKey: string = environment.reCaptchaSiteKey;
   isCaptchaResolved: boolean = false;
 
   constructor(
@@ -32,20 +29,18 @@ export class ContactComponent {
     private matSnackBar: MatSnackBar
   ) {}
 
-  /*
-  Usage EmailJS:
-  1. Register at emailjs.com
-  2. Go to Email Services. → Add New Service → and configure it. Now you have YOUR_SERVICE_ID.
-  3. Go to Email Templates. → Create New Template → and configure it. Now you have YOUR_TEMPLATE_ID.
-  4. Go to Account and get YOUR_PUBLIC_KEY. */
   async sendEmail() {
-    emailjs.init('YOUR_PUBLIC_KEY');
-    let response = await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-      from_email: this.formGroup.value.from_email,
-      from_name: this.formGroup.value.from_name,
-      subject: this.formGroup.value.subject,
-      message: this.formGroup.value.message,
-    });
+    emailjs.init(environment.emailJsPublicKey);
+    let response = await emailjs.send(
+      environment.emailJsServiceId,
+      environment.emailjJsTemplateId,
+      {
+        from_email: this.formGroup.value.from_email,
+        from_name: this.formGroup.value.from_name,
+        subject: this.formGroup.value.subject,
+        message: this.formGroup.value.message,
+      }
+    );
 
     this.formGroup.reset();
     this.matSnackBar.open('The email has been sent.', 'Close', {
