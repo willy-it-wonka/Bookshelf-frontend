@@ -11,8 +11,6 @@ describe('NavbarComponent', () => {
   let fixture: ComponentFixture<NavBarComponent>;
   let userService: jasmine.SpyObj<UserService>;
   let router: Router;
-  const fakeJwt =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmljayI6IkphbmVfRG9lIn0.s5pVXpGKsB_4W1EizmhD1Jy6Q7bRCVnrJw8kLpkHRDQ';
 
   beforeEach(async () => {
     userService = jasmine.createSpyObj('UserService', [
@@ -21,6 +19,7 @@ describe('NavbarComponent', () => {
       'logout',
       'setHasAuthToRoute',
     ]);
+    userService.checkEnabled.and.returnValue(of(true)); // beforeEach because is called in ngOnInit
 
     await TestBed.configureTestingModule({
       imports: [NavBarComponent, NoopAnimationsModule],
@@ -51,20 +50,22 @@ describe('NavbarComponent', () => {
   });
 
   it('should set loggedIn and UserService.hasAuthToRoute to true and decode JWT if token exists', () => {
-    spyOn(localStorage, 'getItem').and.returnValue(fakeJwt);
-    spyOn(window, 'atob').and.returnValue('{"sub":"123", "nick":"Joe"}');
+    spyOn(localStorage, 'getItem').and.returnValue(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmljayI6IkphbmVfRG9lIn0.s5pVXpGKsB_4W1EizmhD1Jy6Q7bRCVnrJw8kLpkHRDQ'
+    );
+    spyOn(window, 'atob').and.returnValue(
+      '{"sub":"1234567890", "nick":"Jane_Doe"}'
+    );
 
     component.checkLoggedIn();
 
     expect(component.loggedIn).toBeTrue();
     expect(userService.setHasAuthToRoute).toHaveBeenCalledWith(true);
-    expect(component.loggedInUserId).toBe('123');
-    expect(component.loggedInUsername).toBe('Joe');
+    expect(component.loggedInUserId).toBe('1234567890');
+    expect(component.loggedInUsername).toBe('Jane_Doe');
   });
 
   it('should set enabled based on the response from userService.checkEnabled()', () => {
-    const enabledMock = true;
-    userService.checkEnabled.and.returnValue(of(enabledMock));
     component.loggedInUserId = '123';
 
     component.checkEnabled();
@@ -74,7 +75,7 @@ describe('NavbarComponent', () => {
   });
 
   it('should call userService.sendNewConfirmationEmail() with the correct userId', () => {
-    const responseMock = { message: 'New email sent.' };
+    const responseMock = 'New email sent.';
     userService.sendNewConfirmationEmail.and.returnValue(of(responseMock));
     component.loggedInUserId = '123';
 

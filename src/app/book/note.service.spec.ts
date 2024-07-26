@@ -76,11 +76,11 @@ describe('NoteService', () => {
 
   it('should send a DELETE request to remove a note by bookId', () => {
     service.deleteNoteByBookId(bookId).subscribe((response) => {
-      expect(response).toEqual('Note for this book does not exist.');
+      expect(response).toBeNull();
     });
 
     const req = httpMock.expectOne(`${baseUrl}/${bookId}`);
     expect(req.request.method).toBe('DELETE');
-    req.flush('Note for this book does not exist.');
+    req.flush(null);
   });
 });

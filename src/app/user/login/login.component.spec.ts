@@ -38,14 +38,15 @@ describe('LoginComponent', () => {
   });
 
   it('should handle successful login and redirect to bookshelf', () => {
-    const response = { message: 'test_token', status: true };
+    const fakeJwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmljayI6IkphbmVfRG9lIn0.s5pVXpGKsB_4W1EizmhD1Jy6Q7bRCVnrJw8kLpkHRDQ';
+    const response = { message: fakeJwt, status: true };
     userService.login.and.returnValue(of(response)); // Mocking login() from UserService
     spyOn(component, 'goToBookshelf'); // Mocking goToBookshelf().
 
     component.signIn();
 
     expect(userService.login).toHaveBeenCalledWith(userData);
-    expect(localStorage.getItem('jwt')).toEqual('test_token');
+    expect(localStorage.getItem('jwt')).toEqual(fakeJwt);
     expect(component.goToBookshelf).toHaveBeenCalled();
   });
 

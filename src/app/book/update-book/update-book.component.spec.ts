@@ -14,6 +14,16 @@ describe('UpdateBookComponent', () => {
   let bookService: jasmine.SpyObj<BookService>;
   let activatedRouteMock: { snapshot: any };
   let router: Router;
+  const bookMock: Book = {
+    id: 123,
+    title: 'Title',
+    author: 'Author',
+    status: 'WAITING',
+    linkToCover: 'http://example.com/cover.jpg',
+    categories: [BookCategory.IT],
+    createdDate: '2024-01-01',
+    lastModifiedDate: '2024-01-01',
+  };
 
   beforeEach(async () => {
     bookService = jasmine.createSpyObj('BookService', [
@@ -65,16 +75,6 @@ describe('UpdateBookComponent', () => {
   });
 
   it('should assign the fetched book to the book property and call getCurrentCategories()', () => {
-    const bookMock: Book = {
-      id: 123,
-      title: 'Title',
-      author: 'Author',
-      status: 'WAITING',
-      linkToCover: 'http://example.com/cover.jpg',
-      categories: [BookCategory.IT],
-      createdDate: '2024-01-01',
-      lastModifiedDate: '2024-01-01',
-    };
     bookService.getBookById.and.returnValue(of(bookMock));
     spyOn(component, 'getCurrentCategories');
 
@@ -135,7 +135,7 @@ describe('UpdateBookComponent', () => {
   });
 
   it('should call bookService.updateBook with the correct data from the properties and call goToBookshelf()', () => {
-    const spy = bookService.updateBook.and.returnValue(of(Book));
+    const spy = bookService.updateBook.and.returnValue(of(bookMock));
     spyOn(component, 'goToBookshelf');
 
     component.updateBook();

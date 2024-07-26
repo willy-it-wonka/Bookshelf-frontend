@@ -111,12 +111,12 @@ describe('BookService', () => {
     const id = 1;
 
     service.deleteBook(id).subscribe((response) => {
-      expect(response).toEqual({});
+      expect(response).toBeNull();;
     });
 
     const req = httpMock.expectOne(`${baseUrl}/${id}`);
     expect(req.request.method).toBe('DELETE');
-    req.flush({});
+    req.flush(null);
   });
 
   it('should fetch books by status and return an array of books', () => {

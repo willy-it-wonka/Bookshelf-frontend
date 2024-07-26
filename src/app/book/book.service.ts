@@ -53,7 +53,7 @@ export class BookService {
     return this.makeHttpRequest('PUT', `${this.baseUrl}/${id}`, book);
   }
 
-  deleteBook(id: number): Observable<Book> {
+  deleteBook(id: number): Observable<void> {
     return this.makeHttpRequest('DELETE', `${this.baseUrl}/${id}`);
   }
 

@@ -46,7 +46,7 @@ describe('BookNotesComponent', () => {
     noteService.getNoteByBookId.and.returnValue(of(new Note()));
     noteService.createNote.and.returnValue(of(new Note()));
     noteService.updateNote.and.returnValue(of(new Note()));
-    noteService.deleteNoteByBookId.and.returnValue(of(new Object()));
+    noteService.deleteNoteByBookId.and.returnValue(of(undefined));
 
     activatedRouteMock = { snapshot: { params: { id: 123 } } };
 

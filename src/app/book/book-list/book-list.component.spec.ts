@@ -42,7 +42,7 @@ describe('BookListComponent', () => {
       'getBooksByStatus',
     ]);
     bookService.getBookList.and.returnValue(of([]));
-    bookService.deleteBook.and.returnValue(of({}));
+    bookService.deleteBook.and.returnValue(of(undefined));
     bookService.getBooksByStatus.and.returnValue(of([]));
     router = jasmine.createSpyObj('Router', ['navigate']);
 

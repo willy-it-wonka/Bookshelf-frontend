@@ -79,7 +79,7 @@ describe('CreateBookComponent', () => {
   });
 
   it('should log response when successful saveBook()', () => {
-    const response = { Book };
+    const response = new Book() ;
     bookService.createBook.and.returnValue(of(response));
     spyOn(console, 'log');
 
