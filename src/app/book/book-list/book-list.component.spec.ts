@@ -74,10 +74,11 @@ describe('BookListComponent', () => {
     expect(bookService.getBookList).toHaveBeenCalled();
   });
 
-  it('should assign the fetched list of books to the books property', () => {
+  it('should assign the fetched list of books to the properties', () => {
     bookService.getBookList.and.returnValue(of(booksMock));
     component.getBooks();
     expect(component.books).toEqual(booksMock);
+    expect(component.allBooks).toEqual(booksMock);
   });
 
   it('should navigate to the book notes page for a given book ID', () => {
@@ -126,9 +127,74 @@ describe('BookListComponent', () => {
     expect(component.books.length).toBe(0);
   });
 
+  it('should toggle showCategoryButtons and reset book list when hiding categories', () => {
+    component.showCategoryButtons = true;
+
+    component.toggleCategories();
+
+    expect(component.showCategoryButtons).toBeFalse();
+    expect(component.books).toEqual(component.allBooks);
+    expect(component.selectedCategories.size).toBe(0);
+  });
+
+  it('should toggle showCategoryButtons when showing categories', () => {
+    component.showCategoryButtons = false;
+    component.toggleCategories();
+    expect(component.showCategoryButtons).toBeTrue();
+  });
+
+  it('should add category to selectedCategories if not already selected', () => {
+    const category = BookCategory.IT;
+    expect(component.selectedCategories.has(category)).toBeFalse();
+
+    component.toggleCategory(category);
+
+    expect(component.selectedCategories.has(category)).toBeTrue();
+  });
+
+  it('should remove category from selectedCategories if already selected', () => {
+    const category = BookCategory.IT;
+    component.selectedCategories.add(category);
+    expect(component.selectedCategories.has(category)).toBeTrue();
+
+    component.toggleCategory(category);
+
+    expect(component.selectedCategories.has(category)).toBeFalse();
+  });
+
+  it('should call filterBookListByCategory when a category is toggled', () => {
+    const category = BookCategory.IT;
+    spyOn(component, 'filterBookListByCategory');
+
+    component.toggleCategory(category);
+
+    expect(component.filterBookListByCategory).toHaveBeenCalled();
+  });
+
+  it('should filter books by selected categories', () => {
+    component.selectedCategories.add(BookCategory.IT);
+    component.allBooks = booksMock;
+
+    component.filterBookListByCategory();
+
+    expect(component.books.length).toBe(2);
+  });
+
+  it('should reset books list when no categories are selected', () => {
+    component.selectedCategories.clear();
+    component.filterBookListByCategory();
+    expect(component.books).toEqual(component.allBooks);
+  });
+
+  it('should reset to the first page when filter is applied', () => {
+    component.page = 3;
+    component.filterBookListByCategory();
+    expect(component.page).toBe(1);
+  });
+
   it('should get all books when no status is selected', () => {
     component.selectedStatus = '';
-    component.filterByStatus();
+    component.filterBookListByStatus();
     expect(bookService.getBookList).toHaveBeenCalled();
   });
 
@@ -137,7 +203,7 @@ describe('BookListComponent', () => {
     const filteredBooks = booksMock.filter((book) => book.status === 'READ');
     bookService.getBooksByStatus.and.returnValue(of(filteredBooks));
 
-    component.filterByStatus();
+    component.filterBookListByStatus();
 
     expect(bookService.getBooksByStatus).toHaveBeenCalledWith(component.selectedStatus);
     expect(component.books).toEqual(filteredBooks);
@@ -170,5 +236,15 @@ describe('BookListComponent', () => {
     expect(component.sortDirection).toEqual('desc');
     expect(component.books[0].author).toEqual('Author2');
     expect(component.books[1].author).toEqual('Author1');
+  });
+
+  it('should replace all underscores in category names with spaces', () => {
+    const formattedCategory = component.formatCategory(BookCategory.SELF_IMPROVEMENT);
+    expect(formattedCategory).toBe('SELF IMPROVEMENT');
+  });
+
+  it('should handle category names without underscores correctly', () => {
+    const formattedCategory = component.formatCategory(BookCategory.HISTORY);
+    expect(formattedCategory).toBe('HISTORY');
   });
 });

@@ -52,6 +52,7 @@ export class BookListComponent implements OnInit {
     this.getBooks();
   }
 
+  // Get a list of the user's books from the database.
   getBooks() {
     this.bookService.getBookList().subscribe((response) => {
       this.allBooks = response;
@@ -73,7 +74,7 @@ export class BookListComponent implements OnInit {
     this.showDeleteConfirmation = true;
   }
 
-  // Confirmation in a modal.
+  // Confirm the deletion of the book in the modal.
   confirmDelete() {
     if (this.selectedBookId !== null) {
       this.bookService.deleteBook(this.selectedBookId).subscribe(() => {
@@ -88,16 +89,18 @@ export class BookListComponent implements OnInit {
   search() {
     this.page = 1; // After searching, go to page 1. Without this, you may think that the search doesn't work on page 2 and next.
     if (this.searchTerms == '') {
-      if (this.selectedCategories.size > 0) this.filterBooksByCategory();
-      else this.books = this.allBooks; // Reset to the original book list.
+      // Include the selected categories.
+      if (this.selectedCategories.size > 0) this.filterBookListByCategory();
+      // Reset to the original book list.
+      else this.books = this.allBooks;
     } else {
       this.books = this.books.filter((book) => {
         const titleMatch = book.title
-          .toLocaleLowerCase()
-          .includes(this.searchTerms.toLocaleLowerCase());
+          .toLowerCase()
+          .includes(this.searchTerms.toLowerCase());
         const authorMatch = book.author
-          .toLocaleLowerCase()
-          .includes(this.searchTerms.toLocaleLowerCase());
+          .toLowerCase()
+          .includes(this.searchTerms.toLowerCase());
         return titleMatch || authorMatch;
       });
     }
@@ -124,10 +127,11 @@ export class BookListComponent implements OnInit {
       this.selectedCategories.delete(category);
     else this.selectedCategories.add(category);
 
-    this.filterBooksByCategory(); // Filter at each check/uncheck.
+    this.filterBookListByCategory(); // Filter at each check/uncheck.
   }
 
-  filterBooksByCategory() {
+  filterBookListByCategory() {
+    this.page = 1;
     if (this.selectedCategories.size > 0) {
       this.books = this.allBooks.filter((book) =>
         // Filter the list of books by every checked category.
@@ -139,13 +143,14 @@ export class BookListComponent implements OnInit {
   }
 
   // Filter books based on selected status.
-  filterByStatus() {
+  filterBookListByStatus() {
     if (this.showCategoryButtons) this.toggleCategories(); // Hide and reset categories.
     if (this.selectedStatus) {
       this.bookService
         .getBooksByStatus(this.selectedStatus)
         .subscribe((response) => {
           this.books = response;
+          this.page = 1;
         });
     } else this.books = this.allBooks; // If no status is selected, return all books.
   }
