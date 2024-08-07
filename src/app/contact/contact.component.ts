@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCaptchaModule } from 'ngx-captcha';
@@ -15,10 +15,10 @@ import { environment } from '../../environments/environment';
 })
 export class ContactComponent {
   formGroup: FormGroup = this.formBuilder.group({
-    from_email: '',
-    from_name: '',
-    subject: '',
-    message: '',
+    from_email: ['', [Validators.required, Validators.email]],
+    from_name: ['', Validators.required],
+    subject: ['', Validators.required],
+    message: ['', Validators.required],
   });
 
   siteKey: string = environment.reCaptchaSiteKey;
