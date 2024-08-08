@@ -16,6 +16,7 @@ import { BookCategory } from '../book-category';
 export class UpdateBookComponent implements OnInit {
   id!: number;
   book: Book = new Book();
+  initialBook: Book = new Book(); // For tracking changes - if there are none, block submit button.
   allCategories = Object.values(BookCategory); // Array of all values from BookCategory.
   selectedCategories = new Map<string, boolean>(); // For track the checked/unchecked status of category buttons.
 
@@ -38,6 +39,7 @@ export class UpdateBookComponent implements OnInit {
     this.bookService.getBookById(this.id).subscribe({
       next: (data) => {
         this.book = data;
+        this.initialBook = JSON.parse(JSON.stringify(data)); // Deep copy of the initial book data.
         this.getCurrentCategories();
       },
     });
@@ -57,10 +59,10 @@ export class UpdateBookComponent implements OnInit {
   toggleCategory(category: string) {
     const isSelected = this.selectedCategories.get(category) || false;
     this.selectedCategories.set(category, !isSelected);
+    this.setBookCategories(); // It is necessary to set after each toggle to properly compare - lock/unlock the submit button.
   }
 
   onSubmit() {
-    this.setBookCategories();
     this.updateBook();
   }
 
@@ -69,6 +71,13 @@ export class UpdateBookComponent implements OnInit {
     this.book.categories = Array.from(this.selectedCategories.entries())
       .filter(([_, isSelected]) => isSelected) // Filtr by isSelected == true. Category is ignored _
       .map(([category]) => category as BookCategory); // Convert string to BookCategory.
+  }
+
+  // Compare the current book state with the initial state.
+  isBookChanged(): boolean {
+    const currentBookState = this.sortBookCategories(this.book);
+    const initialBook = this.sortBookCategories(this.initialBook);
+    return JSON.stringify(currentBookState) !== JSON.stringify(initialBook);
   }
 
   updateBook() {
@@ -84,5 +93,12 @@ export class UpdateBookComponent implements OnInit {
 
   goToBookshelf() {
     this.router.navigate(['/bookshelf']);
+  }
+
+  // Sorting collections is necessary for proper comparison.
+  private sortBookCategories(book: Book): Book {
+    const sortedBook = { ...book }; // Shallow copy.
+    sortedBook.categories = [...sortedBook.categories].sort();
+    return sortedBook;
   }
 }

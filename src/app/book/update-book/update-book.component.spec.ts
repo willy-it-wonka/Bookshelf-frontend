@@ -93,31 +93,31 @@ describe('UpdateBookComponent', () => {
     expect(component.selectedCategories.get('HISTORY')).toBeFalse();
   });
 
-  it('should toggle category from false to true', () => {
+  it('should toggle category from false to true and call setBookCategories()', () => {
     const category = 'IT';
     component.selectedCategories.set(category, false); // Set initial unchecked state.
+    spyOn(component, 'setBookCategories');
 
     component.toggleCategory(category);
 
     expect(component.selectedCategories.get(category)).toBeTrue();
+    expect(component.setBookCategories).toHaveBeenCalled();
   });
 
-  it('should toggle category from true to false', () => {
+  it('should toggle category from true to false and call setBookCategories()', () => {
     const category = 'IT';
     component.selectedCategories.set(category, true); // Set initial checked state.
+    spyOn(component, 'setBookCategories');
 
     component.toggleCategory(category);
 
     expect(component.selectedCategories.get(category)).toBeFalse();
+    expect(component.setBookCategories).toHaveBeenCalled();
   });
 
-  it('should call setBookCategories() and updateBook() when onSubmit() is called', () => {
-    spyOn(component, 'setBookCategories');
+  it('should call updateBook() when onSubmit() is called', () => {
     spyOn(component, 'updateBook');
-
     component.onSubmit();
-
-    expect(component.setBookCategories).toHaveBeenCalled();
     expect(component.updateBook).toHaveBeenCalled();
   });
 
@@ -132,6 +132,22 @@ describe('UpdateBookComponent', () => {
     expect(component.book.categories).toContain(BookCategory.BUSINESS);
     expect(component.book.categories).not.toContain(BookCategory.DRAMA);
     expect(component.book.categories.length).toBe(2);
+  });
+
+  it('should detect no changes when book is unchanged', () => {
+    component.book = bookMock;
+    component.initialBook = JSON.parse(JSON.stringify(component.book));
+
+    expect(component.isBookChanged()).toBeFalse();
+  });
+
+  it('should detect changes when title is changed', () => {
+    component.book = bookMock;
+    component.initialBook = JSON.parse(JSON.stringify(component.book));
+
+    component.book.title = 'New Title';
+
+    expect(component.isBookChanged()).toBeTrue();
   });
 
   it('should call bookService.updateBook with the correct data from the properties and call goToBookshelf()', () => {
