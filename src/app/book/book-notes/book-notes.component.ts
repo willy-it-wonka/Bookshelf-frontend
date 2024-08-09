@@ -18,6 +18,7 @@ export class BookNotesComponent implements OnInit {
   id!: number; // This is a book ID, also used in NoteService http requests.
   book!: Book;
   note!: Note;
+  initialNote!: Note; // Initial state of the note for comparison (block submit button).
 
   // For notes
   isEditing: boolean = false; // For switching between editing and presentation states.
@@ -55,7 +56,11 @@ export class BookNotesComponent implements OnInit {
   initializeNote() {
     this.note = new Note();
     this.noteService.getNoteByBookId(this.id).subscribe({
-      next: (response) => ((this.note = response), (this.canDelete = true)),
+      next: (response) => (
+        (this.note = response),
+        (this.initialNote = JSON.parse(JSON.stringify(response))), // Deep copy.
+        (this.canDelete = true)
+      ),
       error: (error) => (this.missingNotesMessage = error.error),
     });
   }
@@ -69,6 +74,7 @@ export class BookNotesComponent implements OnInit {
     this.noteService.updateNote(id, note).subscribe((response) => {
       console.log(response);
       this.isEditing = false;
+      this.initialNote = JSON.parse(JSON.stringify(response)); // Update initial state after saving.
     });
   }
 
@@ -78,6 +84,7 @@ export class BookNotesComponent implements OnInit {
       console.log(response);
       this.note = response; // Without this, when you create a new note and try to edit it without first reloading
       // the page, it will cause a SQLIntegrityConstraintViolationException (re-creates instead of editing).
+      this.initialNote = JSON.parse(JSON.stringify(response)); // Update initial state after creation.
       this.isEditing = false;
       this.canDelete = true;
       this.cleanMissingNotesMessage();
@@ -89,6 +96,11 @@ export class BookNotesComponent implements OnInit {
     if (this.note && this.note.content && this.note.content.trim().length > 0)
       return true;
     return false;
+  }
+
+  // Comparison of the current state of the note with the initial state.
+  isNoteChanged(): boolean {
+    return JSON.stringify(this.note) !== JSON.stringify(this.initialNote);
   }
 
   cleanMissingNotesMessage() {
