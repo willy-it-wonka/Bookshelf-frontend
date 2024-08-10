@@ -46,7 +46,9 @@ export class BookListComponent implements OnInit {
   selectedCategories: Set<BookCategory> = new Set();
   showCategoryButtons: boolean = false;
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(private bookService: BookService, private router: Router) {
+    this.page = this.bookService.currentPage;
+  }
 
   ngOnInit(): void {
     this.getBooks();
@@ -65,6 +67,7 @@ export class BookListComponent implements OnInit {
   }
 
   goToUpdateBook(id: number) {
+    this.bookService.currentPage = this.page;
     this.router.navigate(['/update', id]);
   }
 

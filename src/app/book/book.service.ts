@@ -11,6 +11,9 @@ export class BookService {
   private baseUrl = environment.bookApiBaseUrl;
   private headers: HttpHeaders;
 
+  // Used to return to the right page of the book list after editing.
+  currentPage: number = 1;
+
   constructor(private httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
   }
@@ -58,6 +61,9 @@ export class BookService {
   }
 
   getBooksByStatus(status: string): Observable<Book[]> {
-    return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}/status?status=${status}`);
+    return this.makeHttpRequest<Book[]>(
+      'GET',
+      `${this.baseUrl}/status?status=${status}`
+    );
   }
 }
