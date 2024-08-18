@@ -52,13 +52,18 @@ export class NavBarComponent implements OnInit {
   }
 
   sendNewConfirmationEmail() {
-    this.userService
-      .sendNewConfirmationEmail(this.loggedInUserId)
-      .subscribe((response: any) => {
+    this.userService.sendNewConfirmationEmail(this.loggedInUserId).subscribe({
+      next: (response) => {
         this.matSnackBar.open(response, 'Close', {
           duration: 5000,
         });
-      });
+      },
+      error: (error) => {
+        this.matSnackBar.open(error.error, 'Close', {
+          duration: 5000,
+        });
+      },
+    });
   }
 
   logout() {
