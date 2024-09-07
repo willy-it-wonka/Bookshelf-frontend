@@ -32,7 +32,7 @@ describe('BookNotesComponent', () => {
   };
 
   beforeEach(async () => {
-    bookService = jasmine.createSpyObj('BookService', ['getBookById']);
+    bookService = jasmine.createSpyObj('BookService', ['getUserBookById']);
     noteService = jasmine.createSpyObj('NoteService', [
       'getNoteByBookId',
       'createNote',
@@ -42,7 +42,7 @@ describe('BookNotesComponent', () => {
     /* Always return Observable<...>. 
        Solution for TypeError: Cannot read properties of undefined (reading 'subscribe').
        Helps avoid mocking with subscribe in each test method. */
-    bookService.getBookById.and.returnValue(of(new Book()));
+    bookService.getUserBookById.and.returnValue(of(new Book()));
     noteService.getNoteByBookId.and.returnValue(of(new Note()));
     noteService.createNote.and.returnValue(of(new Note()));
     noteService.updateNote.and.returnValue(of(new Note()));
@@ -85,13 +85,13 @@ describe('BookNotesComponent', () => {
     expect(component.id).toEqual(bookId);
   });
 
-  it('should call bookService.getBookById with the correct id from the id property', () => {
+  it('should call bookService.getUserBookById with the correct id from the id property', () => {
     component.initializeBook();
-    expect(bookService.getBookById).toHaveBeenCalledWith(component.id);
+    expect(bookService.getUserBookById).toHaveBeenCalledWith(component.id);
   });
 
   it('should assign the fetched book to the book property', () => {
-    bookService.getBookById.and.returnValue(of(bookMock));
+    bookService.getUserBookById.and.returnValue(of(bookMock));
     component.initializeBook();
     expect(component.book).toEqual(bookMock);
   });

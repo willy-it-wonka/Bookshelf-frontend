@@ -37,13 +37,13 @@ describe('BookListComponent', () => {
 
   beforeEach(async () => {
     bookService = jasmine.createSpyObj('BookService', [
-      'getBookList',
-      'deleteBook',
-      'getBooksByStatus',
+      'getAllUserBooks',
+      'deleteBookById',
+      'getUserBooksByStatus',
     ]);
-    bookService.getBookList.and.returnValue(of([]));
-    bookService.deleteBook.and.returnValue(of(undefined));
-    bookService.getBooksByStatus.and.returnValue(of([]));
+    bookService.getAllUserBooks.and.returnValue(of([]));
+    bookService.deleteBookById.and.returnValue(of(undefined));
+    bookService.getUserBooksByStatus.and.returnValue(of([]));
     router = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
@@ -69,13 +69,13 @@ describe('BookListComponent', () => {
     expect(component.getBooks).toHaveBeenCalled();
   });
 
-  it('should call bookService.getBookList', () => {
+  it('should call bookService.getAllUserBooks', () => {
     component.getBooks();
-    expect(bookService.getBookList).toHaveBeenCalled();
+    expect(bookService.getAllUserBooks).toHaveBeenCalled();
   });
 
   it('should assign the fetched list of books to the properties', () => {
-    bookService.getBookList.and.returnValue(of(booksMock));
+    bookService.getAllUserBooks.and.returnValue(of(booksMock));
     component.getBooks();
     expect(component.books).toEqual(booksMock);
     expect(component.allBooks).toEqual(booksMock);
@@ -102,8 +102,8 @@ describe('BookListComponent', () => {
 
     component.confirmDelete();
 
-    expect(bookService.deleteBook).toHaveBeenCalledWith(123);
-    expect(bookService.getBookList).toHaveBeenCalled();
+    expect(bookService.deleteBookById).toHaveBeenCalledWith(123);
+    expect(bookService.getAllUserBooks).toHaveBeenCalled();
     expect(component.showDeleteConfirmation).toBeFalse();
     expect(component.selectedBookId).toBeNull();
   });
@@ -195,17 +195,17 @@ describe('BookListComponent', () => {
   it('should get all books when no status is selected', () => {
     component.selectedStatus = '';
     component.filterBookListByStatus();
-    expect(bookService.getBookList).toHaveBeenCalled();
+    expect(bookService.getAllUserBooks).toHaveBeenCalled();
   });
 
   it('should get books by status when status is selected', () => {
     component.selectedStatus = 'READ';
     const filteredBooks = booksMock.filter((book) => book.status === 'READ');
-    bookService.getBooksByStatus.and.returnValue(of(filteredBooks));
+    bookService.getUserBooksByStatus.and.returnValue(of(filteredBooks));
 
     component.filterBookListByStatus();
 
-    expect(bookService.getBooksByStatus).toHaveBeenCalledWith(component.selectedStatus);
+    expect(bookService.getUserBooksByStatus).toHaveBeenCalledWith(component.selectedStatus);
     expect(component.books).toEqual(filteredBooks);
     expect(component.books.length).toBe(1);
   });

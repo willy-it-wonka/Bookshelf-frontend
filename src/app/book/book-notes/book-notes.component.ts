@@ -44,7 +44,7 @@ export class BookNotesComponent implements OnInit {
 
   initializeBook() {
     this.book = new Book();
-    this.bookService.getBookById(this.id).subscribe((response) => {
+    this.bookService.getUserBookById(this.id).subscribe((response) => {
       this.book = response;
     });
   }

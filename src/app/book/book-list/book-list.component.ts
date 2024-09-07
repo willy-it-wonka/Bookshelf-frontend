@@ -56,7 +56,7 @@ export class BookListComponent implements OnInit {
 
   // Get a list of the user's books from the database.
   getBooks() {
-    this.bookService.getBookList().subscribe((response) => {
+    this.bookService.getAllUserBooks().subscribe((response) => {
       this.allBooks = response;
       this.books = response;
     });
@@ -80,7 +80,7 @@ export class BookListComponent implements OnInit {
   // Confirm the deletion of the book in the modal.
   confirmDelete() {
     if (this.selectedBookId !== null) {
-      this.bookService.deleteBook(this.selectedBookId).subscribe(() => {
+      this.bookService.deleteBookById(this.selectedBookId).subscribe(() => {
         this.getBooks();
       });
       this.showDeleteConfirmation = false; // Hide the modal after confirming deletion.
@@ -150,7 +150,7 @@ export class BookListComponent implements OnInit {
     if (this.showCategoryButtons) this.toggleCategories(); // Hide and reset categories.
     if (this.selectedStatus) {
       this.bookService
-        .getBooksByStatus(this.selectedStatus)
+        .getUserBooksByStatus(this.selectedStatus)
         .subscribe((response) => {
           this.books = response;
           this.page = 1;

@@ -49,7 +49,7 @@ describe('BookService', () => {
   });
 
   it('should fetch a list of the user books', () => {
-    service.getBookList().subscribe((books) => {
+    service.getAllUserBooks().subscribe((books) => {
       expect(books.length).toBe(2);
       expect(books).toEqual(booksMock);
     });
@@ -62,7 +62,7 @@ describe('BookService', () => {
   it('should fetch a book with the given id', () => {
     const id = booksMock[0].id;
 
-    service.getBookById(id).subscribe((book) => {
+    service.getUserBookById(id).subscribe((book) => {
       expect(book).toEqual(booksMock[0]);
     });
 
@@ -110,7 +110,7 @@ describe('BookService', () => {
   it('should send a delete request', () => {
     const id = 1;
 
-    service.deleteBook(id).subscribe((response) => {
+    service.deleteBookById(id).subscribe((response) => {
       expect(response).toBeNull();;
     });
 
@@ -123,7 +123,7 @@ describe('BookService', () => {
     const status = 'WAITING';
     const expectedBooks = booksMock.filter((book) => book.status === status);
 
-    service.getBooksByStatus(status).subscribe((books) => {
+    service.getUserBooksByStatus(status).subscribe((books) => {
       expect(books).toEqual(expectedBooks);
       expect(books.length).toBe(1);
     });

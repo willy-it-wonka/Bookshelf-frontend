@@ -36,7 +36,7 @@ export class UpdateBookComponent implements OnInit {
   }
 
   initializeBook() {
-    this.bookService.getBookById(this.id).subscribe({
+    this.bookService.getUserBookById(this.id).subscribe({
       next: (data) => {
         this.book = data;
         this.initialBook = JSON.parse(JSON.stringify(data)); // Deep copy of the initial book data.

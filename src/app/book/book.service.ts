@@ -40,7 +40,7 @@ export class BookService {
     });
   }
 
-  getBookList(): Observable<Book[]> {
+  getAllUserBooks(): Observable<Book[]> {
     return this.makeHttpRequest<Book[]>('GET', `${this.baseUrl}`);
   }
 
@@ -48,7 +48,7 @@ export class BookService {
     return this.makeHttpRequest('POST', `${this.baseUrl}`, book);
   }
 
-  getBookById(id: number): Observable<Book> {
+  getUserBookById(id: number): Observable<Book> {
     return this.makeHttpRequest<Book>('GET', `${this.baseUrl}/${id}`);
   }
 
@@ -56,11 +56,11 @@ export class BookService {
     return this.makeHttpRequest('PUT', `${this.baseUrl}/${id}`, book);
   }
 
-  deleteBook(id: number): Observable<void> {
+  deleteBookById(id: number): Observable<void> {
     return this.makeHttpRequest('DELETE', `${this.baseUrl}/${id}`);
   }
 
-  getBooksByStatus(status: string): Observable<Book[]> {
+  getUserBooksByStatus(status: string): Observable<Book[]> {
     return this.makeHttpRequest<Book[]>(
       'GET',
       `${this.baseUrl}/status?status=${status}`

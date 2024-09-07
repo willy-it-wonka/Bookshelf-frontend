@@ -27,10 +27,10 @@ describe('UpdateBookComponent', () => {
 
   beforeEach(async () => {
     bookService = jasmine.createSpyObj('BookService', [
-      'getBookById',
+      'getUserBookById',
       'updateBook',
     ]);
-    bookService.getBookById.and.returnValue(of(new Book())); /* Always return Observable<Book>. 
+    bookService.getUserBookById.and.returnValue(of(new Book())); /* Always return Observable<Book>. 
     Solution for TypeError: Cannot read properties of undefined (reading 'subscribe').
     Helps avoid mocking with subscribe in each test method. */
     activatedRouteMock = { snapshot: { params: { id: 123 } } };
@@ -69,13 +69,13 @@ describe('UpdateBookComponent', () => {
     expect(component.id).toEqual(bookId);
   });
 
-  it('should call bookService.getBookById with the correct id from the id property', () => {
+  it('should call bookService.getUserBookById with the correct id from the id property', () => {
     component.initializeBook();
-    expect(bookService.getBookById).toHaveBeenCalledWith(component.id);
+    expect(bookService.getUserBookById).toHaveBeenCalledWith(component.id);
   });
 
   it('should assign the fetched book to the book property and call getCurrentCategories()', () => {
-    bookService.getBookById.and.returnValue(of(bookMock));
+    bookService.getUserBookById.and.returnValue(of(bookMock));
     spyOn(component, 'getCurrentCategories');
 
     component.initializeBook();
