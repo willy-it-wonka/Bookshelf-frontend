@@ -30,12 +30,23 @@
       </button>
 
       <mat-menu #userMenu>
-        <button mat-menu-item [disabled]="enabled">
+        <button
+          mat-menu-item
+          [disabled]="enabled"
+          [matMenuTriggerFor]="!enabled ? confEmail : null"
+        >
           <mat-icon>{{ enabled ? "check_circle" : "error" }}</mat-icon>
           <span [ngClass]="enabled ? 'conf' : 'unconf'">
             {{ enabled ? "Email confirmed" : "Email unconfirmed" }}
           </span>
         </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+      <mat-menu #confEmail>
         <button
           mat-menu-item
           *ngIf="!enabled"
@@ -43,10 +54,6 @@
         >
           <mat-icon>email</mat-icon>
           <span>Send confirmation email</span>
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Logout</span>
         </button>
       </mat-menu>
     </div>
