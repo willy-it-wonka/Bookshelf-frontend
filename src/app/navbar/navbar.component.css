@@ -32,8 +32,8 @@
   font-weight: bold;
 }
 
-.p-l {
-  padding-left: 15px;
+.m-l {
+  margin-left: 30px;
 }
 
 .p-r {
@@ -41,9 +41,10 @@
 }
 
 .conf {
-  color: rgb(129, 255, 129);
+  color: rgb(5, 151, 0);
+  font-weight: bold;
 }
 
 .unconf {
-  color: rgb(255, 230, 0);
+  color: rgb(204, 14, 0);
 }

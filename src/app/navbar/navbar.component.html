@@ -20,21 +20,35 @@
         >
       </li>
     </ul>
-    <div class="navbar-user" *ngIf="loggedInUsername; enabled">
+
+    <div class="navbar-user" *ngIf="loggedInUsername">
       <div class="nick">{{ loggedInUsername }}</div>
-      <a (click)="logout()" role="button"
-        ><i class="fa fa-power-off fa-lg p-l"></i
-      ></a>
-      <div class="p-l" [ngClass]="enabled ? 'conf' : 'unconf'">
-        {{ enabled ? "email confirmed" : "email unconfirmed" }}
-      </div>
-      <button
-        class="btn btn-info btn-rounded btn-sm fw-bold m-2"
-        *ngIf="enabled === false"
-        (click)="sendNewConfirmationEmail()"
-      >
-        Send new conf email
+
+      <button [matMenuTriggerFor]="userMenu" class="m-l">
+        <mat-icon>account_circle</mat-icon>
+        <span>Your account</span>
       </button>
+
+      <mat-menu #userMenu>
+        <button mat-menu-item [disabled]="enabled">
+          <mat-icon>{{ enabled ? "check_circle" : "error" }}</mat-icon>
+          <span [ngClass]="enabled ? 'conf' : 'unconf'">
+            {{ enabled ? "Email confirmed" : "Email unconfirmed" }}
+          </span>
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!enabled"
+          (click)="sendNewConfirmationEmail()"
+        >
+          <mat-icon>email</mat-icon>
+          <span>Send confirmation email</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 
