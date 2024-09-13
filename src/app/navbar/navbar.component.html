@@ -24,7 +24,7 @@
     <div class="navbar-user" *ngIf="loggedInUsername">
       <div class="nick">{{ loggedInUsername }}</div>
 
-      <button [matMenuTriggerFor]="userMenu" class="m-l">
+      <button [matMenuTriggerFor]="userMenu" class="m-l user-account">
         <mat-icon>account_circle</mat-icon>
         <span>Your account</span>
       </button>
@@ -34,13 +34,16 @@
           mat-menu-item
           [disabled]="enabled"
           [matMenuTriggerFor]="!enabled ? confEmail : null"
+          class="user-account-item"
         >
-          <mat-icon>{{ enabled ? "check_circle" : "error" }}</mat-icon>
+          <mat-icon>{{
+            enabled ? "check_circle_outline" : "error_outline"
+          }}</mat-icon>
           <span [ngClass]="enabled ? 'conf' : 'unconf'">
             {{ enabled ? "Email confirmed" : "Email unconfirmed" }}
           </span>
         </button>
-        <button mat-menu-item (click)="logout()">
+        <button mat-menu-item (click)="logout()" class="user-account-item">
           <mat-icon>exit_to_app</mat-icon>
           <span>Logout</span>
         </button>
@@ -51,6 +54,7 @@
           mat-menu-item
           *ngIf="!enabled"
           (click)="sendNewConfirmationEmail()"
+          class="user-account-item"
         >
           <mat-icon>email</mat-icon>
           <span>Send confirmation email</span>

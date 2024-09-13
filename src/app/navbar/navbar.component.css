@@ -48,3 +48,25 @@
 .unconf {
   color: rgb(204, 14, 0);
 }
+
+.user-account {
+  background-color: #0a7945;
+  border: 1px solid #0a7945;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 7px 16px;
+  display: flex;
+  align-items: center;
+}
+.user-account:hover {
+  background-color: #332d2d;
+}
+
+.user-account mat-icon {
+  margin-right: 10px;
+}
+
+.user-account-item:hover {
+  background-color: rgba(10, 121, 69, 0.2) !important;
+}
