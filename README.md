@@ -9,7 +9,9 @@ Example data for the database: [repository](https://github.com/willy-it-wonka/Bo
 <img src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" width="45px" height="auto" alt="TypeScript">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" width="45px" height="auto" alt="HTML">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" width="45px" height="auto" alt="CSS">&nbsp;&nbsp;&nbsp;
-<img src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png" width="45px" height="auto" alt="Bootstrap">
+<img src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png" width="45px" height="auto" alt="Bootstrap">&nbsp;&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" width="45px" height="auto" alt="git">&nbsp;&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/25181517/183896132-54262f2e-6d98-41e3-8888-e40ab5a17326.png" width="45px" height="auto" alt="aws">
 </br></br>
 
 ## Installation
