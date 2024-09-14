@@ -51,9 +51,20 @@ export class RegisterComponent {
         this.goToLogin();
       },
       error: (error) => {
-        this.matSnackBar.open(error.error, 'Close', {
-          duration: 5000,
-        });
+        const specificErrorMessage =
+          'There was a problem while sending confirmation email. Contact the administration. You can log in and use the application.';
+
+        if (error.error === specificErrorMessage) {
+          this.resetForm();
+          this.matSnackBar.open(specificErrorMessage, 'Close', {
+            duration: 5000,
+          });
+          this.goToLogin();
+        } else {
+          this.matSnackBar.open(error.error, 'Close', {
+            duration: 5000,
+          });
+        }
       },
     });
   }
