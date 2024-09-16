@@ -21,8 +21,10 @@ h3 {
   font-weight: bold;
 }
 
-/* Check mark in modal. */
+/* Check mark in a modal. */
 .ch-mark {
   color: #00ad28;
   font-weight: bold;
+  font-size: 25px;
+  margin-right: 10px;
 }

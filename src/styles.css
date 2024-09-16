@@ -38,7 +38,7 @@ footer {
   border: 0;
 }
 
-/* Warning in modal (delete button in book-list and book-notes). */
+/* Warning in a modal (for delete button in book-list and book-notes). */
 .text-w {
   font-weight: bold;
   color: rgb(187, 0, 0);
