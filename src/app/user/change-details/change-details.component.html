@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Change your nick</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>New nick</mat-label>
+    <input matInput [(ngModel)]="nick" required />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput [(ngModel)]="password" type="password" required />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="changeNick()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

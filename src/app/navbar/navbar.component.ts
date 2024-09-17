@@ -5,6 +5,8 @@ import { UserService } from '../user/user.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetailsComponent } from '../user/change-details/change-details.component';
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +30,8 @@ export class NavBarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private matSnackBar: MatSnackBar
+    private matSnackBar: MatSnackBar,
+    public matDialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -70,6 +73,16 @@ export class NavBarComponent implements OnInit {
           duration: 5000,
         });
       },
+    });
+  }
+
+  openChangeNickDialog(): void {
+    const dialogRef = this.matDialog.open(ChangeDetailsComponent, {
+      data: { userId: this.loggedInUserId }, // Data passed to the dialog.
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.loggedInUsername = result; // Data received from the dialog, if successful.
     });
   }
 
