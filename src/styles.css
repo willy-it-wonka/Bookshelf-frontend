@@ -26,22 +26,17 @@ footer {
   font-weight: bold;
 }
 
-/* For input in login and register. */
-.input-r-l {
+/* For input in login, register, change nick, etc. */
+.input-a {
   min-width: 400px;
   padding: 10px;
 }
-.input-r-l:focus,
-.input-r-l:hover {
+.input-a:focus,
+.input-a:hover {
   background-color: #332d2d;
   color: white;
-  border: 0;
-}
-
-/* Warning in a modal (for delete button in book-list and book-notes). */
-.text-w {
-  font-weight: bold;
-  color: rgb(187, 0, 0);
+  border-color: #332d2d;
+  outline: none;
 }
 
 /* Show/hide password. */
@@ -57,6 +52,12 @@ footer {
   position: absolute;
   right: 10px;
   cursor: pointer;
+}
+
+/* Warning in a modal (for delete button in book-list and book-notes). */
+.text-w {
+  font-weight: bold;
+  color: rgb(187, 0, 0);
 }
 
 /* For the category buttons in create-book and update-book. */

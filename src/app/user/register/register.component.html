@@ -2,7 +2,7 @@
   <form (ngSubmit)="onSubmit()">
     <input
       type="text"
-      class="form-control mb-3 input-r-l"
+      class="form-control mb-3 input-a"
       [(ngModel)]="user.nick"
       name="nick"
       #nick="ngModel"
@@ -12,7 +12,7 @@
     />
     <input
       type="email"
-      class="form-control mb-3 input-r-l"
+      class="form-control mb-3 input-a"
       [(ngModel)]="user.email"
       name="email"
       #email="ngModel"
@@ -22,7 +22,7 @@
     <div class="password-wrapper">
       <input
         [type]="hidePassword ? 'password' : 'text'"
-        class="form-control input-r-l"
+        class="form-control input-a"
         [(ngModel)]="user.password"
         name="password"
         #password="ngModel"

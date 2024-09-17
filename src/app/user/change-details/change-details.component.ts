@@ -22,6 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './change-details.component.css',
 })
 export class ChangeDetailsComponent {
+  hidePassword: boolean = true;
   nick: string = '';
   password: string = '';
 
@@ -43,9 +44,13 @@ export class ChangeDetailsComponent {
       next: (response) => {
         localStorage.setItem('jwt', response.response);
 
-        this.snackBar.open('Your nick was successfully changed.', 'Close', {
-          duration: 5000,
-        });
+        this.snackBar.open(
+          'Your nick has been successfully changed.',
+          'Close',
+          {
+            duration: 5000,
+          }
+        );
 
         this.dialogRef.close(this.nick); // Return changed nick to the NavBarComponent.
       },

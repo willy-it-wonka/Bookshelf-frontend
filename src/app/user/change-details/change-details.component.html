@@ -1,15 +1,36 @@
-<h2 mat-dialog-title>Change your nick</h2>
-<mat-dialog-content>
-  <mat-form-field>
-    <mat-label>New nick</mat-label>
-    <input matInput [(ngModel)]="nick" required />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="password" type="password" required />
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button (click)="changeNick()" cdkFocusInitial>Save</button>
-</mat-dialog-actions>
+<div class="dialog">
+  <mat-dialog-content>
+    <input
+      type="text"
+      class="form-control mb-3 input-a"
+      [(ngModel)]="nick"
+      placeholder="New nick"
+      required
+      minlength="1"
+      maxlength="25"
+    />
+    <div class="password-wrapper">
+      <input
+        [type]="hidePassword ? 'password' : 'text'"
+        class="form-control input-a"
+        [(ngModel)]="password"
+        placeholder="Password"
+        required
+      /><i
+        class="fa fa-eye password-icon"
+        (click)="hidePassword = !hidePassword"
+      ></i>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="d-flex justify-content-center bn">
+    <button class="btn btn-dark" (click)="onCancel()">Cancel</button>
+    <button
+      class="btn btn-success"
+      type="submit"
+      (click)="changeNick()"
+      [disabled]="!nick.trim() || !password"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>
