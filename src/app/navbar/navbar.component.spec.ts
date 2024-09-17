@@ -14,12 +14,12 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     userService = jasmine.createSpyObj('UserService', [
-      'checkEnabled',
+      'emailIsConfirmed',
       'sendNewConfirmationEmail',
       'logout',
       'setHasAuthToRoute',
     ]);
-    userService.checkEnabled.and.returnValue(of(true)); // beforeEach because is called in ngOnInit
+    userService.emailIsConfirmed.and.returnValue(of(true)); // beforeEach because is called in ngOnInit
 
     await TestBed.configureTestingModule({
       imports: [NavBarComponent, NoopAnimationsModule],
@@ -41,12 +41,12 @@ describe('NavbarComponent', () => {
 
   it('should initialize the component properly', () => {
     spyOn(component, 'checkLoggedIn').and.callFake(() => (component.loggedIn = true));
-    spyOn(component, 'checkEnabled');
+    spyOn(component, 'emailIsConfirmed');
 
     component.ngOnInit();
 
     expect(component.checkLoggedIn).toHaveBeenCalled();
-    expect(component.checkEnabled).toHaveBeenCalled();
+    expect(component.emailIsConfirmed).toHaveBeenCalled();
   });
 
   it('should set loggedIn and UserService.hasAuthToRoute to true and decode JWT if token exists', () => {
@@ -65,12 +65,12 @@ describe('NavbarComponent', () => {
     expect(component.loggedInUsername).toBe('Jane_Doe');
   });
 
-  it('should set enabled based on the response from userService.checkEnabled()', () => {
+  it('should set enabled based on the response from userService.emailIsConfirmed()', () => {
     component.loggedInUserId = '123';
 
-    component.checkEnabled();
+    component.emailIsConfirmed();
 
-    expect(userService.checkEnabled).toHaveBeenCalledWith('123');
+    expect(userService.emailIsConfirmed).toHaveBeenCalledWith('123');
     expect(component.enabled).toBeTrue();
   });
 

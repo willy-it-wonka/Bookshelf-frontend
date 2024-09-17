@@ -42,8 +42,7 @@ export class UserService {
 
   // The next methods require authorization.
 
-  // Check if the user's email address has been confirmed.
-  checkEnabled(id: string): Observable<boolean> {
+  emailIsConfirmed(id: string): Observable<boolean> {
     return this.httpClient.get<boolean>(`${this.baseUrl}/${id}/enabled`, {
       headers: this.headers,
     });
@@ -54,6 +53,14 @@ export class UserService {
       `${this.baseUrl}/${id}/new-confirmation-email`,
       null,
       { headers: this.headers, responseType: 'text' }
+    );
+  }
+
+  changeNick(id: string, nick: string, password: string): Observable<any> {
+    return this.httpClient.patch(
+      `${this.baseUrl}/${id}/nick`,
+      { nick, password },
+      { headers: this.headers }
     );
   }
 

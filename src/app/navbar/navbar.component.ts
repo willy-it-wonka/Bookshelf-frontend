@@ -33,7 +33,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.checkLoggedIn();
-    if (this.loggedIn) this.checkEnabled();
+    if (this.loggedIn) this.emailIsConfirmed();
   }
 
   checkLoggedIn() {
@@ -50,9 +50,9 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  checkEnabled() {
+  emailIsConfirmed() {
     this.userService
-      .checkEnabled(this.loggedInUserId)
+      .emailIsConfirmed(this.loggedInUserId)
       .subscribe((enabled: boolean) => {
         this.enabled = enabled;
       });

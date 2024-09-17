@@ -71,7 +71,7 @@ describe('UserService', () => {
   it('should ask about user status (enabled) and return it', () => {
     const responseMock = false;
 
-    service.checkEnabled(id).subscribe((enabled) => {
+    service.emailIsConfirmed(id).subscribe((enabled) => {
       expect(responseMock).toBeFalse();
     });
 
