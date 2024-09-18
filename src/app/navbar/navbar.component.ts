@@ -78,11 +78,17 @@ export class NavBarComponent implements OnInit {
 
   openChangeNickDialog(): void {
     const dialogRef = this.matDialog.open(ChangeDetailsComponent, {
-      data: { userId: this.loggedInUserId }, // Data passed to the dialog.
+      data: { userId: this.loggedInUserId, changeType: 'nick' }, // Data passed to the dialog.
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) this.loggedInUsername = result; // Data received from the dialog, if successful.
+    });
+  }
+
+  openChangeEmailDialog(): void {
+    this.matDialog.open(ChangeDetailsComponent, {
+      data: { userId: this.loggedInUserId, changeType: 'email' },
     });
   }
 

@@ -50,6 +50,13 @@
         >
           <mat-icon>face</mat-icon><span>Change your nick</span>
         </button>
+        <button
+          mat-menu-item
+          (click)="openChangeEmailDialog()"
+          class="user-account-item"
+        >
+          <mat-icon>alternate_email</mat-icon><span>Change your email</span>
+        </button>
         <button mat-menu-item (click)="logout()" class="user-account-item">
           <mat-icon>exit_to_app</mat-icon>
           <span>Logout</span>

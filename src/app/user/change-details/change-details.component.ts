@@ -24,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ChangeDetailsComponent {
   hidePassword: boolean = true;
   nick: string = '';
+  email: string = '';
   password: string = '';
 
   constructor(
@@ -37,9 +38,14 @@ export class ChangeDetailsComponent {
     this.dialogRef.close();
   }
 
-  changeNick(): void {
+  changeDetails(): void {
     const userId = this.data.userId;
 
+    if (this.data.changeType === 'nick') this.changeNick(userId);
+    else if (this.data.changeType === 'email') this.changeEmail(userId);
+  }
+
+  private changeNick(userId: string): void {
     this.userService.changeNick(userId, this.nick, this.password).subscribe({
       next: (response) => {
         localStorage.setItem('jwt', response.response);
@@ -53,6 +59,22 @@ export class ChangeDetailsComponent {
         );
 
         this.dialogRef.close(this.nick); // Return changed nick to the NavBarComponent.
+      },
+      error: (error) => {
+        this.snackBar.open(error.error, 'Close', {
+          duration: 5000,
+        });
+      },
+    });
+  }
+
+  private changeEmail(userId: string): void {
+    this.userService.changeEmail(userId, this.email, this.password).subscribe({
+      next: (response) => {
+        this.snackBar.open(response.response, 'Close', {
+          duration: 5000,
+        });
+        this.dialogRef.close();
       },
       error: (error) => {
         this.snackBar.open(error.error, 'Close', {

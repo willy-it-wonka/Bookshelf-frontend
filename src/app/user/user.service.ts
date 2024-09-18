@@ -64,6 +64,14 @@ export class UserService {
     );
   }
 
+  changeEmail(id: string, email: string, password: string): Observable<any> {
+    return this.httpClient.patch(
+      `${this.baseUrl}/${id}/email`,
+      { email, password },
+      { headers: this.headers }
+    );
+  }
+
   // The next methods are for routesGuard.
 
   setHasAuthToRoute(value: boolean) {

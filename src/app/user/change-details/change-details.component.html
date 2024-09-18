@@ -1,14 +1,28 @@
 <div class="dialog">
   <mat-dialog-content>
-    <input
-      type="text"
-      class="form-control mb-3 input-a"
-      [(ngModel)]="nick"
-      placeholder="New nick"
-      required
-      minlength="1"
-      maxlength="25"
-    />
+    <ng-container *ngIf="data.changeType === 'nick'">
+      <input
+        type="text"
+        class="form-control mb-3 input-a"
+        [(ngModel)]="nick"
+        placeholder="New nick"
+        minlength="1"
+        maxlength="25"
+        required
+      />
+    </ng-container>
+
+    <ng-container *ngIf="data.changeType === 'email'">
+      <input
+        type="email"
+        class="form-control mb-3 input-a"
+        [(ngModel)]="email"
+        placeholder="New email"
+        maxlength="40"
+        required
+      />
+    </ng-container>
+
     <div class="password-wrapper">
       <input
         [type]="hidePassword ? 'password' : 'text'"
@@ -22,13 +36,14 @@
       ></i>
     </div>
   </mat-dialog-content>
+
   <mat-dialog-actions class="d-flex justify-content-center bn">
     <button class="btn btn-dark" (click)="onCancel()">Cancel</button>
     <button
       class="btn btn-success"
       type="submit"
-      (click)="changeNick()"
-      [disabled]="!nick.trim() || !password"
+      (click)="changeDetails()"
+      [disabled]="(!nick.trim() && !email.trim()) || !password"
     >
       Save
     </button>
