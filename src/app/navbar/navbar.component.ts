@@ -92,6 +92,12 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  openChangePasswordDialog(): void {
+    this.matDialog.open(ChangeDetailsComponent, {
+      data: { userId: this.loggedInUserId, changeType: 'password' },
+    });
+  }
+
   logout() {
     this.userService.logout().subscribe((response: any) => {
       console.log(response);

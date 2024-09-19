@@ -72,6 +72,18 @@ export class UserService {
     );
   }
 
+  changePassword(
+    id: string,
+    newPassword: string,
+    currentPassword: string
+  ): Observable<any> {
+    return this.httpClient.patch(
+      `${this.baseUrl}/${id}/password`,
+      { newPassword, currentPassword },
+      { headers: this.headers }
+    );
+  }
+
   // The next methods are for routesGuard.
 
   setHasAuthToRoute(value: boolean) {

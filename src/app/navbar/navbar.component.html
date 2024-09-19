@@ -57,6 +57,13 @@
         >
           <mat-icon>alternate_email</mat-icon><span>Change your email</span>
         </button>
+        <button
+          mat-menu-item
+          (click)="openChangePasswordDialog()"
+          class="user-account-item"
+        >
+          <mat-icon>lock_open</mat-icon><span>Change your password</span>
+        </button>
         <button mat-menu-item (click)="logout()" class="user-account-item">
           <mat-icon>exit_to_app</mat-icon>
           <span>Logout</span>

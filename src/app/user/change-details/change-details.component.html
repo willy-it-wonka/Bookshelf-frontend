@@ -3,7 +3,7 @@
     <ng-container *ngIf="data.changeType === 'nick'">
       <input
         type="text"
-        class="form-control mb-3 input-a"
+        class="form-control input-a"
         [(ngModel)]="nick"
         placeholder="New nick"
         minlength="1"
@@ -15,7 +15,7 @@
     <ng-container *ngIf="data.changeType === 'email'">
       <input
         type="email"
-        class="form-control mb-3 input-a"
+        class="form-control input-a"
         [(ngModel)]="email"
         placeholder="New email"
         maxlength="40"
@@ -23,7 +23,30 @@
       />
     </ng-container>
 
-    <div class="password-wrapper">
+    <ng-container *ngIf="data.changeType === 'password'">
+      <div class="password-wrapper">
+        <input
+          [type]="hideNewPassword ? 'password' : 'text'"
+          class="form-control input-a"
+          [(ngModel)]="newPassword"
+          #newPasswordInput="ngModel"
+          placeholder="New password"
+          minlength="6"
+          required
+        /><i
+          class="fa fa-eye password-icon"
+          (click)="hideNewPassword = !hideNewPassword"
+        ></i>
+      </div>
+      <div
+        *ngIf="newPasswordInput.errors?.['minlength']"
+        class="alert alert-danger"
+      >
+        The password must have at least 6 characters.
+      </div>
+    </ng-container>
+
+    <div class="password-wrapper mt-3">
       <input
         [type]="hidePassword ? 'password' : 'text'"
         class="form-control input-a"
@@ -43,7 +66,9 @@
       class="btn btn-success"
       type="submit"
       (click)="changeDetails()"
-      [disabled]="(!nick.trim() && !email.trim()) || !password"
+      [disabled]="
+        (!nick.trim() && !email.trim() && newPassword.length < 6) || !password
+      "
     >
       Save
     </button>

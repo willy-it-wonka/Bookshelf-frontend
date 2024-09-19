@@ -23,9 +23,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ChangeDetailsComponent {
   hidePassword: boolean = true;
+  hideNewPassword: boolean = true;
   nick: string = '';
   email: string = '';
   password: string = '';
+  newPassword: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ChangeDetailsComponent>,
@@ -43,6 +45,7 @@ export class ChangeDetailsComponent {
 
     if (this.data.changeType === 'nick') this.changeNick(userId);
     else if (this.data.changeType === 'email') this.changeEmail(userId);
+    else if (this.data.changeType === 'password') this.changePassword(userId);
   }
 
   private changeNick(userId: string): void {
@@ -82,5 +85,23 @@ export class ChangeDetailsComponent {
         });
       },
     });
+  }
+
+  private changePassword(userId: string): void {
+    this.userService
+      .changePassword(userId, this.newPassword, this.password)
+      .subscribe({
+        next: (response) => {
+          this.snackBar.open(response.response, 'Close', {
+            duration: 5000,
+          });
+          this.dialogRef.close();
+        },
+        error: (error) => {
+          this.snackBar.open(error.error, 'Close', {
+            duration: 5000,
+          });
+        },
+      });
   }
 }
