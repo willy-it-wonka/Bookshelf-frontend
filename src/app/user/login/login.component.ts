@@ -32,16 +32,18 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.userService.login(data).subscribe((response: any) => {
-      console.log(response);
-      if (response.status === true) {
-        localStorage.setItem('jwt', response.message); // Save JWT in local storage.
-        this.goToBookshelf();
-      } else {
-        this.matSnackBar.open(response.message, 'Close', {
+    this.userService.login(data).subscribe({
+      next: (response) => {
+        if (response.status === true) {
+          localStorage.setItem('jwt', response.message); // Save JWT in local storage.
+          this.goToBookshelf();
+        }
+      },
+      error: (error) => {
+        this.matSnackBar.open(error.error, 'Close', {
           duration: 5000,
         });
-      }
+      },
     });
   }
 
