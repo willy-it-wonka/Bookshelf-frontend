@@ -1,6 +1,6 @@
 ## Links
 Back-end: [repository](https://github.com/willy-it-wonka/Bookshelf-backend)\
-Demo: [AWS](http://bookshelf-app.s3-website.eu-north-1.amazonaws.com)&nbsp;&nbsp;&nbsp;[no SSL certification – access may be blocked by antivirus]\
+Demo: [AWS](https://d39oa1kkhfrmo.cloudfront.net)\
 Example data for the database: [repository](https://github.com/willy-it-wonka/Bookshelf-database)
 </br></br>
 
