@@ -46,11 +46,16 @@ export class NavBarComponent implements OnInit {
       this.userService.setHasAuthToRoute(true);
 
       // JWT decoding.
-      const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
-      // Read data from JWT.
-      this.loggedInUserId = decodedJwt.sub;
-      this.loggedInUsername = decodedJwt.nick;
+      const decodedPayload = JSON.parse(this.decodeUnicode(jwt.split('.')[1]));
+      this.loggedInUserId = decodedPayload.sub;
+      this.loggedInUsername = decodedPayload.nick;
     }
+  }
+
+  private decodeUnicode(payload: string) {
+    return new TextDecoder().decode(
+      Uint8Array.from(atob(payload), (c) => c.charCodeAt(0))
+    );
   }
 
   emailIsConfirmed() {
