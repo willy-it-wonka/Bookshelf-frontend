@@ -11,22 +11,32 @@
 <img src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" width="50px" height="auto" alt="CSS">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png" width="50px" height="auto" alt="Bootstrap">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" width="50px" height="auto" alt="git">&nbsp;&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/25181517/117207330-263ba280-adf4-11eb-9b97-0ac5b40bc3be.png" width="60px" height="auto" alt="docker">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183896132-54262f2e-6d98-41e3-8888-e40ab5a17326.png" width="50px" height="auto" alt="aws">
 </br></br>
 
 ## Installation
 1. Run the [back-end](https://github.com/willy-it-wonka/Bookshelf-backend) of this application.
-2. Clone the repository. [Instruction](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=integrated-terminal#clone-repository).
+2. Clone the front-end repository. [Instruction](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=integrated-terminal#clone-repository).
 3. To install all dependencies, type in the VSC terminal:
    ```
    npm install
    ```
-4. CAPTCHA verification has been implemented in the registration and contact form. Instructions for use are included in the comments in the file: environment.ts
-5. Contact form works with [EmailJS](https://www.emailjs.com/). Instructions are in the comments in environment.ts
-6. To use the application through the browser, type in the VSC terminal:
+4. CAPTCHA verification has been implemented in the registration and contact form. Instructions for use are included in the comments in the `environment.ts` file.
+5. Contact form works with [EmailJS](https://www.emailjs.com/). Instructions are in the comments in `environment.ts` file.
+6. To run the application locally using Webpack Dev Server, type in the VSC terminal:
    ```
    ng serve
    ```
+   Then open your browser and navigate to `localhost:4200`.
+7. To run the application via Docker: open Docker, then in a cmd/terminal, execute the following commands:
+   ```
+   docker build -t bookshelf-angular .
+   ```
+   ```
+   docker run -p 80:80 bookshelf-angular
+   ```
+   Then open your browser and navigate to `localhost`.
 </br>
 
 ## Description
