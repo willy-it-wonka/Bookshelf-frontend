@@ -10,9 +10,9 @@
 <img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" width="50px" height="auto" alt="HTML">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" width="50px" height="auto" alt="CSS">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183898054-b3d693d4-dafb-4808-a509-bab54cf5de34.png" width="50px" height="auto" alt="Bootstrap">&nbsp;&nbsp;&nbsp;
-<img src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" width="50px" height="auto" alt="git">&nbsp;&nbsp;&nbsp;
-<img src="https://user-images.githubusercontent.com/25181517/117207330-263ba280-adf4-11eb-9b97-0ac5b40bc3be.png" width="60px" height="auto" alt="docker">&nbsp;&nbsp;&nbsp;
-<img src="https://user-images.githubusercontent.com/25181517/183896132-54262f2e-6d98-41e3-8888-e40ab5a17326.png" width="50px" height="auto" alt="aws">
+<img src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" width="50px" height="auto" alt="Git">&nbsp;&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/25181517/117207330-263ba280-adf4-11eb-9b97-0ac5b40bc3be.png" width="60px" height="auto" alt="Docker">&nbsp;&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/25181517/183896132-54262f2e-6d98-41e3-8888-e40ab5a17326.png" width="50px" height="auto" alt="AWS">
 </br></br>
 
 ## Installation
@@ -28,16 +28,20 @@
    ```
    ng serve
    ```
-   Then open your browser and navigate to `localhost:4200`.
-7. To run the application via Docker: open Docker, then in a cmd/terminal, execute the following commands:
+7. Open your browser and navigate to `localhost:4200`.
+</br></br>
+
+## Launching with Docker
+1. TODO: run back
+2. Open Docker, then in a cmd/terminal, execute the following commands:
    ```
    docker build -t bookshelf-angular .
    ```
    ```
-   docker run -p 80:80 bookshelf-angular
+   docker run -p 4200:80 bookshelf-angular
    ```
-   Then open your browser and navigate to `localhost`.
-</br>
+3. Open your browser and navigate to `localhost:4200`.
+</br></br>
 
 ## Description
 Your virtual library.\
