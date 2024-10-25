@@ -32,15 +32,16 @@
 </br></br>
 
 ## Launching with Docker
-1. TODO: run back
-2. Open Docker, then in a cmd/terminal, execute the following commands:
+1. Run the [back-end](https://github.com/willy-it-wonka/Bookshelf-backend?tab=readme-ov-file#launching-with-docker).
+2. Open Docker.\
+   In cmd/terminal go to the root directory of the project and execute the following commands:
    ```
    docker build -t bookshelf-angular .
    ```
    ```
    docker run -p 4200:80 bookshelf-angular
    ```
-3. Open your browser and navigate to `localhost:4200`.
+4. Open your browser and navigate to `localhost:4200`.
 </br></br>
 
 ## Description
