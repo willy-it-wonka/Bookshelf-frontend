@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpdateBookComponent } from './update-book.component';
 import { BookService } from '../book.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../book';
 import { of } from 'rxjs';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BookCategory } from '../book-category';
 
