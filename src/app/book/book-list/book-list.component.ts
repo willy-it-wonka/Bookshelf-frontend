@@ -46,7 +46,10 @@ export class BookListComponent implements OnInit {
   selectedCategories: Set<BookCategory> = new Set();
   showCategoryButtons: boolean = false;
 
-  constructor(private bookService: BookService, private router: Router) {
+  constructor(
+    private readonly bookService: BookService,
+    private readonly router: Router
+  ) {
     this.page = this.bookService.currentPage;
   }
 

@@ -28,9 +28,9 @@ export class NavBarComponent implements OnInit {
   enabled!: boolean; // Is the email account confirmed?
 
   constructor(
-    private userService: UserService,
-    private router: Router,
-    private matSnackBar: MatSnackBar,
+    private readonly userService: UserService,
+    private readonly router: Router,
+    private readonly matSnackBar: MatSnackBar,
     public matDialog: MatDialog
   ) {}
 

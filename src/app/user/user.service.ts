@@ -8,12 +8,12 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = environment.userApiBaseUrl;
-  private headers: HttpHeaders;
+  private readonly baseUrl = environment.userApiBaseUrl;
+  private readonly headers: HttpHeaders;
 
   hasAuthToRoute: boolean = false; // For routesGuard
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
   }
 

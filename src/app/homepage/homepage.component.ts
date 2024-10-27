@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './homepage.component.css',
 })
 export class HomepageComponent {
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   goToRegister() {
     this.router.navigate(['/register']);

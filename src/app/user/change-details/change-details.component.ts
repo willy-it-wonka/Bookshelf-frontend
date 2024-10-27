@@ -32,8 +32,8 @@ export class ChangeDetailsComponent {
   constructor(
     public dialogRef: MatDialogRef<ChangeDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, // Data received from the NavBarComponent.
-    private userService: UserService,
-    private snackBar: MatSnackBar
+    private readonly userService: UserService,
+    private readonly snackBar: MatSnackBar
   ) {}
 
   onCancel(): void {

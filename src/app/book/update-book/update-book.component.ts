@@ -21,9 +21,9 @@ export class UpdateBookComponent implements OnInit {
   selectedCategories = new Map<string, boolean>(); // For track the checked/unchecked status of category buttons.
 
   constructor(
-    private bookService: BookService,
-    private route: ActivatedRoute,
-    private router: Router
+    private readonly bookService: BookService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {

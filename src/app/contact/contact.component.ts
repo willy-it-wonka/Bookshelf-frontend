@@ -21,12 +21,12 @@ export class ContactComponent {
     message: ['', Validators.required],
   });
 
-  siteKey: string = environment.reCaptchaSiteKey;
+  readonly siteKey: string = environment.reCaptchaSiteKey;
   isCaptchaResolved: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private matSnackBar: MatSnackBar
+    private readonly formBuilder: FormBuilder,
+    private readonly matSnackBar: MatSnackBar
   ) {}
 
   async sendEmail() {

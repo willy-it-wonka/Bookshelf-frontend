@@ -17,7 +17,7 @@ export class CreateBookComponent {
   allCategories = Object.values(BookCategory); // Array of all values from BookCategory.
   selectedCategories = new Map<string, boolean>(); // For track the checked/unchecked status of category buttons.
 
-  constructor(private bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {}
 
   // Change the state of selectedCategories when the category button is clicked.
   toggleCategory(category: string) {

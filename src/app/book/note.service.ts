@@ -8,10 +8,10 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class NoteService {
-  private baseUrl = environment.noteApiBaseUrl;
-  private headers: HttpHeaders;
+  private readonly baseUrl = environment.noteApiBaseUrl;
+  private readonly headers: HttpHeaders;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
   }
 
@@ -19,7 +19,7 @@ export class NoteService {
     const jwt = localStorage.getItem('jwt');
     let headers = new HttpHeaders();
 
-    if (jwt) this.headers = headers.set('Authorization', 'Bearer ' + jwt);
+    if (jwt) headers = headers.set('Authorization', 'Bearer ' + jwt);
 
     return headers;
   }

@@ -8,13 +8,13 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class BookService {
-  private baseUrl = environment.bookApiBaseUrl;
-  private headers: HttpHeaders;
+  private readonly baseUrl = environment.bookApiBaseUrl;
+  private readonly headers: HttpHeaders;
 
   // Used to return to the right page of the book list after editing.
   currentPage: number = 1;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient) {
     this.headers = this.createAuthorizationHeader();
   }
 
@@ -22,7 +22,7 @@ export class BookService {
     const jwt = localStorage.getItem('jwt');
     let headers = new HttpHeaders();
 
-    if (jwt) this.headers = headers.set('Authorization', 'Bearer ' + jwt);
+    if (jwt) headers = headers.set('Authorization', 'Bearer ' + jwt);
 
     return headers;
   }

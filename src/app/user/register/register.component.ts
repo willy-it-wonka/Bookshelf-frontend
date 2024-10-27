@@ -19,13 +19,13 @@ export class RegisterComponent {
   user: User = new User();
   hidePassword: boolean = true;
 
-  siteKey: string = environment.reCaptchaSiteKey;
+  readonly siteKey: string = environment.reCaptchaSiteKey;
   isCaptchaResolved: boolean = false;
 
   constructor(
-    private userService: UserService,
-    private matSnackBar: MatSnackBar,
-    private router: Router
+    private readonly userService: UserService,
+    private readonly matSnackBar: MatSnackBar,
+    private readonly router: Router
   ) {}
 
   onSubmit() {

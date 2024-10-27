@@ -27,9 +27,9 @@ export class BookNotesComponent implements OnInit {
   showDeleteConfirmation: boolean = false; // For delete modal.
 
   constructor(
-    private route: ActivatedRoute,
-    private bookService: BookService,
-    private noteService: NoteService
+    private readonly route: ActivatedRoute,
+    private readonly bookService: BookService,
+    private readonly noteService: NoteService
   ) {}
 
   ngOnInit(): void {
