@@ -91,4 +91,55 @@ describe('UserService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(responseMock);
   });
+
+  it('should send patch request to change user nick', () => {
+    const nick = 'newNick';
+    const password = '123';
+    const responseMock = { message: 'newJWT' };
+
+    service.changeNick(id, nick, password).subscribe((res) => {
+      expect(res).toEqual(responseMock);
+    });
+
+    const req = httpMock.expectOne(`${baseUrl}/${id}/nick`);
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ nick, password });
+    req.flush(responseMock);
+  });
+
+  it('should send patch request to change user email', () => {
+    const email = 'newEmail@test.com';
+    const password = '123';
+    const responseMock = {
+      message: 'Your email has been successfully changed.',
+    };
+
+    service.changeEmail(id, email, password).subscribe((res) => {
+      expect(res).toEqual(responseMock);
+    });
+
+    const req = httpMock.expectOne(`${baseUrl}/${id}/email`);
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ email, password });
+    req.flush(responseMock);
+  });
+
+  it('should send patch request to change user password', () => {
+    const newPassword = 'newPass';
+    const currentPassword = 'currentPass';
+    const responseMock = {
+      message: 'Your password has been successfully changed.',
+    };
+
+    service
+      .changePassword(id, newPassword, currentPassword)
+      .subscribe((res) => {
+        expect(res).toEqual(responseMock);
+      });
+
+    const req = httpMock.expectOne(`${baseUrl}/${id}/password`);
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ newPassword, currentPassword });
+    req.flush(responseMock);
+  });
 });
