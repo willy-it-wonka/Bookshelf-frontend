@@ -33,6 +33,8 @@
       <i
         class="fa fa-eye password-icon"
         (click)="hidePassword = !hidePassword"
+        (keydown.enter)="hidePassword = !hidePassword"
+        tabindex="0"
       ></i>
     </div>
     <div *ngIf="password.errors?.['minlength']" class="alert alert-danger">

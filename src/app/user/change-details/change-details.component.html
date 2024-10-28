@@ -36,6 +36,8 @@
         /><i
           class="fa fa-eye password-icon"
           (click)="hideNewPassword = !hideNewPassword"
+          (keydown.enter)="hideNewPassword = !hideNewPassword"
+          tabindex="0"
         ></i>
       </div>
       <div
@@ -56,6 +58,8 @@
       /><i
         class="fa fa-eye password-icon"
         (click)="hidePassword = !hidePassword"
+        (keydown.enter)="hidePassword = !hidePassword"
+        tabindex="0"
       ></i>
     </div>
   </mat-dialog-content>

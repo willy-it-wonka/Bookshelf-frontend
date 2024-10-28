@@ -57,7 +57,11 @@
     <thead class="bg-dark">
       <tr>
         <th class="cover-column"></th>
-        <th (click)="sortTableBy('title')">
+        <th
+          (click)="sortTableBy('title')"
+          (keydown.enter)="sortTableBy('title')"
+          tabindex="0"
+        >
           Title
           <i *ngIf="sortDirection === ''" class="fa fa-solid fa-sort fa-lg"></i>
           <i
@@ -69,7 +73,11 @@
             class="fa fa-solid fa-sort-down fa-lg"
           ></i>
         </th>
-        <th (click)="sortTableBy('author')">
+        <th
+          (click)="sortTableBy('author')"
+          (keydown.enter)="sortTableBy('author')"
+          tabindex="0"
+        >
           Author
           <i *ngIf="sortDirection === ''" class="fa fa-solid fa-sort fa-lg"></i>
           <i
