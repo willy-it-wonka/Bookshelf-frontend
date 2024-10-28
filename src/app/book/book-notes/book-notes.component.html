@@ -28,13 +28,13 @@
         >
       </div>
       <div class="mt-4">
-        <label><b>Title:</b></label> {{ book.title }}
+        <span><b>Title:</b></span> {{ book.title }}
       </div>
       <div class="mt-1">
-        <label><b>Author:</b></label> {{ book.author }}
+        <span><b>Author:</b></span> {{ book.author }}
       </div>
       <div class="mt-4">
-        <label><b>Categories:</b></label
+        <span><b>Categories:</b></span
         ><span
           *ngFor="let category of book.categories"
           class="badge badge-info m-1"
@@ -42,11 +42,11 @@
         >
       </div>
       <div class="mt-4">
-        <label><b>Created date:</b></label>
+        <span><b>Created date:</b></span>
         {{ book.createdDate | date : "d MMM yyyy | HH:mm" }}
       </div>
       <div>
-        <label><b>Last edited:</b></label>
+        <span><b>Last edited:</b></span>
         {{ book.lastModifiedDate | date : "d MMM yyyy | HH:mm" }}
       </div>
     </div>

@@ -2,7 +2,7 @@
   <h3>Add new book</h3>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group mt-3 md-3">
-      <label class="ta-label">Title</label>
+      <label class="ta-label" for="title">Title</label>
       <input
         type="text"
         class="form-control"
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group mt-3 md-3">
-      <label class="ta-label">Author</label>
+      <label class="ta-label" for="author">Author</label>
       <input
         type="text"
         class="form-control"
@@ -40,7 +40,7 @@
     </div>
 
     <div class="form-group mt-3 md-3">
-      <label class="ta-label">Status</label>
+      <label class="ta-label" for="status">Status</label>
       <select
         class="form-control"
         id="status"
@@ -56,7 +56,7 @@
     </div>
 
     <div class="form-group mt-3 md-3">
-      <label class="ta-label">Link to cover</label>
+      <label class="ta-label" for="linkToCover">Link to cover</label>
       <input
         type="text"
         class="form-control"
@@ -68,7 +68,7 @@
     </div>
 
     <div class="form-group mt-3 md-3">
-      <label class="ta-label">Categories</label>
+      <span class="ta-label">Categories</span>
       <div class="category-container">
         <div *ngFor="let category of allCategories">
           <button
