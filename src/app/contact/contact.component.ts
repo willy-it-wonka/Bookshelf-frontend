@@ -30,7 +30,7 @@ export class ContactComponent {
 
   async sendEmail() {
     emailjs.init(environment.emailJsPublicKey);
-    let response = await emailjs.send(
+    await emailjs.send(
       environment.emailJsServiceId,
       environment.emailjJsTemplateId,
       {

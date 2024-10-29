@@ -56,12 +56,14 @@ export class BookNotesComponent implements OnInit {
   initializeNote() {
     this.note = new Note();
     this.noteService.getNoteByBookId(this.id).subscribe({
-      next: (response) => (
-        (this.note = response),
-        (this.initialNote = JSON.parse(JSON.stringify(response))), // Deep copy.
-        (this.canDelete = true)
-      ),
-      error: (error) => (this.missingNotesMessage = error.error),
+      next: (response) => {
+        this.note = response;
+        this.initialNote = JSON.parse(JSON.stringify(response)); // Deep copy.
+        this.canDelete = true;
+      },
+      error: (error) => {
+        this.missingNotesMessage = error.error;
+      },
     });
   }
 
@@ -93,9 +95,7 @@ export class BookNotesComponent implements OnInit {
 
   // To disable SAVE when there is no text or only whitespaces.
   canSaveNote(): boolean {
-    if (this.note && this.note.content && this.note.content.trim().length > 0)
-      return true;
-    return false;
+    return !!this.note?.content?.trim();
   }
 
   // Comparison of the current state of the note with the initial state.
