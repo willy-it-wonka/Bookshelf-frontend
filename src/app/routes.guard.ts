@@ -1,7 +1,11 @@
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { inject } from '@angular/core';
 import { UserService } from './user/user.service';
-import { map, of } from 'rxjs';
 
 export const routesGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -12,10 +16,6 @@ export const routesGuard: CanActivateFn = (
 
   const hasAuthToRoute = userService.getHasAuthToRoute();
 
-  return of(hasAuthToRoute).pipe(
-    map((loggedIn: boolean) => {
-      if (loggedIn) return true;
-      else return router.createUrlTree(['/login']);
-    })
-  );
+  if (hasAuthToRoute) return true;
+  else return router.createUrlTree(['/login']);
 };

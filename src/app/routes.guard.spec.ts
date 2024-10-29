@@ -1,8 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { routesGuard } from './routes.guard';
 import { UserService } from './user/user.service';
-import { Observable, of } from 'rxjs';
 
 describe('routesGuard', () => {
   let userService: any;
@@ -30,27 +35,19 @@ describe('routesGuard', () => {
   });
 
   it('should allow the route if user is logged in', () => {
-    userService.getHasAuthToRoute.and.returnValue(of(true));
-    
-    const guardResult = TestBed.runInInjectionContext(
-      () => routesGuard(route, state) as Observable<boolean | UrlTree>
-    );
-
-    guardResult.subscribe((result) => {
-      expect(result).toBe(true);
-    });
+    userService.getHasAuthToRoute.and.returnValue(true);
+    const result = executeGuard(route, state);
+    expect(result).toBe(true);
   });
 
   it('should redirect to login if user is not logged in', () => {
-    userService.getHasAuthToRoute.and.returnValue(of(false));
-    router.createUrlTree.and.returnValue(true);
+    userService.getHasAuthToRoute.and.returnValue(false);
+    const urlTree = {} as UrlTree;
+    router.createUrlTree.and.returnValue(urlTree);
 
-    const guardResult = TestBed.runInInjectionContext(
-      () => routesGuard(route, state) as Observable<boolean | UrlTree>
-    );
+    const result = executeGuard(route, state);
 
-    guardResult.subscribe((result) => {
-      expect(result).toEqual(router.createUrlTree(['/login']));
-    });
+    expect(result).toEqual(urlTree);
+    expect(router.createUrlTree).toHaveBeenCalledWith(['/login']);
   });
 });
