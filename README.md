@@ -5,7 +5,7 @@
 </br></br>
 
 ## Tech stack
-<img src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png" width="50px" height="auto" alt="Angular 17">&nbsp;&nbsp;&nbsp;
+<img src="https://user-images.githubusercontent.com/25181517/183890595-779a7e64-3f43-4634-bad2-eceef4e80268.png" width="50px" height="auto" alt="Angular">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" width="50px" height="auto" alt="TypeScript">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" width="50px" height="auto" alt="HTML">&nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" width="50px" height="auto" alt="CSS">&nbsp;&nbsp;&nbsp;
@@ -61,4 +61,4 @@ With this application you can manage your library. Create a reading schedule. Ke
 
 ## Future features
 * Reading schedule.
-* Formatting text in notes.
+* Implement interceptors.
