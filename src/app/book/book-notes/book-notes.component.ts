@@ -7,6 +7,7 @@ import { Note } from '../note';
 import { BookService } from '../book.service';
 import { NoteService } from '../note.service';
 import { QuillModule } from 'ngx-quill';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-book-notes',
@@ -30,7 +31,8 @@ export class BookNotesComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly bookService: BookService,
-    private readonly noteService: NoteService
+    private readonly noteService: NoteService,
+    private readonly domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -106,6 +108,10 @@ export class BookNotesComponent implements OnInit {
 
   cleanMissingNotesMessage() {
     this.missingNotesMessage = '';
+  }
+
+  getSanitizedContent(content: string): SafeHtml {
+    return this.domSanitizer.bypassSecurityTrustHtml(content);
   }
 
   // Modal for delete button.

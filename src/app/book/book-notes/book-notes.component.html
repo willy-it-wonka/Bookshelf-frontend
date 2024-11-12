@@ -57,8 +57,11 @@
     <!-- Presentation of the content of the note. -->
     <div *ngIf="!isEditing">
       <div class="notes-presentation">
-        {{ missingNotesMessage }}
-        {{ note.content }}
+        <p *ngIf="missingNotesMessage">{{ missingNotesMessage }}</p>
+        <div
+          *ngIf="note.content"
+          [innerHTML]="getSanitizedContent(note.content)"
+        ></div>
       </div>
       <div class="d-flex justify-content-center mt-3">
         <button
