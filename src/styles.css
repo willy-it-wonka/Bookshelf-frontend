@@ -72,3 +72,25 @@ footer {
   padding-left: 9px;
   padding-right: 9px;
 }
+
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-justify {
+  text-align: justify;
+}
+
+blockquote {
+  border-left: 3px solid #405974;
+  background-color: #dbdbdb;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}

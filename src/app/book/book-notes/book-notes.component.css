@@ -8,23 +8,21 @@
 }
 
 .notes-presentation {
-  padding: 15px;
-  border-radius: 5px;
   border-left: 4px solid #007bff;
   background-color: #ececec;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 15px;
   white-space: pre-line;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
 
-textarea {
+.quill-editor {
+  height: 100%;
+  width: 100%;
   background-color: #ececec;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   padding: 15px;
-}
-
-textarea:focus {
-  background-color: #ececec;
-  outline: 0;
-  border: 0;
 }
