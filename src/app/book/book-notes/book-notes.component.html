@@ -81,12 +81,20 @@
 
     <!-- Edit the content of the note. -->
     <div *ngIf="isEditing">
-      <textarea
+      <quill-editor
         [(ngModel)]="note.content"
-        rows="15"
-        class="form-control"
-        maxlength="10000"
-      ></textarea>
+        [modules]="{
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ header: [1, 2, 3, false] }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ color: [] }, { background: [] }],
+            [{ align: [] }],
+            ['blockquote'],
+            ['clean']
+          ]
+        }"
+      ></quill-editor>
       <div class="text-muted ms-2">
         {{ 10000 - (note.content ? note.content.length : 0) }} characters left.
       </div>

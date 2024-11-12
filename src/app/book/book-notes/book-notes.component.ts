@@ -6,11 +6,12 @@ import { Book } from '../book';
 import { Note } from '../note';
 import { BookService } from '../book.service';
 import { NoteService } from '../note.service';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-book-notes',
   standalone: true,
-  imports: [DatePipe, CommonModule, FormsModule],
+  imports: [DatePipe, CommonModule, FormsModule, QuillModule],
   templateUrl: './book-notes.component.html',
   styleUrl: './book-notes.component.css',
 })
