@@ -98,9 +98,11 @@
             ['clean']
           ]
         }"
+        (onEditorCreated)="calculateInitialContentLength($event)"
+        (onContentChanged)="limitContentLength($event)"
       ></quill-editor>
       <div class="text-muted ms-3 mt-1">
-        {{ 10000 - (note.content ? note.content.length : 0) }} characters left.
+        {{ remainingCharacters }} characters left.
       </div>
       <div class="d-flex justify-content-center">
         <button

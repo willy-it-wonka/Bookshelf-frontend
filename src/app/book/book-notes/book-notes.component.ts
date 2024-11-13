@@ -25,8 +25,10 @@ export class BookNotesComponent implements OnInit {
   // For notes
   isEditing: boolean = false; // For switching between editing and presentation states.
   missingNotesMessage!: string; // For display info about lack of notes.
-  canDelete: boolean = false; // For disable/enable the delete button.
-  showDeleteConfirmation: boolean = false; // For delete modal.
+  maxCharacters: number = 30000;
+  remainingCharacters: number = 30000;
+  canDelete: boolean = false;
+  showDeleteConfirmation: boolean = false;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -108,6 +110,25 @@ export class BookNotesComponent implements OnInit {
 
   cleanMissingNotesMessage() {
     this.missingNotesMessage = '';
+  }
+
+  calculateInitialContentLength(editor: any) {
+    this.calculateRemainingCharacters(editor.getText().trim());
+  }
+
+  limitContentLength(event: any) {
+    const noteContent = event.editor.getText().trim();
+    if (noteContent.length > this.maxCharacters) {
+      event.editor.deleteText(
+        this.maxCharacters,
+        noteContent.length - this.maxCharacters
+      );
+    }
+    this.calculateRemainingCharacters(noteContent);
+  }
+
+  calculateRemainingCharacters(noteContent: string) {
+    this.remainingCharacters = this.maxCharacters - noteContent.length;
   }
 
   getSanitizedContent(content: string): SafeHtml {
