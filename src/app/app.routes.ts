@@ -8,6 +8,7 @@ import { LoginComponent } from './user/login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { routesGuard } from './routes.guard';
 import { ContactComponent } from './contact/contact.component';
+import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 
 export const routes: Routes = [
   { path: 'homepage', title: 'Home', component: HomepageComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'bookshelf', title: 'Bookshelf', component: BookListComponent },
   { path: 'contact', title: 'Contact us', component: ContactComponent },
+  { path: 'password-reset', title: 'Reset password', component: PasswordResetComponent },
   {
     path: 'create',
     title: 'Add book',
