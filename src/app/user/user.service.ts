@@ -40,6 +40,25 @@ export class UserService {
     });
   }
 
+  initiateForgottenPasswordReset(email: string): Observable<string> {
+    return this.httpClient.post(
+      `${this.baseUrl}/forgotten-password`,
+      { email },
+      { responseType: 'text' }
+    );
+  }
+
+  resetForgottenPassword(
+    confirmationToken: string,
+    newPassword: string
+  ): Observable<string> {
+    return this.httpClient.patch(
+      `${this.baseUrl}/password-reset`,
+      { confirmationToken, newPassword },
+      { responseType: 'text' }
+    );
+  }
+
   // The next methods require authorization.
 
   emailIsConfirmed(id: string): Observable<boolean> {
