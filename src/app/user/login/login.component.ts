@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ForgottenPasswordComponent } from '../forgotten-password/forgotten-password.component';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,8 @@ export class LoginComponent {
   constructor(
     private readonly userService: UserService,
     private readonly router: Router,
-    private readonly matSnackBar: MatSnackBar
+    private readonly matSnackBar: MatSnackBar,
+    public matDialog: MatDialog
   ) {}
 
   onSubmit() {
@@ -51,5 +54,9 @@ export class LoginComponent {
     this.router.navigate(['/bookshelf']).then(() => {
       window.location.reload(); // Essential to change the guest navbar to the user navbar.
     });
+  }
+
+  openinitiateForgottenPasswordReset(): void {
+    this.matDialog.open(ForgottenPasswordComponent);
   }
 }
