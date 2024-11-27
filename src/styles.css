@@ -1,10 +1,10 @@
-/* Necessary for proper display of content and footer. */
+/* Necessary for proper display of content and footer */
 html,
 body {
   height: 100%;
 }
 
-/* Footer. */
+/* Footer */
 footer {
   text-align: center;
   color: white;
@@ -19,7 +19,7 @@ footer {
   color: black;
 }
 
-/* For label in create-book and update-book. */
+/* For label in create-book and update-book */
 .ta-label {
   margin-left: 15px;
   margin-bottom: 3px;
@@ -39,7 +39,7 @@ footer {
   outline: none;
 }
 
-/* Show/hide password. */
+/* Show/hide password */
 .password-wrapper {
   position: relative;
   display: flex;
@@ -54,13 +54,13 @@ footer {
   cursor: pointer;
 }
 
-/* Warning in a modal (for delete button in book-list and book-notes). */
+/* Warning in a modal (for delete button in book-list and book-notes) */
 .text-w {
   font-weight: bold;
   color: rgb(187, 0, 0);
 }
 
-/* For the category buttons in create-book and update-book. */
+/* For the category buttons in create-book and update-book */
 .category-container {
   display: flex;
   flex-wrap: wrap;
@@ -73,18 +73,16 @@ footer {
   padding-right: 9px;
 }
 
+/* Book notes */
 .ql-align-center {
   text-align: center;
 }
-
 .ql-align-right {
   text-align: right;
 }
-
 .ql-align-justify {
   text-align: justify;
 }
-
 blockquote {
   border-left: 3px solid #405974;
   background-color: #dbdbdb;
@@ -93,4 +91,13 @@ blockquote {
   white-space: pre-line;
   overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+/* For <a> on login and register pages */
+.action-reg-log {
+  color: blue;
+}
+.action-reg-log:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

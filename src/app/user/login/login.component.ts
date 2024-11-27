@@ -56,7 +56,7 @@ export class LoginComponent {
     });
   }
 
-  openinitiateForgottenPasswordReset(): void {
+  openForgottenPasswordMatDialog(): void {
     this.matDialog.open(ForgottenPasswordComponent);
   }
 }
