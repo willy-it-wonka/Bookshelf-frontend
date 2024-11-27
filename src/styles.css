@@ -93,6 +93,15 @@ blockquote {
   word-wrap: break-word;
 }
 
+/* MatDialog for change-details and forgotten-password */
+.dialog {
+  padding: 20px;
+}
+.bn button {
+  margin-left: 15px;
+  font-weight: bold;
+}
+
 /* For <a> on login and register pages */
 .action-reg-log {
   color: blue;
