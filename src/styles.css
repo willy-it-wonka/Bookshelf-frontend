@@ -39,6 +39,10 @@ footer {
   outline: none;
 }
 
+.btn-success:hover {
+  background-color: #218838;
+}
+
 /* Show/hide password */
 .password-wrapper {
   position: relative;
