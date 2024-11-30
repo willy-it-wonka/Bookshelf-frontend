@@ -12,6 +12,7 @@ describe('NavbarComponent', () => {
   let router: Router;
 
   beforeEach(async () => {
+    localStorage.clear();
     userService = jasmine.createSpyObj('UserService', [
       'emailIsConfirmed',
       'sendNewConfirmationEmail',
