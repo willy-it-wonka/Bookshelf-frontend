@@ -9,10 +9,11 @@ describe('UserService', () => {
   const baseUrl = 'http://localhost:8080/api/v1/users';
   const user: User = {
     nick: 'user',
-    email: 'test@Example.com',
-    password: '123',
+    email: 'test@email.com',
+    password: '123456',
   };
   const id = '1';
+  const password = '123456';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -91,7 +92,6 @@ describe('UserService', () => {
 
   it('should send patch request to change user nick', () => {
     const nick = 'newNick';
-    const password = '123';
     const responseMock = { message: 'newJWT' };
 
     service.changeNick(id, nick, password).subscribe((res) => {
@@ -106,7 +106,6 @@ describe('UserService', () => {
 
   it('should send patch request to change user email', () => {
     const email = 'newEmail@test.com';
-    const password = '123';
     const responseMock = {
       message: 'Your email has been successfully changed.',
     };
@@ -137,6 +136,37 @@ describe('UserService', () => {
     const req = httpMock.expectOne(`${baseUrl}/${id}/password`);
     expect(req.request.method).toBe('PATCH');
     expect(req.request.body).toEqual({ newPassword, currentPassword });
+    req.flush(responseMock);
+  });
+
+  it('should send post request to initiate forgotten password reset', () => {
+    const email = 'test@test.com';
+    const responseMock = 'Password reset email sent.';
+
+    service.initiateForgottenPasswordReset(email).subscribe((res) => {
+      expect(res).toBe(responseMock);
+    });
+
+    const req = httpMock.expectOne(`${baseUrl}/forgotten-password`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ email });
+    req.flush(responseMock);
+  });
+
+  it('should send patch request to reset forgotten password', () => {
+    const confirmationToken = 'token';
+    const newPassword = 'newPassword';
+    const responseMock = 'Password successfully reset.';
+
+    service
+      .resetForgottenPassword(confirmationToken, newPassword)
+      .subscribe((res) => {
+        expect(res).toBe(responseMock);
+      });
+
+    const req = httpMock.expectOne(`${baseUrl}/password-reset`);
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ confirmationToken, newPassword });
     req.flush(responseMock);
   });
 });
