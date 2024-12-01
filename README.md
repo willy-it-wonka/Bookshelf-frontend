@@ -50,7 +50,8 @@ With this application you can manage your library. Create a reading schedule. Ke
 </br>
 * registration and login
 * user account management
-* sending confirmation email
+* sending confirmation email (SMTP)
+* resetting a forgotten password via e-mail (SMTP)
 * JWT authorization
 * CRUD operations
 * contact form using EmailJS
@@ -61,4 +62,6 @@ With this application you can manage your library. Create a reading schedule. Ke
 
 ## Future features
 * Reading schedule.
+* Reading statistics.
+* Display price comparisons of books from different bookstores.
 * Implement interceptors.
